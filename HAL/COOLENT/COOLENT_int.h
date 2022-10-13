@@ -20,9 +20,9 @@
 
 #define COOLENT_TEMP_TOLERANCE 		5
 
-#define COOL_KP					0.8
-#define COOL_KI					0.4
-#define COOL_KD					0.2
+#define COOL_KP					8
+#define COOL_KI					4
+#define COOL_KD					2
 
 #define COOL_INIT_DUTY_CYCLE	50
 #define COOL_MAX_DUTY_CYCLE		80

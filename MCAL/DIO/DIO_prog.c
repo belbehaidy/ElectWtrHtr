@@ -128,16 +128,16 @@ ES_t DIO_enuGetPinValue(u8 Copy_u8GroupID , u8 Copy_u8PinID , u8 *Copy_pu8Value)
 			switch (Copy_u8GroupID)
 			{
 			case DIO_u8GROUP_A:
-				*Copy_pu8Value = ( IS_BIT( PIN_A , Copy_u8PinID ) & DIO_BIT_MASK ) ;
+				*Copy_pu8Value = IS_BIT( PIN_A , Copy_u8PinID ) ;
 				break;
 			case DIO_u8GROUP_B:
-				*Copy_pu8Value = ( IS_BIT( PIN_B , Copy_u8PinID ) & DIO_BIT_MASK ) ;
+				*Copy_pu8Value = IS_BIT( PIN_B , Copy_u8PinID ) ;
 				break;
 			case DIO_u8GROUP_C:
-				*Copy_pu8Value = ( IS_BIT( PIN_C , Copy_u8PinID ) & DIO_BIT_MASK ) ;
+				*Copy_pu8Value = IS_BIT( PIN_C , Copy_u8PinID ) ;
 				break;
 			case DIO_u8GROUP_D:
-				*Copy_pu8Value = ( IS_BIT( PIN_D , Copy_u8PinID ) & DIO_BIT_MASK ) ;
+				*Copy_pu8Value = IS_BIT( PIN_D , Copy_u8PinID ) ;
 				break;
 			}
 			Local_enuErrorState = ES_OK;

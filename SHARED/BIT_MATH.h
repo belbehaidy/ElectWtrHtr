@@ -22,16 +22,22 @@
 
 #define _CLI_		asm volatile( " CLI " )
 #define _SEI_		asm volatile( " SEI " )
-
-
-#define SET_BIT( reg , bit)		reg |= _u8_VALUE_(bit)
+/*
+#define ASM_SET_BIT( reg , bit )		asm volatile( " SBI %[reg] , %[bit]  "	\
+														: [reg] "M"	(reg)	,	\
+														: [bit]	"M"	(bit)	)
+#define ASM_CLR_BIT( reg , bit )		asm volatile( " CBI %[reg] , %[bit]  "	\
+														: [reg] "M"	(reg)	,	\
+														: [bit]	"M"	(bit)	)
+*/
+#define SET_BIT( reg , bit)		reg |=  ( _u8_VALUE_(bit) )
 #define CLR_BIT( reg , bit)		reg &= ~( _u8_VALUE_(bit) )
-#define TOG_BIT( reg , bit)		reg ^= ( _u8_VALUE_(bit) )
+#define TOG_BIT( reg , bit)		reg ^=  ( _u8_VALUE_(bit) )
 
-#define IS_BIT( reg , bit)		( reg & _u8_VALUE_( bit ) )							/* Returns 0 if bit is Clear and Non-Zero if bit is set	*/
-#define ASSIGN_BIT_VALUE( reg , bit , value )		reg = ( ( CLR_BIT( reg , bit) ) | ( ( value & _BIT_MASK_) << (bit) ) )
+#define IS_BIT( reg , bit)		( _BIT_MASK_ & ( reg >> bit ) )							/* Returns 0 if bit is Clear and 1 if bit is set	*/
+#define ASSIGN_BIT_VALUE( reg , bit , value )		reg = ( ( reg & ~(_BIT_MASK_ << bit ) ) | ( value << bit ) )
 
-#define WAIT_TILL_BIT_IS_SET( reg , bit ) 	do { } while ( !(IS_BIT( reg , bit) ) )
-#define WAIT_TILL_BIT_IS_CLR( reg , bit ) 	do { } while ( IS_BIT( reg , bit) )
+#define WAIT_TILL_BIT_IS_SET( reg , bit ) 	while( !( IS_BIT( reg , bit) ) )
+#define WAIT_TILL_BIT_IS_CLR( reg , bit ) 	while( IS_BIT( reg , bit) )
 
 #endif /* BIT_MATH_H_ */

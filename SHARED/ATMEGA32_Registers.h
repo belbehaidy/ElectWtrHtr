@@ -8,11 +8,11 @@
 #ifndef ATMEG32_H_
 #define ATMEG32_H_
 
-#include "stdTypes.h"
+//#include "stdTypes.h"
 
 /************************************************
  *				Pin Type definition				*
- ************************************************/
+ ************************************************//*
 typedef struct
 {
 	u8 DIO_PinNum:4 ;
@@ -21,7 +21,7 @@ typedef struct
 
 #define PIN_NUM( _u8_DIO_PIN_ )				_u8_LOW_NIPPLE_VALUE_( _u8_DIO_PIN_ )
 #define PIN_GRP( _u8_DIO_PIN_ )				_u8_HIGH_NIPPLE_VALUE_( _u8_DIO_PIN_ )
-
+*/
 /****************************
 *		I/O Ports Macros	*
 ****************************/
@@ -30,8 +30,8 @@ typedef struct
 #define __IO_u8_SFR__( io_addr )			*((volatile u8*) ( io_addr )
 #define __IO_u16_SFR__( io_addr )			*((volatile u16*) ( io_addr )
 
-#define __MEM_u8_SFR__( io_addr )			*((volatile u8*) ( (io_addr) + _SFR_MEM_OFFSET_ ))
-#define __MEM_u16_SFR__( io_addr )			*((volatile u16*) ( (io_addr) + _SFR_MEM_OFFSET_ ))
+#define __MEM_u8_SFR__( io_addr )			*((volatile u8*) ( io_addr + _SFR_MEM_OFFSET_ ))
+#define __MEM_u16_SFR__( io_addr )			*((volatile u16*) ( io_addr + _SFR_MEM_OFFSET_ ))
 
 #define __MEM_u8_ADDRESS__( mem_addr )		*((volatile u8*) mem_addr )
 #define __MEM_u16_ADDRESS__( mem_addr )		*((volatile u16*) mem_addr )
@@ -132,7 +132,7 @@ typedef struct
 #define SPMCR				__MEM_u8_SFR__( _SFR_SPMCR_ )
 
 /************************************************
-*				TIMER RESIGTERS					*
+*			TIMER GENERAL RESIGTERS				*
 *************************************************/
 
 /************
@@ -149,54 +149,66 @@ typedef struct
 #define IO_TIFR				__IO_u8_SFR__( _SFR_TIFR_ )
 #define TIFR				__MEM_u8_SFR__( _SFR_TIFR_ )
 
-/********
- * TCCR	*
- ********/
-#define _SFR_TCCR0_ 							0x33
+/************************************************
+*				TIMER0 RESIGTERS				*
+*************************************************/
+#define _SFR_TCCR0_ 						0x33
 #define IO_TCCR0			__IO_u8_SFR__( _SFR_TCCR0_ )
 #define TCCR0				__MEM_u8_SFR__( _SFR_TCCR0_ )
 
-#define _SFR_TCCR1A_ 							0x2F
-#define IO_TCCR1A			__IO_u8_SFR__( _SFR_TCCR1A_ )
-#define TCCR1A				__MEM_u8_SFR__( _SFR_TCCR1A_ )
-
-#define _SFR_TCCR1B_ 							0x2E
-#define IO_TCCR1B			__IO_u8_SFR__( _SFR_TCCR1B_ )
-#define TCCR1B				__MEM_u8_SFR__( _SFR_TCCR1B_ )
-
-#define _SFR_TCCR2_ 							0x25
-#define IO_TCCR2			__IO_u8_SFR__( _SFR_TCCR2_ )
-#define TCCR2				__MEM_u8_SFR__( _SFR_TCCR2_ )
-
-/************
- *	TCNT	*
- ************/
-#define _SFR_TCNT0_ 							0x32
+#define _SFR_TCNT0_ 						0x32
 #define IO_TCNT0			__IO_u8_SFR__( _SFR_TCNT0_ )
 #define TCNT0				__MEM_u8_SFR__( _SFR_TCNT0_ )
 
-#define _SFR_TCNT1H_ 							0x2D
-#define IO_TCNT1H			__IO_u8_SFR__( _SFR_TCNT1H_ )
-#define TCNT1H				__MEM_u8_SFR__( _SFR_TCNT1H_ )
-
-#define _SFR_TCNT1L_ 							0x2C
-#define IO_TCNT1L			__IO_u8_SFR__( _SFR_TCNT1L_ )
-#define TCNT1L				__MEM_u8_SFR__( _SFR_TCNT1L_ )
-
-#define _SFR_TCNT1_ 							0x2C
-#define IO_TCNT1			__IO_u16_SFR__( _SFR_TCNT1_ )
-#define TCNT1				__MEM_u16_SFR__( _SFR_TCNT1_ )
-
-#define _SFR_TCNT2_ 							0x24
-#define IO_TCNT2			__IO_u8_SFR__( _SFR_TCCNT2_ )
-#define TCNT2				__MEM_u8_SFR__( _SFR_TCNT2_ )
-
-/********
- *	OCR	*
- ********/
 #define _SFR_OCR0_ 							0x3C
 #define IO_OCR0				__IO_u8_SFR__( _SFR_OCR0_ )
 #define OCR0				__MEM_u8_SFR__( _SFR_OCR0_ )
+
+
+
+/************************************************
+*				TIMER2 RESIGTERS				*
+*************************************************/
+#define _SFR_TCCR2_ 						0x25
+#define IO_TCCR2			__IO_u8_SFR__( _SFR_TCCR2_ )
+#define TCCR2				__MEM_u8_SFR__( _SFR_TCCR2_ )
+
+#define _SFR_TCNT2_ 						0x24
+#define IO_TCNT2			__IO_u8_SFR__( _SFR_TCCNT2_ )
+#define TCNT2				__MEM_u8_SFR__( _SFR_TCNT2_ )
+
+#define _SFR_OCR2_ 							0x23
+#define IO_OCR2				__IO_u8_SFR__( _SFR_OCR2_ )
+#define OCR2				__MEM_u8_SFR__( _SFR_OCR2_ )
+
+#define _SFR_ASSR_ 							0x22
+#define IO_ASSR				__IO_u8_SFR__( _SFR_ASSR_ )
+#define ASSR				__MEM_u8_SFR__( _SFR_ASSR_ )
+
+
+/************************************************
+*				TIMER1 RESIGTERS				*
+*************************************************/
+
+#define _SFR_TCCR1A_ 						0x2F
+#define IO_TCCR1A			__IO_u8_SFR__( _SFR_TCCR1A_ )
+#define TCCR1A				__MEM_u8_SFR__( _SFR_TCCR1A_ )
+
+#define _SFR_TCCR1B_ 						0x2E
+#define IO_TCCR1B			__IO_u8_SFR__( _SFR_TCCR1B_ )
+#define TCCR1B				__MEM_u8_SFR__( _SFR_TCCR1B_ )
+
+#define _SFR_TCNT1H_ 						0x2D
+#define IO_TCNT1H			__IO_u8_SFR__( _SFR_TCNT1H_ )
+#define TCNT1H				__MEM_u8_SFR__( _SFR_TCNT1H_ )
+
+#define _SFR_TCNT1L_ 						0x2C
+#define IO_TCNT1L			__IO_u8_SFR__( _SFR_TCNT1L_ )
+#define TCNT1L				__MEM_u8_SFR__( _SFR_TCNT1L_ )
+
+#define _SFR_TCNT1_ 						0x2C
+#define IO_TCNT1			__IO_u16_SFR__( _SFR_TCNT1_ )
+#define TCNT1				__MEM_u16_SFR__( _SFR_TCNT1_ )
 
 #define _SFR_OCR1AH_ 						0x2B
 #define IO_OCR1AH			__IO_u8_SFR__( _SFR_OCR1AH_ )
@@ -234,13 +246,6 @@ typedef struct
 #define IO_ICR1				__IO_u16_SFR__( _SFR_ICR1_ )
 #define ICR1				__MEM_u16_SFR__( _SFR_ICR1_ )
 
-#define _SFR_OCR2_ 							0x23
-#define IO_OCR2				__IO_u8_SFR__( _SFR_OCR2_ )
-#define OCR2				__MEM_u8_SFR__( _SFR_OCR2_ )
-
-#define _SFR_ASSR_ 							0x22
-#define IO_ASSR				__IO_u8_SFR__( _SFR_ASSR_ )
-#define ASSR				__MEM_u8_SFR__( _SFR_ASSR_ )
 
 /********************
 * ADC REGISTERS		*
@@ -317,6 +322,10 @@ typedef struct
 #define _SFR_EEARL_ 						0x1E
 #define IO_EEARL			__IO_u8_SFR__( _SFR_EEARL_ )
 #define EEARL				__MEM_u8_SFR__( _SFR_EEARL_ )
+
+#define _SFR_EEAR_ 							0x1E
+#define IO_EEAR				__IO_u16_SFR__( _SFR_EEAR_ )
+#define EEAR				__MEM_u16_SFR__( _SFR_EEAR_ )
 
 #define _SFR_EEDR_ 							0x1D
 #define IO_EEDR				__IO_u8_SFR__( _SFR_EEDR_ )

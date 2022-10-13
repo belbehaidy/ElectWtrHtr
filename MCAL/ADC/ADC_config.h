@@ -10,7 +10,7 @@
 
 #define ADC_PRES				ADC_PRES_64
 
-#define ADC_VREF				AVCC_REF
+#define ADC_VREF				INTERNAL_REF
 
 #define ADC_ADJUST				RIGHT_ADJUST
 

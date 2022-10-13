@@ -24,8 +24,8 @@ bool Global_blConverted = FALSE ;
 #define TEMP_VALUE_STATE		DIO_u8FLOAT
 
 #define TEMP_ADC_CH				CH_00
-#define TEMP_CONVERSION_FACTOR	0.488281 			//	Degree/step
-#define TEMP_OFFSET				0.00002816			//	Correction factor at mid range
+#define TEMP_CONVERSION_FACTOR	0.25		 		//	Degree/step
+//#define TEMP_OFFSET				0.0000				//	Correction factor at mid range
 
 ES_t LM35_enuInit(void)
 {
@@ -59,9 +59,8 @@ ES_t LM35_enuReadTemp( u16 *Copy_u16TempValue )
 	if( Global_blConverted == TRUE )
 	{
 		Local_enuErrorState = ADC_enuRead( &Local_u16TempValue );
-		*Copy_u16TempValue = (u16)( ( Local_u16TempValue * TEMP_CONVERSION_FACTOR ) + TEMP_OFFSET );
+		*Copy_u16TempValue = (u16)( ( Local_u16TempValue * TEMP_CONVERSION_FACTOR )/* + TEMP_OFFSET */);
 		Global_blConverted = FALSE ;
-		Local_enuErrorState = ES_OK ;
 	}
 
 	return Local_enuErrorState ;

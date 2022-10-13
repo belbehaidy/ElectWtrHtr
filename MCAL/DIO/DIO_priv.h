@@ -9,9 +9,9 @@
 #define DIO_PRIV_H_
 
 #define DIO_u8GROUP_A			12
-#define DIO_u8GROUP_B			19
-#define DIO_u8GROUP_C			25
-#define DIO_u8GROUP_D			33
+#define DIO_u8GROUP_B			13
+#define DIO_u8GROUP_C			14
+#define DIO_u8GROUP_D			15
 
 
 #define DIO_u8PIN0				PIN0

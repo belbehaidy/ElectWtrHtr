@@ -183,6 +183,5 @@ typedef struct
 #define PSR10_BIT							0			/* Prescaler RESET Bit for Timer/Counter0&1	*/
 //#define PSR2_BIT							1			/* Prescaler RESET Bit for Timer/Counter2	*/
 
-static u32 PWM_u32TimerClock( u8 Copy_u8TimerNum ,u8 Copy_u8ClkSelectNum ,u8 *Copy_pu8ClkSelectPrescalar );
 
 #endif /* MCAL_PWM_PWM_PRIV_H_ */

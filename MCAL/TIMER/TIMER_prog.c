@@ -13,7 +13,7 @@
 #include "TIMER_config.h"
 #include "TIMER_priv.h"
 
-
+static u32 Timer_u32TimerClock( u8 Copy_u8TimerNum ,u8 Copy_u8ClkSelectNum ,u8 *Copy_pu8ClkSelectPrescalar );
 
 extern u8 Timers_u8MaxNum , Timer0Max , Timer2Max ;
 extern Timer_t	Timers[];

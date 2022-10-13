@@ -13,6 +13,8 @@
 #include "PWM_config.h"
 #include "PWM_priv.h"
 
+static u32 PWM_u32TimerClock( u8 Copy_u8TimerNum ,u8 Copy_u8ClkSelectNum ,u8 *Copy_pu8ClkSelectPrescalar );
+
 extern u8 PWM_u8MaxNum ;
 extern u16 Timer1Max ;
 extern PWM_t PWMs[];
@@ -420,7 +422,7 @@ ES_t PWM_enuSetInterruptMode( u8 Copy_u8TimerNum , u8 Copy_u8TimerInterruptMode 
 
 		switch( Copy_u8TimerInterruptMode )
 		{
-			case PWM_OVERFLOW_INT	:	SET_BIT( TIMSK , TOIE1 );					/*	Enable TOIE1 Interrupt */
+			case PWM_OVERFLOW_INT	:	SET_BIT( TIMSK , TOIE1_BIT );					/*	Enable TOIE1 Interrupt */
 										for( Local_u8Iter = 0 ; Local_u8Iter < PWM_u8MaxNum ; Local_u8Iter++  )
 										{
 											PWMs[Local_u8Iter].InterruptMode = Copy_u8TimerInterruptMode ;
@@ -429,11 +431,11 @@ ES_t PWM_enuSetInterruptMode( u8 Copy_u8TimerNum , u8 Copy_u8TimerInterruptMode 
 										break;
 			case PWM_OUT_COMP_INT	:	if( Copy_u8TimerNum == TIMER1B )
 										{
-											SET_BIT( TIMSK , OCIE1B );				/*	Enable OCIE1B Interrupt */
+											SET_BIT( TIMSK , OCIE1B_BIT );				/*	Enable OCIE1B Interrupt */
 										}
 										else
 										{
-											SET_BIT( TIMSK , OCIE1A );				/*	Enable OCIE1A Interrupt */
+											SET_BIT( TIMSK , OCIE1A_BIT );				/*	Enable OCIE1A Interrupt */
 										}
 										break;
 		}

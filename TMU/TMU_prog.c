@@ -23,6 +23,7 @@ void TMU_vid_TOIE2_ISR(void) ;
 #endif
 
 #if MAX_TASKS >0 && MAX_TASKS<=10
+static TCB_t All_Tasks[MAX_TASKS];
 #else
 #error num of tasks is invalid
 #endif
@@ -31,7 +32,6 @@ static u8 TMU_u8ISRNum;
 static u8 TMU_u8ISRCount;
 static u8 TMU_u8Preload;
 
-static TCB_t All_Tasks[MAX_TASKS];
 static u32 TMU_u32OsTicks;
 
 void TMU_vidInit(void)
@@ -47,8 +47,8 @@ void TMU_vidInit(void)
 			Timer_enuSetTimer_Mode( TIMER0 , WGM_CTC_MODE );
 			TMU_u8ISRNum = 1;
 			TMU_u8ISRCount = 1;
-			Timer_enuInterruptEnable( OCIE0 );
 			Timer_enuCallBack( OCIE0 , TMU_vid_OCIE0_ISR );
+			Timer_enuInterruptEnable( OCIE0 );
 		}
 	#elif ( OS_TICK <=150 ) && ( OS_TICK > 0 )
 		u8 GCF = 16;
@@ -61,8 +61,8 @@ void TMU_vidInit(void)
 			Timer_enuSetOCRnValue( TIMER0 , (u8)((GCF * CPU_FREQ_KHZ )/ 1024ul) ) ;
 			TMU_u8ISRNum = (OS_TICK/GCF);
 			TMU_u8ISRCount = TMU_u8ISRNum;
-			Timer_enuInterruptEnable( OCIE0 );
 			Timer_enuCallBack( OCIE0 , TMU_vid_OCIE0_ISR );
+			Timer_enuInterruptEnable( OCIE0 );
 		}
 		else
 		{
@@ -72,8 +72,8 @@ void TMU_vidInit(void)
 			TMU_u8ISRCount = TMU_u8ISRNum;
 			TMU_u8Preload = ( TIMER0_MAX + 1 ) - ( Counts % ( TIMER0_MAX + 1 ) );
 			Timer_enuPreLoad( TIMER0 , TMU_u8Preload );
-			Timer_enuInterruptEnable( TOIE0 );
 			Timer_enuCallBack( TOIE0 , TMU_vid_OCIE0_ISR );
+			Timer_enuInterruptEnable( TOIE0 );
 		}
 	#else
 	#error os tick value is invalid
@@ -86,8 +86,8 @@ void TMU_vidInit(void)
 		Timer_enuSetOCRnValue( TIMER2 , (u8)((OS_TICK * CPU_FREQ_KHZ)/1024ul)) ) ;
 		TMU_u8ISRNum = 1;
 		TMU_u8ISRCount = 1;
-		Timer_enuInterruptEnable( OCIE2 );
 		Timer_enuCallBack( OCIE2 , TMU_vid_OCIE2_ISR );
+		Timer_enuInterruptEnable( OCIE2 );
 	#elif OS_TICK <=150 && OS_TICK > 0
 		u8 GCF = 16;
 		for (;GCF>0;GCF--)
@@ -99,8 +99,8 @@ void TMU_vidInit(void)
 			Timer_enuSetOCRnValue( TIMER2 , (u8)((GCF * CPU_FREQ_KHZ )/ 1024ul) ) ;
 			TMU_u8ISRNum = (OS_TICK/GCF);
 			TMU_u8ISRCount = TMU_u8ISRNum;
-			Timer_enuInterruptEnable( OCIE2 );
 			Timer_enuCallBack( OCIE2 , TMU_vid_OCIE2_ISR );
+			Timer_enuInterruptEnable( OCIE2 );
 		}
 		else
 		{
@@ -110,8 +110,8 @@ void TMU_vidInit(void)
 			TMU_u8ISRCount = TMU_u8ISRNum;
 			TMU_u8Preload = ( TIMER2_MAX + 1 ) - ( Counts % ( TIMER2_MAX + 1 ) );
 			Timer_enuPreLoad( TIMER2 , TMU_u8Preload );
-			Timer_enuInterruptEnable( TOIE2 );
 			Timer_enuCallBack( TOIE2 , TMU_vid_TOIE2_ISR );
+			Timer_enuInterruptEnable( TOIE2 );
 		}
 	#else
 	#error os tick value is invalid

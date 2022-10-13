@@ -17,11 +17,11 @@
 
 
 //configure your CPU clock in KHz
-#define CPU_FREQ_KHZ			CPU_CLOCK/1000UL
+#define CPU_FREQ_KHZ			( CPU_CLOCK/1000UL )
 
 
 //assign max num of tasks in ur system
 //don't exceed 10
-#define MAX_TASKS 		8
+#define MAX_TASKS 		9
 
 #endif /* TMU_CONFIG_H_ */

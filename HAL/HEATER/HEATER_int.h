@@ -20,9 +20,9 @@
 
 #define HTR_TEMP_TOLERANCE 		5
 
-#define HTR_KP					0.8
-#define HTR_KI					0.4
-#define HTR_KD					0.2
+#define HTR_KP					8
+#define HTR_KI					4
+#define HTR_KD					2
 
 #define HTR_INIT_DUTY_CYCLE		50
 #define HTR_MAX_DUTY_CYCLE		80
