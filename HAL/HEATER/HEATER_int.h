@@ -24,21 +24,27 @@
 #define HTR_KI					4
 #define HTR_KD					2
 
+#ifndef ICR1_VALUE
+#define ICR1_VALUE				0x00FF
+#endif
+
 #define HTR_INIT_DUTY_CYCLE		50
 #define HTR_MAX_DUTY_CYCLE		80
 
 ES_t Heater_enuInit(void)
 {
-	ES_t Local_enuErrorState = ES_NOK ;
+	ES_t Local_AenuErrorState[5];
 
-	if( ES_OK == PWM_enuInit())
-	{
-		PWM_enuSetDutyCycle( HEATER_PWM , HTR_INIT_DUTY_CYCLE );
-		if( ES_OK == DIO_enuSetPinDirection( HEATER_GRP , HEATER_PIN , DIO_u8OUTPUT ) )
-			Local_enuErrorState = DIO_enuSetPinValue( HEATER_GRP , HEATER_PIN , DIO_u8LOW );
-	}
+	Local_AenuErrorState[0] = PWM_enuInit();
+	Local_AenuErrorState[1] = PWM_enuSetICR1Value( (u16)ICR1_VALUE );
+	Local_AenuErrorState[2] = PWM_enuSetDutyCycle( HEATER_PWM , HTR_INIT_DUTY_CYCLE );
+	Local_AenuErrorState[3] = DIO_enuSetPinDirection( HEATER_GRP , HEATER_PIN , DIO_u8OUTPUT );
+	Local_AenuErrorState[4] = DIO_enuSetPinValue( HEATER_GRP , HEATER_PIN , DIO_u8LOW );
 
-	return Local_enuErrorState ;
+	u8 Local_u8Iter = 0 ;
+	for( ; (Local_u8Iter < 5) && ( Local_AenuErrorState[Local_u8Iter] == ES_OK ) ; Local_u8Iter++ );
+
+	return ( ( Local_u8Iter == 5 )? ES_OK : Local_AenuErrorState[Local_u8Iter] );
 }
 
 ES_t Heater_enuSetState( s8 Copy_u8TempError )

@@ -58,9 +58,9 @@ ES_t LM35_enuReadTemp( u16 *Copy_u16TempValue )
 
 	if( Global_blConverted == TRUE )
 	{
+		Global_blConverted = FALSE ;
 		Local_enuErrorState = ADC_enuRead( &Local_u16TempValue );
 		*Copy_u16TempValue = (u16)( ( Local_u16TempValue * TEMP_CONVERSION_FACTOR )/* + TEMP_OFFSET */);
-		Global_blConverted = FALSE ;
 	}
 
 	return Local_enuErrorState ;

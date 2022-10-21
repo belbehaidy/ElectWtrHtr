@@ -23,7 +23,7 @@ typedef struct
 /*	Timer/Counter1	Configuration	*/
 /************************************/
 #define TC1_CS			PWM_PRES_8
-#define	TC1_WGM			WGM_PC_8_bit
+#define	TC1_WGM			WGM_PFC_ICR1
 #define TIMER1_BOTTOM	0x0000
 #define TIMER1_MAX		0x00FF
 /************************************/

@@ -12,8 +12,6 @@
 #define SW_ONE					202
 #define SW_TWO					203
 
-
-
 ES_t Switch_enuInit(void);
 
 ES_t Switch_enuGetPressed (u8 Copy_u8SwitchNum ,u8 *Copy_pu8SwitchValue );

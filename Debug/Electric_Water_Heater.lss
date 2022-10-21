@@ -3,33 +3,33 @@ Electric_Water_Heater.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00005f80  00000000  00000000  00000094  2**1
+  0 .text         00006038  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000170  00800060  00005f80  00006014  2**0
+  1 .data         00000170  00800060  00006038  000060cc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000078  008001d0  008001d0  00006184  2**0
+  2 .bss          00000078  008001d0  008001d0  0000623c  2**0
                   ALLOC
-  3 .stab         00006744  00000000  00000000  00006184  2**2
+  3 .stab         0000678c  00000000  00000000  0000623c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00002788  00000000  00000000  0000c8c8  2**0
+  4 .stabstr      000027d0  00000000  00000000  0000c9c8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_aranges 000001a0  00000000  00000000  0000f050  2**0
+  5 .debug_aranges 000001a0  00000000  00000000  0000f198  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_pubnames 000001f6  00000000  00000000  0000f1f0  2**0
+  6 .debug_pubnames 000001f6  00000000  00000000  0000f338  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   00002393  00000000  00000000  0000f3e6  2**0
+  7 .debug_info   00002393  00000000  00000000  0000f52e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00001374  00000000  00000000  00011779  2**0
+  8 .debug_abbrev 00001374  00000000  00000000  000118c1  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00001238  00000000  00000000  00012aed  2**0
+  9 .debug_line   00001238  00000000  00000000  00012c35  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  000001c0  00000000  00000000  00013d28  2**2
+ 10 .debug_frame  000001c0  00000000  00000000  00013e70  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    000002ff  00000000  00000000  00013ee8  2**0
+ 11 .debug_str    000002ff  00000000  00000000  00014030  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    000009de  00000000  00000000  000141e7  2**0
+ 12 .debug_loc    000009de  00000000  00000000  0001432f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000050  00000000  00000000  00014bc5  2**0
+ 13 .debug_ranges 00000050  00000000  00000000  00014d0d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -69,8 +69,8 @@ Disassembly of section .text:
       60:	11 e0       	ldi	r17, 0x01	; 1
       62:	a0 e6       	ldi	r26, 0x60	; 96
       64:	b0 e0       	ldi	r27, 0x00	; 0
-      66:	e0 e8       	ldi	r30, 0x80	; 128
-      68:	ff e5       	ldi	r31, 0x5F	; 95
+      66:	e8 e3       	ldi	r30, 0x38	; 56
+      68:	f0 e6       	ldi	r31, 0x60	; 96
       6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
 
 0000006c <.do_copy_data_loop>:
@@ -95,8 +95,8 @@ Disassembly of section .text:
       80:	a8 34       	cpi	r26, 0x48	; 72
       82:	b1 07       	cpc	r27, r17
       84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-      86:	0e 94 06 2b 	call	0x560c	; 0x560c <main>
-      8a:	0c 94 be 2f 	jmp	0x5f7c	; 0x5f7c <_exit>
+      86:	0e 94 62 2b 	call	0x56c4	; 0x56c4 <main>
+      8a:	0c 94 1a 30 	jmp	0x6034	; 0x6034 <_exit>
 
 0000008e <__bad_interrupt>:
       8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -148,7 +148,7 @@ Disassembly of section .text:
       ec:	b0 e0       	ldi	r27, 0x00	; 0
       ee:	eb e7       	ldi	r30, 0x7B	; 123
       f0:	f0 e0       	ldi	r31, 0x00	; 0
-      f2:	0c 94 87 2f 	jmp	0x5f0e	; 0x5f0e <__prologue_saves__>
+      f2:	0c 94 e3 2f 	jmp	0x5fc6	; 0x5fc6 <__prologue_saves__>
       f6:	dc 01       	movw	r26, r24
       f8:	2b 01       	movw	r4, r22
       fa:	fa 01       	movw	r30, r20
@@ -473,14 +473,14 @@ Disassembly of section .text:
      378:	cd b7       	in	r28, 0x3d	; 61
      37a:	de b7       	in	r29, 0x3e	; 62
      37c:	e2 e1       	ldi	r30, 0x12	; 18
-     37e:	0c 94 a3 2f 	jmp	0x5f46	; 0x5f46 <__epilogue_restores__>
+     37e:	0c 94 ff 2f 	jmp	0x5ffe	; 0x5ffe <__epilogue_restores__>
 
 00000382 <__subsf3>:
      382:	a0 e2       	ldi	r26, 0x20	; 32
      384:	b0 e0       	ldi	r27, 0x00	; 0
      386:	e7 ec       	ldi	r30, 0xC7	; 199
      388:	f1 e0       	ldi	r31, 0x01	; 1
-     38a:	0c 94 93 2f 	jmp	0x5f26	; 0x5f26 <__prologue_saves__+0x18>
+     38a:	0c 94 ef 2f 	jmp	0x5fde	; 0x5fde <__prologue_saves__+0x18>
      38e:	69 83       	std	Y+1, r22	; 0x01
      390:	7a 83       	std	Y+2, r23	; 0x02
      392:	8b 83       	std	Y+3, r24	; 0x03
@@ -518,14 +518,14 @@ Disassembly of section .text:
      3d8:	0e 94 9f 05 	call	0xb3e	; 0xb3e <__pack_f>
      3dc:	a0 96       	adiw	r28, 0x20	; 32
      3de:	e6 e0       	ldi	r30, 0x06	; 6
-     3e0:	0c 94 af 2f 	jmp	0x5f5e	; 0x5f5e <__epilogue_restores__+0x18>
+     3e0:	0c 94 0b 30 	jmp	0x6016	; 0x6016 <__epilogue_restores__+0x18>
 
 000003e4 <__addsf3>:
      3e4:	a0 e2       	ldi	r26, 0x20	; 32
      3e6:	b0 e0       	ldi	r27, 0x00	; 0
      3e8:	e8 ef       	ldi	r30, 0xF8	; 248
      3ea:	f1 e0       	ldi	r31, 0x01	; 1
-     3ec:	0c 94 93 2f 	jmp	0x5f26	; 0x5f26 <__prologue_saves__+0x18>
+     3ec:	0c 94 ef 2f 	jmp	0x5fde	; 0x5fde <__prologue_saves__+0x18>
      3f0:	69 83       	std	Y+1, r22	; 0x01
      3f2:	7a 83       	std	Y+2, r23	; 0x02
      3f4:	8b 83       	std	Y+3, r24	; 0x03
@@ -559,14 +559,14 @@ Disassembly of section .text:
      432:	0e 94 9f 05 	call	0xb3e	; 0xb3e <__pack_f>
      436:	a0 96       	adiw	r28, 0x20	; 32
      438:	e6 e0       	ldi	r30, 0x06	; 6
-     43a:	0c 94 af 2f 	jmp	0x5f5e	; 0x5f5e <__epilogue_restores__+0x18>
+     43a:	0c 94 0b 30 	jmp	0x6016	; 0x6016 <__epilogue_restores__+0x18>
 
 0000043e <__mulsf3>:
      43e:	a0 e2       	ldi	r26, 0x20	; 32
      440:	b0 e0       	ldi	r27, 0x00	; 0
      442:	e5 e2       	ldi	r30, 0x25	; 37
      444:	f2 e0       	ldi	r31, 0x02	; 2
-     446:	0c 94 87 2f 	jmp	0x5f0e	; 0x5f0e <__prologue_saves__>
+     446:	0c 94 e3 2f 	jmp	0x5fc6	; 0x5fc6 <__prologue_saves__>
      44a:	69 83       	std	Y+1, r22	; 0x01
      44c:	7a 83       	std	Y+2, r23	; 0x02
      44e:	8b 83       	std	Y+3, r24	; 0x03
@@ -806,14 +806,14 @@ Disassembly of section .text:
      626:	0e 94 9f 05 	call	0xb3e	; 0xb3e <__pack_f>
      62a:	a0 96       	adiw	r28, 0x20	; 32
      62c:	e2 e1       	ldi	r30, 0x12	; 18
-     62e:	0c 94 a3 2f 	jmp	0x5f46	; 0x5f46 <__epilogue_restores__>
+     62e:	0c 94 ff 2f 	jmp	0x5ffe	; 0x5ffe <__epilogue_restores__>
 
 00000632 <__divsf3>:
      632:	a8 e1       	ldi	r26, 0x18	; 24
      634:	b0 e0       	ldi	r27, 0x00	; 0
      636:	ef e1       	ldi	r30, 0x1F	; 31
      638:	f3 e0       	ldi	r31, 0x03	; 3
-     63a:	0c 94 8f 2f 	jmp	0x5f1e	; 0x5f1e <__prologue_saves__+0x10>
+     63a:	0c 94 eb 2f 	jmp	0x5fd6	; 0x5fd6 <__prologue_saves__+0x10>
      63e:	69 83       	std	Y+1, r22	; 0x01
      640:	7a 83       	std	Y+2, r23	; 0x02
      642:	8b 83       	std	Y+3, r24	; 0x03
@@ -975,14 +975,14 @@ Disassembly of section .text:
      77e:	0e 94 9f 05 	call	0xb3e	; 0xb3e <__pack_f>
      782:	68 96       	adiw	r28, 0x18	; 24
      784:	ea e0       	ldi	r30, 0x0A	; 10
-     786:	0c 94 ab 2f 	jmp	0x5f56	; 0x5f56 <__epilogue_restores__+0x10>
+     786:	0c 94 07 30 	jmp	0x600e	; 0x600e <__epilogue_restores__+0x10>
 
 0000078a <__eqsf2>:
      78a:	a8 e1       	ldi	r26, 0x18	; 24
      78c:	b0 e0       	ldi	r27, 0x00	; 0
      78e:	eb ec       	ldi	r30, 0xCB	; 203
      790:	f3 e0       	ldi	r31, 0x03	; 3
-     792:	0c 94 93 2f 	jmp	0x5f26	; 0x5f26 <__prologue_saves__+0x18>
+     792:	0c 94 ef 2f 	jmp	0x5fde	; 0x5fde <__prologue_saves__+0x18>
      796:	69 83       	std	Y+1, r22	; 0x01
      798:	7a 83       	std	Y+2, r23	; 0x02
      79a:	8b 83       	std	Y+3, r24	; 0x03
@@ -1020,14 +1020,14 @@ Disassembly of section .text:
      7e0:	81 e0       	ldi	r24, 0x01	; 1
      7e2:	68 96       	adiw	r28, 0x18	; 24
      7e4:	e6 e0       	ldi	r30, 0x06	; 6
-     7e6:	0c 94 af 2f 	jmp	0x5f5e	; 0x5f5e <__epilogue_restores__+0x18>
+     7e6:	0c 94 0b 30 	jmp	0x6016	; 0x6016 <__epilogue_restores__+0x18>
 
 000007ea <__gesf2>:
      7ea:	a8 e1       	ldi	r26, 0x18	; 24
      7ec:	b0 e0       	ldi	r27, 0x00	; 0
      7ee:	eb ef       	ldi	r30, 0xFB	; 251
      7f0:	f3 e0       	ldi	r31, 0x03	; 3
-     7f2:	0c 94 93 2f 	jmp	0x5f26	; 0x5f26 <__prologue_saves__+0x18>
+     7f2:	0c 94 ef 2f 	jmp	0x5fde	; 0x5fde <__prologue_saves__+0x18>
      7f6:	69 83       	std	Y+1, r22	; 0x01
      7f8:	7a 83       	std	Y+2, r23	; 0x02
      7fa:	8b 83       	std	Y+3, r24	; 0x03
@@ -1065,14 +1065,14 @@ Disassembly of section .text:
      840:	8f ef       	ldi	r24, 0xFF	; 255
      842:	68 96       	adiw	r28, 0x18	; 24
      844:	e6 e0       	ldi	r30, 0x06	; 6
-     846:	0c 94 af 2f 	jmp	0x5f5e	; 0x5f5e <__epilogue_restores__+0x18>
+     846:	0c 94 0b 30 	jmp	0x6016	; 0x6016 <__epilogue_restores__+0x18>
 
 0000084a <__floatsisf>:
      84a:	a8 e0       	ldi	r26, 0x08	; 8
      84c:	b0 e0       	ldi	r27, 0x00	; 0
      84e:	eb e2       	ldi	r30, 0x2B	; 43
      850:	f4 e0       	ldi	r31, 0x04	; 4
-     852:	0c 94 90 2f 	jmp	0x5f20	; 0x5f20 <__prologue_saves__+0x12>
+     852:	0c 94 ec 2f 	jmp	0x5fd8	; 0x5fd8 <__prologue_saves__+0x12>
      856:	9b 01       	movw	r18, r22
      858:	ac 01       	movw	r20, r24
      85a:	83 e0       	ldi	r24, 0x03	; 3
@@ -1157,14 +1157,14 @@ Disassembly of section .text:
      8fa:	0e 94 9f 05 	call	0xb3e	; 0xb3e <__pack_f>
      8fe:	28 96       	adiw	r28, 0x08	; 8
      900:	e9 e0       	ldi	r30, 0x09	; 9
-     902:	0c 94 ac 2f 	jmp	0x5f58	; 0x5f58 <__epilogue_restores__+0x12>
+     902:	0c 94 08 30 	jmp	0x6010	; 0x6010 <__epilogue_restores__+0x12>
 
 00000906 <__fixsfsi>:
      906:	ac e0       	ldi	r26, 0x0C	; 12
      908:	b0 e0       	ldi	r27, 0x00	; 0
      90a:	e9 e8       	ldi	r30, 0x89	; 137
      90c:	f4 e0       	ldi	r31, 0x04	; 4
-     90e:	0c 94 97 2f 	jmp	0x5f2e	; 0x5f2e <__prologue_saves__+0x20>
+     90e:	0c 94 f3 2f 	jmp	0x5fe6	; 0x5fe6 <__prologue_saves__+0x20>
      912:	69 83       	std	Y+1, r22	; 0x01
      914:	7a 83       	std	Y+2, r23	; 0x02
      916:	8b 83       	std	Y+3, r24	; 0x03
@@ -1240,14 +1240,14 @@ Disassembly of section .text:
      9a4:	ca 01       	movw	r24, r20
      9a6:	2c 96       	adiw	r28, 0x0c	; 12
      9a8:	e2 e0       	ldi	r30, 0x02	; 2
-     9aa:	0c 94 b3 2f 	jmp	0x5f66	; 0x5f66 <__epilogue_restores__+0x20>
+     9aa:	0c 94 0f 30 	jmp	0x601e	; 0x601e <__epilogue_restores__+0x20>
 
 000009ae <__floatunsisf>:
      9ae:	a8 e0       	ldi	r26, 0x08	; 8
      9b0:	b0 e0       	ldi	r27, 0x00	; 0
      9b2:	ed ed       	ldi	r30, 0xDD	; 221
      9b4:	f4 e0       	ldi	r31, 0x04	; 4
-     9b6:	0c 94 8f 2f 	jmp	0x5f1e	; 0x5f1e <__prologue_saves__+0x10>
+     9b6:	0c 94 eb 2f 	jmp	0x5fd6	; 0x5fd6 <__prologue_saves__+0x10>
      9ba:	7b 01       	movw	r14, r22
      9bc:	8c 01       	movw	r16, r24
      9be:	61 15       	cp	r22, r1
@@ -1359,7 +1359,7 @@ Disassembly of section .text:
      a94:	0e 94 9f 05 	call	0xb3e	; 0xb3e <__pack_f>
      a98:	28 96       	adiw	r28, 0x08	; 8
      a9a:	ea e0       	ldi	r30, 0x0A	; 10
-     a9c:	0c 94 ab 2f 	jmp	0x5f56	; 0x5f56 <__epilogue_restores__+0x10>
+     a9c:	0c 94 07 30 	jmp	0x600e	; 0x600e <__epilogue_restores__+0x10>
 
 00000aa0 <__clzsi2>:
      aa0:	ef 92       	push	r14
@@ -2179,7 +2179,7 @@ void TMU_vidStartScheduler(void)
     10aa:	50 e0       	ldi	r21, 0x00	; 0
     10ac:	c8 01       	movw	r24, r16
     10ae:	b7 01       	movw	r22, r14
-    10b0:	0e 94 65 2f 	call	0x5eca	; 0x5eca <__udivmodsi4>
+    10b0:	0e 94 c1 2f 	call	0x5f82	; 0x5f82 <__udivmodsi4>
     10b4:	dc 01       	movw	r26, r24
     10b6:	cb 01       	movw	r24, r22
     10b8:	9c 01       	movw	r18, r24
@@ -12064,7 +12064,7 @@ ES_t SevSeg_enuFrameDelay(u8 Copy_u8SevSegTotalModules, u8 *Copy_pu8SevSegModule
     50bc:	30 e0       	ldi	r19, 0x00	; 0
     50be:	ca 01       	movw	r24, r20
     50c0:	b9 01       	movw	r22, r18
-    50c2:	0e 94 52 2f 	call	0x5ea4	; 0x5ea4 <__divmodhi4>
+    50c2:	0e 94 ae 2f 	call	0x5f5c	; 0x5f5c <__divmodhi4>
     50c6:	cb 01       	movw	r24, r22
     50c8:	eb 81       	ldd	r30, Y+3	; 0x03
     50ca:	fc 81       	ldd	r31, Y+4	; 0x04
@@ -12392,1940 +12392,2035 @@ ES_t Coolent_enuInit(void)
 {
     52b6:	df 93       	push	r29
     52b8:	cf 93       	push	r28
-    52ba:	0f 92       	push	r0
-    52bc:	cd b7       	in	r28, 0x3d	; 61
-    52be:	de b7       	in	r29, 0x3e	; 62
-	ES_t Local_enuErrorState = ES_NOK ;
-    52c0:	81 e0       	ldi	r24, 0x01	; 1
-    52c2:	89 83       	std	Y+1, r24	; 0x01
+    52ba:	cd b7       	in	r28, 0x3d	; 61
+    52bc:	de b7       	in	r29, 0x3e	; 62
+    52be:	27 97       	sbiw	r28, 0x07	; 7
+    52c0:	0f b6       	in	r0, 0x3f	; 63
+    52c2:	f8 94       	cli
+    52c4:	de bf       	out	0x3e, r29	; 62
+    52c6:	0f be       	out	0x3f, r0	; 63
+    52c8:	cd bf       	out	0x3d, r28	; 61
+	ES_t Local_AenuErrorState[5];
 
-	if( ES_OK == PWM_enuInit())
-    52c4:	0e 94 be 10 	call	0x217c	; 0x217c <PWM_enuInit>
-    52c8:	88 23       	and	r24, r24
-    52ca:	a1 f4       	brne	.+40     	; 0x52f4 <Coolent_enuInit+0x3e>
-	{
-		PWM_enuSetDutyCycle( COOLENT_PWM , COOL_INIT_DUTY_CYCLE );
-    52cc:	89 ec       	ldi	r24, 0xC9	; 201
-    52ce:	40 e0       	ldi	r20, 0x00	; 0
-    52d0:	50 e0       	ldi	r21, 0x00	; 0
-    52d2:	68 e4       	ldi	r22, 0x48	; 72
-    52d4:	72 e4       	ldi	r23, 0x42	; 66
-    52d6:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
-		if( ES_OK == DIO_enuSetPinDirection( COOLENT_GRP , COOLENT_PIN , DIO_u8OUTPUT ) )
-    52da:	83 e0       	ldi	r24, 0x03	; 3
-    52dc:	65 e0       	ldi	r22, 0x05	; 5
-    52de:	41 e0       	ldi	r20, 0x01	; 1
-    52e0:	0e 94 fd 1f 	call	0x3ffa	; 0x3ffa <DIO_enuSetPinDirection>
-    52e4:	88 23       	and	r24, r24
-    52e6:	31 f4       	brne	.+12     	; 0x52f4 <Coolent_enuInit+0x3e>
-			Local_enuErrorState = DIO_enuSetPinValue( COOLENT_GRP , COOLENT_PIN , DIO_u8LOW );
-    52e8:	83 e0       	ldi	r24, 0x03	; 3
-    52ea:	65 e0       	ldi	r22, 0x05	; 5
-    52ec:	40 e0       	ldi	r20, 0x00	; 0
-    52ee:	0e 94 d3 20 	call	0x41a6	; 0x41a6 <DIO_enuSetPinValue>
-    52f2:	89 83       	std	Y+1, r24	; 0x01
-	}
-	return Local_enuErrorState ;
-    52f4:	89 81       	ldd	r24, Y+1	; 0x01
+	Local_AenuErrorState[0] = PWM_enuInit();
+    52ca:	0e 94 be 10 	call	0x217c	; 0x217c <PWM_enuInit>
+    52ce:	8a 83       	std	Y+2, r24	; 0x02
+	Local_AenuErrorState[1] = PWM_enuSetICR1Value( (u16)ICR1_VALUE );
+    52d0:	8f ef       	ldi	r24, 0xFF	; 255
+    52d2:	90 e0       	ldi	r25, 0x00	; 0
+    52d4:	0e 94 57 15 	call	0x2aae	; 0x2aae <PWM_enuSetICR1Value>
+    52d8:	8b 83       	std	Y+3, r24	; 0x03
+	Local_AenuErrorState[2] = PWM_enuSetDutyCycle( COOLENT_PWM , COOL_INIT_DUTY_CYCLE );
+    52da:	89 ec       	ldi	r24, 0xC9	; 201
+    52dc:	40 e0       	ldi	r20, 0x00	; 0
+    52de:	50 e0       	ldi	r21, 0x00	; 0
+    52e0:	68 e4       	ldi	r22, 0x48	; 72
+    52e2:	72 e4       	ldi	r23, 0x42	; 66
+    52e4:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
+    52e8:	8c 83       	std	Y+4, r24	; 0x04
+	Local_AenuErrorState[3] = DIO_enuSetPinDirection( COOLENT_GRP , COOLENT_PIN , DIO_u8OUTPUT );
+    52ea:	83 e0       	ldi	r24, 0x03	; 3
+    52ec:	65 e0       	ldi	r22, 0x05	; 5
+    52ee:	41 e0       	ldi	r20, 0x01	; 1
+    52f0:	0e 94 fd 1f 	call	0x3ffa	; 0x3ffa <DIO_enuSetPinDirection>
+    52f4:	8d 83       	std	Y+5, r24	; 0x05
+	Local_AenuErrorState[4] = DIO_enuSetPinValue( COOLENT_GRP , COOLENT_PIN , DIO_u8LOW );
+    52f6:	83 e0       	ldi	r24, 0x03	; 3
+    52f8:	65 e0       	ldi	r22, 0x05	; 5
+    52fa:	40 e0       	ldi	r20, 0x00	; 0
+    52fc:	0e 94 d3 20 	call	0x41a6	; 0x41a6 <DIO_enuSetPinValue>
+    5300:	8e 83       	std	Y+6, r24	; 0x06
+
+	u8 Local_u8Iter = 0 ;
+    5302:	19 82       	std	Y+1, r1	; 0x01
+    5304:	03 c0       	rjmp	.+6      	; 0x530c <Coolent_enuInit+0x56>
+	for( ; (Local_u8Iter < 5) && ( Local_AenuErrorState[Local_u8Iter] == ES_OK ) ; Local_u8Iter++ );
+    5306:	89 81       	ldd	r24, Y+1	; 0x01
+    5308:	8f 5f       	subi	r24, 0xFF	; 255
+    530a:	89 83       	std	Y+1, r24	; 0x01
+    530c:	89 81       	ldd	r24, Y+1	; 0x01
+    530e:	85 30       	cpi	r24, 0x05	; 5
+    5310:	58 f4       	brcc	.+22     	; 0x5328 <Coolent_enuInit+0x72>
+    5312:	89 81       	ldd	r24, Y+1	; 0x01
+    5314:	28 2f       	mov	r18, r24
+    5316:	30 e0       	ldi	r19, 0x00	; 0
+    5318:	ce 01       	movw	r24, r28
+    531a:	02 96       	adiw	r24, 0x02	; 2
+    531c:	fc 01       	movw	r30, r24
+    531e:	e2 0f       	add	r30, r18
+    5320:	f3 1f       	adc	r31, r19
+    5322:	80 81       	ld	r24, Z
+    5324:	88 23       	and	r24, r24
+    5326:	79 f3       	breq	.-34     	; 0x5306 <Coolent_enuInit+0x50>
+
+	return ( ( Local_u8Iter == 5 )? ES_OK : Local_AenuErrorState[Local_u8Iter] );
+    5328:	89 81       	ldd	r24, Y+1	; 0x01
+    532a:	85 30       	cpi	r24, 0x05	; 5
+    532c:	59 f0       	breq	.+22     	; 0x5344 <Coolent_enuInit+0x8e>
+    532e:	89 81       	ldd	r24, Y+1	; 0x01
+    5330:	28 2f       	mov	r18, r24
+    5332:	30 e0       	ldi	r19, 0x00	; 0
+    5334:	ce 01       	movw	r24, r28
+    5336:	02 96       	adiw	r24, 0x02	; 2
+    5338:	fc 01       	movw	r30, r24
+    533a:	e2 0f       	add	r30, r18
+    533c:	f3 1f       	adc	r31, r19
+    533e:	80 81       	ld	r24, Z
+    5340:	8f 83       	std	Y+7, r24	; 0x07
+    5342:	01 c0       	rjmp	.+2      	; 0x5346 <Coolent_enuInit+0x90>
+    5344:	1f 82       	std	Y+7, r1	; 0x07
+    5346:	8f 81       	ldd	r24, Y+7	; 0x07
 }
-    52f6:	0f 90       	pop	r0
-    52f8:	cf 91       	pop	r28
-    52fa:	df 91       	pop	r29
-    52fc:	08 95       	ret
+    5348:	27 96       	adiw	r28, 0x07	; 7
+    534a:	0f b6       	in	r0, 0x3f	; 63
+    534c:	f8 94       	cli
+    534e:	de bf       	out	0x3e, r29	; 62
+    5350:	0f be       	out	0x3f, r0	; 63
+    5352:	cd bf       	out	0x3d, r28	; 61
+    5354:	cf 91       	pop	r28
+    5356:	df 91       	pop	r29
+    5358:	08 95       	ret
 
-000052fe <Coolent_enuSetState>:
+0000535a <Coolent_enuSetState>:
 
 ES_t Coolent_enuSetState( s8 Copy_u8TempError )
 {
-    52fe:	df 93       	push	r29
-    5300:	cf 93       	push	r28
-    5302:	00 d0       	rcall	.+0      	; 0x5304 <Coolent_enuSetState+0x6>
-    5304:	00 d0       	rcall	.+0      	; 0x5306 <Coolent_enuSetState+0x8>
-    5306:	00 d0       	rcall	.+0      	; 0x5308 <Coolent_enuSetState+0xa>
-    5308:	cd b7       	in	r28, 0x3d	; 61
-    530a:	de b7       	in	r29, 0x3e	; 62
-    530c:	8e 83       	std	Y+6, r24	; 0x06
+    535a:	df 93       	push	r29
+    535c:	cf 93       	push	r28
+    535e:	00 d0       	rcall	.+0      	; 0x5360 <Coolent_enuSetState+0x6>
+    5360:	00 d0       	rcall	.+0      	; 0x5362 <Coolent_enuSetState+0x8>
+    5362:	00 d0       	rcall	.+0      	; 0x5364 <Coolent_enuSetState+0xa>
+    5364:	cd b7       	in	r28, 0x3d	; 61
+    5366:	de b7       	in	r29, 0x3e	; 62
+    5368:	8e 83       	std	Y+6, r24	; 0x06
 	ES_t Local_enuErrorState = ES_NOK ;
-    530e:	81 e0       	ldi	r24, 0x01	; 1
-    5310:	8d 83       	std	Y+5, r24	; 0x05
+    536a:	81 e0       	ldi	r24, 0x01	; 1
+    536c:	8d 83       	std	Y+5, r24	; 0x05
 	static u8 PrevTempError = 0 ;
 	f32 DutyCycle;
 
 	if( Copy_u8TempError <= -COOLENT_TEMP_TOLERANCE )	DutyCycle = 0.0 ;
-    5312:	8e 81       	ldd	r24, Y+6	; 0x06
-    5314:	8c 3f       	cpi	r24, 0xFC	; 252
-    5316:	4c f4       	brge	.+18     	; 0x532a <Coolent_enuSetState+0x2c>
-    5318:	80 e0       	ldi	r24, 0x00	; 0
-    531a:	90 e0       	ldi	r25, 0x00	; 0
-    531c:	a0 e0       	ldi	r26, 0x00	; 0
-    531e:	b0 e0       	ldi	r27, 0x00	; 0
-    5320:	89 83       	std	Y+1, r24	; 0x01
-    5322:	9a 83       	std	Y+2, r25	; 0x02
-    5324:	ab 83       	std	Y+3, r26	; 0x03
-    5326:	bc 83       	std	Y+4, r27	; 0x04
-    5328:	42 c0       	rjmp	.+132    	; 0x53ae <Coolent_enuSetState+0xb0>
+    536e:	8e 81       	ldd	r24, Y+6	; 0x06
+    5370:	8c 3f       	cpi	r24, 0xFC	; 252
+    5372:	4c f4       	brge	.+18     	; 0x5386 <Coolent_enuSetState+0x2c>
+    5374:	80 e0       	ldi	r24, 0x00	; 0
+    5376:	90 e0       	ldi	r25, 0x00	; 0
+    5378:	a0 e0       	ldi	r26, 0x00	; 0
+    537a:	b0 e0       	ldi	r27, 0x00	; 0
+    537c:	89 83       	std	Y+1, r24	; 0x01
+    537e:	9a 83       	std	Y+2, r25	; 0x02
+    5380:	ab 83       	std	Y+3, r26	; 0x03
+    5382:	bc 83       	std	Y+4, r27	; 0x04
+    5384:	42 c0       	rjmp	.+132    	; 0x540a <Coolent_enuSetState+0xb0>
 	else if( Copy_u8TempError > COOLENT_TEMP_TOLERANCE )	DutyCycle = COOL_MAX_DUTY_CYCLE ;
-    532a:	8e 81       	ldd	r24, Y+6	; 0x06
-    532c:	86 30       	cpi	r24, 0x06	; 6
-    532e:	4c f0       	brlt	.+18     	; 0x5342 <Coolent_enuSetState+0x44>
-    5330:	80 e0       	ldi	r24, 0x00	; 0
-    5332:	90 e0       	ldi	r25, 0x00	; 0
-    5334:	a0 ea       	ldi	r26, 0xA0	; 160
-    5336:	b2 e4       	ldi	r27, 0x42	; 66
-    5338:	89 83       	std	Y+1, r24	; 0x01
-    533a:	9a 83       	std	Y+2, r25	; 0x02
-    533c:	ab 83       	std	Y+3, r26	; 0x03
-    533e:	bc 83       	std	Y+4, r27	; 0x04
-    5340:	36 c0       	rjmp	.+108    	; 0x53ae <Coolent_enuSetState+0xb0>
+    5386:	8e 81       	ldd	r24, Y+6	; 0x06
+    5388:	86 30       	cpi	r24, 0x06	; 6
+    538a:	4c f0       	brlt	.+18     	; 0x539e <Coolent_enuSetState+0x44>
+    538c:	80 e0       	ldi	r24, 0x00	; 0
+    538e:	90 e0       	ldi	r25, 0x00	; 0
+    5390:	a0 ea       	ldi	r26, 0xA0	; 160
+    5392:	b2 e4       	ldi	r27, 0x42	; 66
+    5394:	89 83       	std	Y+1, r24	; 0x01
+    5396:	9a 83       	std	Y+2, r25	; 0x02
+    5398:	ab 83       	std	Y+3, r26	; 0x03
+    539a:	bc 83       	std	Y+4, r27	; 0x04
+    539c:	36 c0       	rjmp	.+108    	; 0x540a <Coolent_enuSetState+0xb0>
 	else
 	{
 		DutyCycle = ( ( COOL_KP * Copy_u8TempError ) +
-    5342:	8e 81       	ldd	r24, Y+6	; 0x06
-    5344:	99 27       	eor	r25, r25
-    5346:	87 fd       	sbrc	r24, 7
-    5348:	90 95       	com	r25
-    534a:	ac 01       	movw	r20, r24
-    534c:	44 0f       	add	r20, r20
-    534e:	55 1f       	adc	r21, r21
-    5350:	8e 81       	ldd	r24, Y+6	; 0x06
-    5352:	28 2f       	mov	r18, r24
-    5354:	33 27       	eor	r19, r19
-    5356:	27 fd       	sbrc	r18, 7
-    5358:	30 95       	com	r19
-    535a:	80 91 35 02 	lds	r24, 0x0235
-    535e:	88 2f       	mov	r24, r24
-    5360:	90 e0       	ldi	r25, 0x00	; 0
-    5362:	82 0f       	add	r24, r18
-    5364:	93 1f       	adc	r25, r19
-    5366:	84 0f       	add	r24, r20
-    5368:	95 1f       	adc	r25, r21
-    536a:	ac 01       	movw	r20, r24
-    536c:	44 0f       	add	r20, r20
-    536e:	55 1f       	adc	r21, r21
-    5370:	8e 81       	ldd	r24, Y+6	; 0x06
-    5372:	28 2f       	mov	r18, r24
-    5374:	33 27       	eor	r19, r19
-    5376:	27 fd       	sbrc	r18, 7
-    5378:	30 95       	com	r19
-    537a:	80 91 35 02 	lds	r24, 0x0235
-    537e:	88 2f       	mov	r24, r24
-    5380:	90 e0       	ldi	r25, 0x00	; 0
-    5382:	b9 01       	movw	r22, r18
-    5384:	68 1b       	sub	r22, r24
-    5386:	79 0b       	sbc	r23, r25
-    5388:	cb 01       	movw	r24, r22
-    538a:	84 0f       	add	r24, r20
-    538c:	95 1f       	adc	r25, r21
-    538e:	88 0f       	add	r24, r24
-    5390:	99 1f       	adc	r25, r25
-    5392:	aa 27       	eor	r26, r26
-    5394:	97 fd       	sbrc	r25, 7
-    5396:	a0 95       	com	r26
-    5398:	ba 2f       	mov	r27, r26
-    539a:	bc 01       	movw	r22, r24
-    539c:	cd 01       	movw	r24, r26
-    539e:	0e 94 25 04 	call	0x84a	; 0x84a <__floatsisf>
-    53a2:	dc 01       	movw	r26, r24
-    53a4:	cb 01       	movw	r24, r22
-    53a6:	89 83       	std	Y+1, r24	; 0x01
-    53a8:	9a 83       	std	Y+2, r25	; 0x02
-    53aa:	ab 83       	std	Y+3, r26	; 0x03
-    53ac:	bc 83       	std	Y+4, r27	; 0x04
+    539e:	8e 81       	ldd	r24, Y+6	; 0x06
+    53a0:	99 27       	eor	r25, r25
+    53a2:	87 fd       	sbrc	r24, 7
+    53a4:	90 95       	com	r25
+    53a6:	ac 01       	movw	r20, r24
+    53a8:	44 0f       	add	r20, r20
+    53aa:	55 1f       	adc	r21, r21
+    53ac:	8e 81       	ldd	r24, Y+6	; 0x06
+    53ae:	28 2f       	mov	r18, r24
+    53b0:	33 27       	eor	r19, r19
+    53b2:	27 fd       	sbrc	r18, 7
+    53b4:	30 95       	com	r19
+    53b6:	80 91 35 02 	lds	r24, 0x0235
+    53ba:	88 2f       	mov	r24, r24
+    53bc:	90 e0       	ldi	r25, 0x00	; 0
+    53be:	82 0f       	add	r24, r18
+    53c0:	93 1f       	adc	r25, r19
+    53c2:	84 0f       	add	r24, r20
+    53c4:	95 1f       	adc	r25, r21
+    53c6:	ac 01       	movw	r20, r24
+    53c8:	44 0f       	add	r20, r20
+    53ca:	55 1f       	adc	r21, r21
+    53cc:	8e 81       	ldd	r24, Y+6	; 0x06
+    53ce:	28 2f       	mov	r18, r24
+    53d0:	33 27       	eor	r19, r19
+    53d2:	27 fd       	sbrc	r18, 7
+    53d4:	30 95       	com	r19
+    53d6:	80 91 35 02 	lds	r24, 0x0235
+    53da:	88 2f       	mov	r24, r24
+    53dc:	90 e0       	ldi	r25, 0x00	; 0
+    53de:	b9 01       	movw	r22, r18
+    53e0:	68 1b       	sub	r22, r24
+    53e2:	79 0b       	sbc	r23, r25
+    53e4:	cb 01       	movw	r24, r22
+    53e6:	84 0f       	add	r24, r20
+    53e8:	95 1f       	adc	r25, r21
+    53ea:	88 0f       	add	r24, r24
+    53ec:	99 1f       	adc	r25, r25
+    53ee:	aa 27       	eor	r26, r26
+    53f0:	97 fd       	sbrc	r25, 7
+    53f2:	a0 95       	com	r26
+    53f4:	ba 2f       	mov	r27, r26
+    53f6:	bc 01       	movw	r22, r24
+    53f8:	cd 01       	movw	r24, r26
+    53fa:	0e 94 25 04 	call	0x84a	; 0x84a <__floatsisf>
+    53fe:	dc 01       	movw	r26, r24
+    5400:	cb 01       	movw	r24, r22
+    5402:	89 83       	std	Y+1, r24	; 0x01
+    5404:	9a 83       	std	Y+2, r25	; 0x02
+    5406:	ab 83       	std	Y+3, r26	; 0x03
+    5408:	bc 83       	std	Y+4, r27	; 0x04
 					( COOL_KI * ( Copy_u8TempError + PrevTempError ) ) +
 					( COOL_KD * ( Copy_u8TempError - PrevTempError ) ) ) ;
 	}
 
 	Local_enuErrorState = PWM_enuSetDutyCycle( COOLENT_PWM , DutyCycle );
-    53ae:	29 81       	ldd	r18, Y+1	; 0x01
-    53b0:	3a 81       	ldd	r19, Y+2	; 0x02
-    53b2:	4b 81       	ldd	r20, Y+3	; 0x03
-    53b4:	5c 81       	ldd	r21, Y+4	; 0x04
-    53b6:	89 ec       	ldi	r24, 0xC9	; 201
-    53b8:	ba 01       	movw	r22, r20
-    53ba:	a9 01       	movw	r20, r18
-    53bc:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
-    53c0:	8d 83       	std	Y+5, r24	; 0x05
+    540a:	29 81       	ldd	r18, Y+1	; 0x01
+    540c:	3a 81       	ldd	r19, Y+2	; 0x02
+    540e:	4b 81       	ldd	r20, Y+3	; 0x03
+    5410:	5c 81       	ldd	r21, Y+4	; 0x04
+    5412:	89 ec       	ldi	r24, 0xC9	; 201
+    5414:	ba 01       	movw	r22, r20
+    5416:	a9 01       	movw	r20, r18
+    5418:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
+    541c:	8d 83       	std	Y+5, r24	; 0x05
 
 	PrevTempError = Copy_u8TempError ;
-    53c2:	8e 81       	ldd	r24, Y+6	; 0x06
-    53c4:	80 93 35 02 	sts	0x0235, r24
+    541e:	8e 81       	ldd	r24, Y+6	; 0x06
+    5420:	80 93 35 02 	sts	0x0235, r24
 
 	return Local_enuErrorState ;
-    53c8:	8d 81       	ldd	r24, Y+5	; 0x05
+    5424:	8d 81       	ldd	r24, Y+5	; 0x05
 }
-    53ca:	26 96       	adiw	r28, 0x06	; 6
-    53cc:	0f b6       	in	r0, 0x3f	; 63
-    53ce:	f8 94       	cli
-    53d0:	de bf       	out	0x3e, r29	; 62
-    53d2:	0f be       	out	0x3f, r0	; 63
-    53d4:	cd bf       	out	0x3d, r28	; 61
-    53d6:	cf 91       	pop	r28
-    53d8:	df 91       	pop	r29
-    53da:	08 95       	ret
+    5426:	26 96       	adiw	r28, 0x06	; 6
+    5428:	0f b6       	in	r0, 0x3f	; 63
+    542a:	f8 94       	cli
+    542c:	de bf       	out	0x3e, r29	; 62
+    542e:	0f be       	out	0x3f, r0	; 63
+    5430:	cd bf       	out	0x3d, r28	; 61
+    5432:	cf 91       	pop	r28
+    5434:	df 91       	pop	r29
+    5436:	08 95       	ret
 
-000053dc <Heater_enuInit>:
+00005438 <Heater_enuInit>:
 
 #define HTR_INIT_DUTY_CYCLE		50
 #define HTR_MAX_DUTY_CYCLE		80
 
 ES_t Heater_enuInit(void)
 {
-    53dc:	df 93       	push	r29
-    53de:	cf 93       	push	r28
-    53e0:	0f 92       	push	r0
-    53e2:	cd b7       	in	r28, 0x3d	; 61
-    53e4:	de b7       	in	r29, 0x3e	; 62
-	ES_t Local_enuErrorState = ES_NOK ;
-    53e6:	81 e0       	ldi	r24, 0x01	; 1
-    53e8:	89 83       	std	Y+1, r24	; 0x01
+    5438:	df 93       	push	r29
+    543a:	cf 93       	push	r28
+    543c:	cd b7       	in	r28, 0x3d	; 61
+    543e:	de b7       	in	r29, 0x3e	; 62
+    5440:	27 97       	sbiw	r28, 0x07	; 7
+    5442:	0f b6       	in	r0, 0x3f	; 63
+    5444:	f8 94       	cli
+    5446:	de bf       	out	0x3e, r29	; 62
+    5448:	0f be       	out	0x3f, r0	; 63
+    544a:	cd bf       	out	0x3d, r28	; 61
+	ES_t Local_AenuErrorState[5];
 
-	if( ES_OK == PWM_enuInit())
-    53ea:	0e 94 be 10 	call	0x217c	; 0x217c <PWM_enuInit>
-    53ee:	88 23       	and	r24, r24
-    53f0:	a1 f4       	brne	.+40     	; 0x541a <Heater_enuInit+0x3e>
-	{
-		PWM_enuSetDutyCycle( HEATER_PWM , HTR_INIT_DUTY_CYCLE );
-    53f2:	8a ec       	ldi	r24, 0xCA	; 202
-    53f4:	40 e0       	ldi	r20, 0x00	; 0
-    53f6:	50 e0       	ldi	r21, 0x00	; 0
-    53f8:	68 e4       	ldi	r22, 0x48	; 72
-    53fa:	72 e4       	ldi	r23, 0x42	; 66
-    53fc:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
-		if( ES_OK == DIO_enuSetPinDirection( HEATER_GRP , HEATER_PIN , DIO_u8OUTPUT ) )
-    5400:	83 e0       	ldi	r24, 0x03	; 3
-    5402:	64 e0       	ldi	r22, 0x04	; 4
-    5404:	41 e0       	ldi	r20, 0x01	; 1
-    5406:	0e 94 fd 1f 	call	0x3ffa	; 0x3ffa <DIO_enuSetPinDirection>
-    540a:	88 23       	and	r24, r24
-    540c:	31 f4       	brne	.+12     	; 0x541a <Heater_enuInit+0x3e>
-			Local_enuErrorState = DIO_enuSetPinValue( HEATER_GRP , HEATER_PIN , DIO_u8LOW );
-    540e:	83 e0       	ldi	r24, 0x03	; 3
-    5410:	64 e0       	ldi	r22, 0x04	; 4
-    5412:	40 e0       	ldi	r20, 0x00	; 0
-    5414:	0e 94 d3 20 	call	0x41a6	; 0x41a6 <DIO_enuSetPinValue>
-    5418:	89 83       	std	Y+1, r24	; 0x01
-	}
+	Local_AenuErrorState[0] = PWM_enuInit();
+    544c:	0e 94 be 10 	call	0x217c	; 0x217c <PWM_enuInit>
+    5450:	8a 83       	std	Y+2, r24	; 0x02
+	Local_AenuErrorState[1] = PWM_enuSetICR1Value( (u16)ICR1_VALUE );
+    5452:	8f ef       	ldi	r24, 0xFF	; 255
+    5454:	90 e0       	ldi	r25, 0x00	; 0
+    5456:	0e 94 57 15 	call	0x2aae	; 0x2aae <PWM_enuSetICR1Value>
+    545a:	8b 83       	std	Y+3, r24	; 0x03
+	Local_AenuErrorState[2] = PWM_enuSetDutyCycle( HEATER_PWM , HTR_INIT_DUTY_CYCLE );
+    545c:	8a ec       	ldi	r24, 0xCA	; 202
+    545e:	40 e0       	ldi	r20, 0x00	; 0
+    5460:	50 e0       	ldi	r21, 0x00	; 0
+    5462:	68 e4       	ldi	r22, 0x48	; 72
+    5464:	72 e4       	ldi	r23, 0x42	; 66
+    5466:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
+    546a:	8c 83       	std	Y+4, r24	; 0x04
+	Local_AenuErrorState[3] = DIO_enuSetPinDirection( HEATER_GRP , HEATER_PIN , DIO_u8OUTPUT );
+    546c:	83 e0       	ldi	r24, 0x03	; 3
+    546e:	64 e0       	ldi	r22, 0x04	; 4
+    5470:	41 e0       	ldi	r20, 0x01	; 1
+    5472:	0e 94 fd 1f 	call	0x3ffa	; 0x3ffa <DIO_enuSetPinDirection>
+    5476:	8d 83       	std	Y+5, r24	; 0x05
+	Local_AenuErrorState[4] = DIO_enuSetPinValue( HEATER_GRP , HEATER_PIN , DIO_u8LOW );
+    5478:	83 e0       	ldi	r24, 0x03	; 3
+    547a:	64 e0       	ldi	r22, 0x04	; 4
+    547c:	40 e0       	ldi	r20, 0x00	; 0
+    547e:	0e 94 d3 20 	call	0x41a6	; 0x41a6 <DIO_enuSetPinValue>
+    5482:	8e 83       	std	Y+6, r24	; 0x06
 
-	return Local_enuErrorState ;
-    541a:	89 81       	ldd	r24, Y+1	; 0x01
+	u8 Local_u8Iter = 0 ;
+    5484:	19 82       	std	Y+1, r1	; 0x01
+    5486:	03 c0       	rjmp	.+6      	; 0x548e <Heater_enuInit+0x56>
+	for( ; (Local_u8Iter < 5) && ( Local_AenuErrorState[Local_u8Iter] == ES_OK ) ; Local_u8Iter++ );
+    5488:	89 81       	ldd	r24, Y+1	; 0x01
+    548a:	8f 5f       	subi	r24, 0xFF	; 255
+    548c:	89 83       	std	Y+1, r24	; 0x01
+    548e:	89 81       	ldd	r24, Y+1	; 0x01
+    5490:	85 30       	cpi	r24, 0x05	; 5
+    5492:	58 f4       	brcc	.+22     	; 0x54aa <Heater_enuInit+0x72>
+    5494:	89 81       	ldd	r24, Y+1	; 0x01
+    5496:	28 2f       	mov	r18, r24
+    5498:	30 e0       	ldi	r19, 0x00	; 0
+    549a:	ce 01       	movw	r24, r28
+    549c:	02 96       	adiw	r24, 0x02	; 2
+    549e:	fc 01       	movw	r30, r24
+    54a0:	e2 0f       	add	r30, r18
+    54a2:	f3 1f       	adc	r31, r19
+    54a4:	80 81       	ld	r24, Z
+    54a6:	88 23       	and	r24, r24
+    54a8:	79 f3       	breq	.-34     	; 0x5488 <Heater_enuInit+0x50>
+
+	return ( ( Local_u8Iter == 5 )? ES_OK : Local_AenuErrorState[Local_u8Iter] );
+    54aa:	89 81       	ldd	r24, Y+1	; 0x01
+    54ac:	85 30       	cpi	r24, 0x05	; 5
+    54ae:	59 f0       	breq	.+22     	; 0x54c6 <Heater_enuInit+0x8e>
+    54b0:	89 81       	ldd	r24, Y+1	; 0x01
+    54b2:	28 2f       	mov	r18, r24
+    54b4:	30 e0       	ldi	r19, 0x00	; 0
+    54b6:	ce 01       	movw	r24, r28
+    54b8:	02 96       	adiw	r24, 0x02	; 2
+    54ba:	fc 01       	movw	r30, r24
+    54bc:	e2 0f       	add	r30, r18
+    54be:	f3 1f       	adc	r31, r19
+    54c0:	80 81       	ld	r24, Z
+    54c2:	8f 83       	std	Y+7, r24	; 0x07
+    54c4:	01 c0       	rjmp	.+2      	; 0x54c8 <Heater_enuInit+0x90>
+    54c6:	1f 82       	std	Y+7, r1	; 0x07
+    54c8:	8f 81       	ldd	r24, Y+7	; 0x07
 }
-    541c:	0f 90       	pop	r0
-    541e:	cf 91       	pop	r28
-    5420:	df 91       	pop	r29
-    5422:	08 95       	ret
+    54ca:	27 96       	adiw	r28, 0x07	; 7
+    54cc:	0f b6       	in	r0, 0x3f	; 63
+    54ce:	f8 94       	cli
+    54d0:	de bf       	out	0x3e, r29	; 62
+    54d2:	0f be       	out	0x3f, r0	; 63
+    54d4:	cd bf       	out	0x3d, r28	; 61
+    54d6:	cf 91       	pop	r28
+    54d8:	df 91       	pop	r29
+    54da:	08 95       	ret
 
-00005424 <Heater_enuSetState>:
+000054dc <Heater_enuSetState>:
 
 ES_t Heater_enuSetState( s8 Copy_u8TempError )
 {
-    5424:	df 93       	push	r29
-    5426:	cf 93       	push	r28
-    5428:	00 d0       	rcall	.+0      	; 0x542a <Heater_enuSetState+0x6>
-    542a:	00 d0       	rcall	.+0      	; 0x542c <Heater_enuSetState+0x8>
-    542c:	00 d0       	rcall	.+0      	; 0x542e <Heater_enuSetState+0xa>
-    542e:	cd b7       	in	r28, 0x3d	; 61
-    5430:	de b7       	in	r29, 0x3e	; 62
-    5432:	8e 83       	std	Y+6, r24	; 0x06
+    54dc:	df 93       	push	r29
+    54de:	cf 93       	push	r28
+    54e0:	00 d0       	rcall	.+0      	; 0x54e2 <Heater_enuSetState+0x6>
+    54e2:	00 d0       	rcall	.+0      	; 0x54e4 <Heater_enuSetState+0x8>
+    54e4:	00 d0       	rcall	.+0      	; 0x54e6 <Heater_enuSetState+0xa>
+    54e6:	cd b7       	in	r28, 0x3d	; 61
+    54e8:	de b7       	in	r29, 0x3e	; 62
+    54ea:	8e 83       	std	Y+6, r24	; 0x06
 	ES_t Local_enuErrorState = ES_NOK ;
-    5434:	81 e0       	ldi	r24, 0x01	; 1
-    5436:	8d 83       	std	Y+5, r24	; 0x05
+    54ec:	81 e0       	ldi	r24, 0x01	; 1
+    54ee:	8d 83       	std	Y+5, r24	; 0x05
 	static u8 PrevTempError = 0 ;
 	f32 DutyCycle;
 
 	if( Copy_u8TempError >= HTR_TEMP_TOLERANCE )	DutyCycle = 0.0 ;
-    5438:	8e 81       	ldd	r24, Y+6	; 0x06
-    543a:	85 30       	cpi	r24, 0x05	; 5
-    543c:	4c f0       	brlt	.+18     	; 0x5450 <Heater_enuSetState+0x2c>
-    543e:	80 e0       	ldi	r24, 0x00	; 0
-    5440:	90 e0       	ldi	r25, 0x00	; 0
-    5442:	a0 e0       	ldi	r26, 0x00	; 0
-    5444:	b0 e0       	ldi	r27, 0x00	; 0
-    5446:	89 83       	std	Y+1, r24	; 0x01
-    5448:	9a 83       	std	Y+2, r25	; 0x02
-    544a:	ab 83       	std	Y+3, r26	; 0x03
-    544c:	bc 83       	std	Y+4, r27	; 0x04
-    544e:	42 c0       	rjmp	.+132    	; 0x54d4 <Heater_enuSetState+0xb0>
+    54f0:	8e 81       	ldd	r24, Y+6	; 0x06
+    54f2:	85 30       	cpi	r24, 0x05	; 5
+    54f4:	4c f0       	brlt	.+18     	; 0x5508 <Heater_enuSetState+0x2c>
+    54f6:	80 e0       	ldi	r24, 0x00	; 0
+    54f8:	90 e0       	ldi	r25, 0x00	; 0
+    54fa:	a0 e0       	ldi	r26, 0x00	; 0
+    54fc:	b0 e0       	ldi	r27, 0x00	; 0
+    54fe:	89 83       	std	Y+1, r24	; 0x01
+    5500:	9a 83       	std	Y+2, r25	; 0x02
+    5502:	ab 83       	std	Y+3, r26	; 0x03
+    5504:	bc 83       	std	Y+4, r27	; 0x04
+    5506:	42 c0       	rjmp	.+132    	; 0x558c <Heater_enuSetState+0xb0>
 	else if( Copy_u8TempError < -HTR_TEMP_TOLERANCE )	DutyCycle = HTR_MAX_DUTY_CYCLE ;
-    5450:	8e 81       	ldd	r24, Y+6	; 0x06
-    5452:	8b 3f       	cpi	r24, 0xFB	; 251
-    5454:	4c f4       	brge	.+18     	; 0x5468 <Heater_enuSetState+0x44>
-    5456:	80 e0       	ldi	r24, 0x00	; 0
-    5458:	90 e0       	ldi	r25, 0x00	; 0
-    545a:	a0 ea       	ldi	r26, 0xA0	; 160
-    545c:	b2 e4       	ldi	r27, 0x42	; 66
-    545e:	89 83       	std	Y+1, r24	; 0x01
-    5460:	9a 83       	std	Y+2, r25	; 0x02
-    5462:	ab 83       	std	Y+3, r26	; 0x03
-    5464:	bc 83       	std	Y+4, r27	; 0x04
-    5466:	36 c0       	rjmp	.+108    	; 0x54d4 <Heater_enuSetState+0xb0>
+    5508:	8e 81       	ldd	r24, Y+6	; 0x06
+    550a:	8b 3f       	cpi	r24, 0xFB	; 251
+    550c:	4c f4       	brge	.+18     	; 0x5520 <Heater_enuSetState+0x44>
+    550e:	80 e0       	ldi	r24, 0x00	; 0
+    5510:	90 e0       	ldi	r25, 0x00	; 0
+    5512:	a0 ea       	ldi	r26, 0xA0	; 160
+    5514:	b2 e4       	ldi	r27, 0x42	; 66
+    5516:	89 83       	std	Y+1, r24	; 0x01
+    5518:	9a 83       	std	Y+2, r25	; 0x02
+    551a:	ab 83       	std	Y+3, r26	; 0x03
+    551c:	bc 83       	std	Y+4, r27	; 0x04
+    551e:	36 c0       	rjmp	.+108    	; 0x558c <Heater_enuSetState+0xb0>
 	else
 	{
 		DutyCycle = ( ( HTR_KP * Copy_u8TempError ) +
-    5468:	8e 81       	ldd	r24, Y+6	; 0x06
-    546a:	99 27       	eor	r25, r25
-    546c:	87 fd       	sbrc	r24, 7
-    546e:	90 95       	com	r25
-    5470:	ac 01       	movw	r20, r24
-    5472:	44 0f       	add	r20, r20
-    5474:	55 1f       	adc	r21, r21
-    5476:	8e 81       	ldd	r24, Y+6	; 0x06
-    5478:	28 2f       	mov	r18, r24
-    547a:	33 27       	eor	r19, r19
-    547c:	27 fd       	sbrc	r18, 7
-    547e:	30 95       	com	r19
-    5480:	80 91 36 02 	lds	r24, 0x0236
-    5484:	88 2f       	mov	r24, r24
-    5486:	90 e0       	ldi	r25, 0x00	; 0
-    5488:	82 0f       	add	r24, r18
-    548a:	93 1f       	adc	r25, r19
-    548c:	84 0f       	add	r24, r20
-    548e:	95 1f       	adc	r25, r21
-    5490:	ac 01       	movw	r20, r24
-    5492:	44 0f       	add	r20, r20
-    5494:	55 1f       	adc	r21, r21
-    5496:	8e 81       	ldd	r24, Y+6	; 0x06
-    5498:	28 2f       	mov	r18, r24
-    549a:	33 27       	eor	r19, r19
-    549c:	27 fd       	sbrc	r18, 7
-    549e:	30 95       	com	r19
-    54a0:	80 91 36 02 	lds	r24, 0x0236
-    54a4:	88 2f       	mov	r24, r24
-    54a6:	90 e0       	ldi	r25, 0x00	; 0
-    54a8:	b9 01       	movw	r22, r18
-    54aa:	68 1b       	sub	r22, r24
-    54ac:	79 0b       	sbc	r23, r25
-    54ae:	cb 01       	movw	r24, r22
-    54b0:	84 0f       	add	r24, r20
-    54b2:	95 1f       	adc	r25, r21
-    54b4:	88 0f       	add	r24, r24
-    54b6:	99 1f       	adc	r25, r25
-    54b8:	aa 27       	eor	r26, r26
-    54ba:	97 fd       	sbrc	r25, 7
-    54bc:	a0 95       	com	r26
-    54be:	ba 2f       	mov	r27, r26
-    54c0:	bc 01       	movw	r22, r24
-    54c2:	cd 01       	movw	r24, r26
-    54c4:	0e 94 25 04 	call	0x84a	; 0x84a <__floatsisf>
-    54c8:	dc 01       	movw	r26, r24
-    54ca:	cb 01       	movw	r24, r22
-    54cc:	89 83       	std	Y+1, r24	; 0x01
-    54ce:	9a 83       	std	Y+2, r25	; 0x02
-    54d0:	ab 83       	std	Y+3, r26	; 0x03
-    54d2:	bc 83       	std	Y+4, r27	; 0x04
+    5520:	8e 81       	ldd	r24, Y+6	; 0x06
+    5522:	99 27       	eor	r25, r25
+    5524:	87 fd       	sbrc	r24, 7
+    5526:	90 95       	com	r25
+    5528:	ac 01       	movw	r20, r24
+    552a:	44 0f       	add	r20, r20
+    552c:	55 1f       	adc	r21, r21
+    552e:	8e 81       	ldd	r24, Y+6	; 0x06
+    5530:	28 2f       	mov	r18, r24
+    5532:	33 27       	eor	r19, r19
+    5534:	27 fd       	sbrc	r18, 7
+    5536:	30 95       	com	r19
+    5538:	80 91 36 02 	lds	r24, 0x0236
+    553c:	88 2f       	mov	r24, r24
+    553e:	90 e0       	ldi	r25, 0x00	; 0
+    5540:	82 0f       	add	r24, r18
+    5542:	93 1f       	adc	r25, r19
+    5544:	84 0f       	add	r24, r20
+    5546:	95 1f       	adc	r25, r21
+    5548:	ac 01       	movw	r20, r24
+    554a:	44 0f       	add	r20, r20
+    554c:	55 1f       	adc	r21, r21
+    554e:	8e 81       	ldd	r24, Y+6	; 0x06
+    5550:	28 2f       	mov	r18, r24
+    5552:	33 27       	eor	r19, r19
+    5554:	27 fd       	sbrc	r18, 7
+    5556:	30 95       	com	r19
+    5558:	80 91 36 02 	lds	r24, 0x0236
+    555c:	88 2f       	mov	r24, r24
+    555e:	90 e0       	ldi	r25, 0x00	; 0
+    5560:	b9 01       	movw	r22, r18
+    5562:	68 1b       	sub	r22, r24
+    5564:	79 0b       	sbc	r23, r25
+    5566:	cb 01       	movw	r24, r22
+    5568:	84 0f       	add	r24, r20
+    556a:	95 1f       	adc	r25, r21
+    556c:	88 0f       	add	r24, r24
+    556e:	99 1f       	adc	r25, r25
+    5570:	aa 27       	eor	r26, r26
+    5572:	97 fd       	sbrc	r25, 7
+    5574:	a0 95       	com	r26
+    5576:	ba 2f       	mov	r27, r26
+    5578:	bc 01       	movw	r22, r24
+    557a:	cd 01       	movw	r24, r26
+    557c:	0e 94 25 04 	call	0x84a	; 0x84a <__floatsisf>
+    5580:	dc 01       	movw	r26, r24
+    5582:	cb 01       	movw	r24, r22
+    5584:	89 83       	std	Y+1, r24	; 0x01
+    5586:	9a 83       	std	Y+2, r25	; 0x02
+    5588:	ab 83       	std	Y+3, r26	; 0x03
+    558a:	bc 83       	std	Y+4, r27	; 0x04
 					( HTR_KI * ( Copy_u8TempError + PrevTempError ) ) +
 					( HTR_KD * ( Copy_u8TempError - PrevTempError ) ) ) ;
 	}
 
 	Local_enuErrorState = PWM_enuSetDutyCycle( HEATER_PWM , DutyCycle );
-    54d4:	29 81       	ldd	r18, Y+1	; 0x01
-    54d6:	3a 81       	ldd	r19, Y+2	; 0x02
-    54d8:	4b 81       	ldd	r20, Y+3	; 0x03
-    54da:	5c 81       	ldd	r21, Y+4	; 0x04
-    54dc:	8a ec       	ldi	r24, 0xCA	; 202
-    54de:	ba 01       	movw	r22, r20
-    54e0:	a9 01       	movw	r20, r18
-    54e2:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
-    54e6:	8d 83       	std	Y+5, r24	; 0x05
+    558c:	29 81       	ldd	r18, Y+1	; 0x01
+    558e:	3a 81       	ldd	r19, Y+2	; 0x02
+    5590:	4b 81       	ldd	r20, Y+3	; 0x03
+    5592:	5c 81       	ldd	r21, Y+4	; 0x04
+    5594:	8a ec       	ldi	r24, 0xCA	; 202
+    5596:	ba 01       	movw	r22, r20
+    5598:	a9 01       	movw	r20, r18
+    559a:	0e 94 6e 16 	call	0x2cdc	; 0x2cdc <PWM_enuSetDutyCycle>
+    559e:	8d 83       	std	Y+5, r24	; 0x05
 
 	PrevTempError = Copy_u8TempError ;
-    54e8:	8e 81       	ldd	r24, Y+6	; 0x06
-    54ea:	80 93 36 02 	sts	0x0236, r24
+    55a0:	8e 81       	ldd	r24, Y+6	; 0x06
+    55a2:	80 93 36 02 	sts	0x0236, r24
 
 	return Local_enuErrorState ;
-    54ee:	8d 81       	ldd	r24, Y+5	; 0x05
+    55a6:	8d 81       	ldd	r24, Y+5	; 0x05
 }
-    54f0:	26 96       	adiw	r28, 0x06	; 6
-    54f2:	0f b6       	in	r0, 0x3f	; 63
-    54f4:	f8 94       	cli
-    54f6:	de bf       	out	0x3e, r29	; 62
-    54f8:	0f be       	out	0x3f, r0	; 63
-    54fa:	cd bf       	out	0x3d, r28	; 61
-    54fc:	cf 91       	pop	r28
-    54fe:	df 91       	pop	r29
-    5500:	08 95       	ret
+    55a8:	26 96       	adiw	r28, 0x06	; 6
+    55aa:	0f b6       	in	r0, 0x3f	; 63
+    55ac:	f8 94       	cli
+    55ae:	de bf       	out	0x3e, r29	; 62
+    55b0:	0f be       	out	0x3f, r0	; 63
+    55b2:	cd bf       	out	0x3d, r28	; 61
+    55b4:	cf 91       	pop	r28
+    55b6:	df 91       	pop	r29
+    55b8:	08 95       	ret
 
-00005502 <LM35_enuInit>:
+000055ba <LM35_enuInit>:
 #define TEMP_ADC_CH				CH_00
 #define TEMP_CONVERSION_FACTOR	0.25		 		//	Degree/step
 //#define TEMP_OFFSET				0.0000				//	Correction factor at mid range
 
 ES_t LM35_enuInit(void)
 {
-    5502:	df 93       	push	r29
-    5504:	cf 93       	push	r28
-    5506:	00 d0       	rcall	.+0      	; 0x5508 <LM35_enuInit+0x6>
-    5508:	0f 92       	push	r0
-    550a:	cd b7       	in	r28, 0x3d	; 61
-    550c:	de b7       	in	r29, 0x3e	; 62
+    55ba:	df 93       	push	r29
+    55bc:	cf 93       	push	r28
+    55be:	00 d0       	rcall	.+0      	; 0x55c0 <LM35_enuInit+0x6>
+    55c0:	0f 92       	push	r0
+    55c2:	cd b7       	in	r28, 0x3d	; 61
+    55c4:	de b7       	in	r29, 0x3e	; 62
 	ES_t Local_enuErrorState = ES_NOK , Local_AenuErrorState[2];
-    550e:	81 e0       	ldi	r24, 0x01	; 1
-    5510:	89 83       	std	Y+1, r24	; 0x01
+    55c6:	81 e0       	ldi	r24, 0x01	; 1
+    55c8:	89 83       	std	Y+1, r24	; 0x01
 
 	Local_AenuErrorState[0] = DIO_enuSetPinDirection( TEMP_VALUE_GRP , TEMP_VALUE_PIN , DIO_u8INPUT );
-    5512:	80 e0       	ldi	r24, 0x00	; 0
-    5514:	60 e0       	ldi	r22, 0x00	; 0
-    5516:	40 e0       	ldi	r20, 0x00	; 0
-    5518:	0e 94 fd 1f 	call	0x3ffa	; 0x3ffa <DIO_enuSetPinDirection>
-    551c:	8a 83       	std	Y+2, r24	; 0x02
+    55ca:	80 e0       	ldi	r24, 0x00	; 0
+    55cc:	60 e0       	ldi	r22, 0x00	; 0
+    55ce:	40 e0       	ldi	r20, 0x00	; 0
+    55d0:	0e 94 fd 1f 	call	0x3ffa	; 0x3ffa <DIO_enuSetPinDirection>
+    55d4:	8a 83       	std	Y+2, r24	; 0x02
 	Local_AenuErrorState[1] = DIO_enuSetPinValue( TEMP_VALUE_GRP , TEMP_VALUE_PIN , TEMP_VALUE_STATE );
-    551e:	80 e0       	ldi	r24, 0x00	; 0
-    5520:	60 e0       	ldi	r22, 0x00	; 0
-    5522:	40 e0       	ldi	r20, 0x00	; 0
-    5524:	0e 94 d3 20 	call	0x41a6	; 0x41a6 <DIO_enuSetPinValue>
-    5528:	8b 83       	std	Y+3, r24	; 0x03
+    55d6:	80 e0       	ldi	r24, 0x00	; 0
+    55d8:	60 e0       	ldi	r22, 0x00	; 0
+    55da:	40 e0       	ldi	r20, 0x00	; 0
+    55dc:	0e 94 d3 20 	call	0x41a6	; 0x41a6 <DIO_enuSetPinValue>
+    55e0:	8b 83       	std	Y+3, r24	; 0x03
 
 	if( Local_AenuErrorState[0] == ES_OK && Local_AenuErrorState[1] == ES_OK )
-    552a:	8a 81       	ldd	r24, Y+2	; 0x02
-    552c:	88 23       	and	r24, r24
-    552e:	51 f4       	brne	.+20     	; 0x5544 <LM35_enuInit+0x42>
-    5530:	8b 81       	ldd	r24, Y+3	; 0x03
-    5532:	88 23       	and	r24, r24
-    5534:	39 f4       	brne	.+14     	; 0x5544 <LM35_enuInit+0x42>
+    55e2:	8a 81       	ldd	r24, Y+2	; 0x02
+    55e4:	88 23       	and	r24, r24
+    55e6:	51 f4       	brne	.+20     	; 0x55fc <LM35_enuInit+0x42>
+    55e8:	8b 81       	ldd	r24, Y+3	; 0x03
+    55ea:	88 23       	and	r24, r24
+    55ec:	39 f4       	brne	.+14     	; 0x55fc <LM35_enuInit+0x42>
 	{
 		Local_AenuErrorState[0] = ADC_enuInit();
-    5536:	0e 94 de 22 	call	0x45bc	; 0x45bc <ADC_enuInit>
-    553a:	8a 83       	std	Y+2, r24	; 0x02
+    55ee:	0e 94 de 22 	call	0x45bc	; 0x45bc <ADC_enuInit>
+    55f2:	8a 83       	std	Y+2, r24	; 0x02
 		Local_AenuErrorState[1] = ADC_enuSelectChannel( TEMP_ADC_CH );
-    553c:	85 e8       	ldi	r24, 0x85	; 133
-    553e:	0e 94 9f 23 	call	0x473e	; 0x473e <ADC_enuSelectChannel>
-    5542:	8b 83       	std	Y+3, r24	; 0x03
+    55f4:	85 e8       	ldi	r24, 0x85	; 133
+    55f6:	0e 94 9f 23 	call	0x473e	; 0x473e <ADC_enuSelectChannel>
+    55fa:	8b 83       	std	Y+3, r24	; 0x03
  	}
 	if( Local_AenuErrorState[0] == ES_OK && Local_AenuErrorState[1] == ES_OK )
-    5544:	8a 81       	ldd	r24, Y+2	; 0x02
-    5546:	88 23       	and	r24, r24
-    5548:	59 f4       	brne	.+22     	; 0x5560 <LM35_enuInit+0x5e>
-    554a:	8b 81       	ldd	r24, Y+3	; 0x03
-    554c:	88 23       	and	r24, r24
-    554e:	41 f4       	brne	.+16     	; 0x5560 <LM35_enuInit+0x5e>
+    55fc:	8a 81       	ldd	r24, Y+2	; 0x02
+    55fe:	88 23       	and	r24, r24
+    5600:	59 f4       	brne	.+22     	; 0x5618 <LM35_enuInit+0x5e>
+    5602:	8b 81       	ldd	r24, Y+3	; 0x03
+    5604:	88 23       	and	r24, r24
+    5606:	41 f4       	brne	.+16     	; 0x5618 <LM35_enuInit+0x5e>
 	{
 
 		Local_AenuErrorState[0] = ADC_enuCallBack( ADC_vidISR );
-    5550:	8c ef       	ldi	r24, 0xFC	; 252
-    5552:	9a e2       	ldi	r25, 0x2A	; 42
-    5554:	0e 94 14 25 	call	0x4a28	; 0x4a28 <ADC_enuCallBack>
-    5558:	8a 83       	std	Y+2, r24	; 0x02
+    5608:	88 e5       	ldi	r24, 0x58	; 88
+    560a:	9b e2       	ldi	r25, 0x2B	; 43
+    560c:	0e 94 14 25 	call	0x4a28	; 0x4a28 <ADC_enuCallBack>
+    5610:	8a 83       	std	Y+2, r24	; 0x02
 		Local_AenuErrorState[1] = ADC_enuStartConversion();
-    555a:	0e 94 c6 23 	call	0x478c	; 0x478c <ADC_enuStartConversion>
-    555e:	8b 83       	std	Y+3, r24	; 0x03
+    5612:	0e 94 c6 23 	call	0x478c	; 0x478c <ADC_enuStartConversion>
+    5616:	8b 83       	std	Y+3, r24	; 0x03
 	}
 	if( Local_AenuErrorState[0] == ES_OK && Local_AenuErrorState[1] == ES_OK )
-    5560:	8a 81       	ldd	r24, Y+2	; 0x02
-    5562:	88 23       	and	r24, r24
-    5564:	21 f4       	brne	.+8      	; 0x556e <LM35_enuInit+0x6c>
-    5566:	8b 81       	ldd	r24, Y+3	; 0x03
-    5568:	88 23       	and	r24, r24
-    556a:	09 f4       	brne	.+2      	; 0x556e <LM35_enuInit+0x6c>
+    5618:	8a 81       	ldd	r24, Y+2	; 0x02
+    561a:	88 23       	and	r24, r24
+    561c:	21 f4       	brne	.+8      	; 0x5626 <LM35_enuInit+0x6c>
+    561e:	8b 81       	ldd	r24, Y+3	; 0x03
+    5620:	88 23       	and	r24, r24
+    5622:	09 f4       	brne	.+2      	; 0x5626 <LM35_enuInit+0x6c>
 		Local_enuErrorState = ES_OK ;
-    556c:	19 82       	std	Y+1, r1	; 0x01
+    5624:	19 82       	std	Y+1, r1	; 0x01
 
 	return Local_enuErrorState ;
-    556e:	89 81       	ldd	r24, Y+1	; 0x01
+    5626:	89 81       	ldd	r24, Y+1	; 0x01
 }
-    5570:	0f 90       	pop	r0
-    5572:	0f 90       	pop	r0
-    5574:	0f 90       	pop	r0
-    5576:	cf 91       	pop	r28
-    5578:	df 91       	pop	r29
-    557a:	08 95       	ret
+    5628:	0f 90       	pop	r0
+    562a:	0f 90       	pop	r0
+    562c:	0f 90       	pop	r0
+    562e:	cf 91       	pop	r28
+    5630:	df 91       	pop	r29
+    5632:	08 95       	ret
 
-0000557c <LM35_enuReadTemp>:
+00005634 <LM35_enuReadTemp>:
 
 ES_t LM35_enuReadTemp( u16 *Copy_u16TempValue )
 {
-    557c:	df 93       	push	r29
-    557e:	cf 93       	push	r28
-    5580:	00 d0       	rcall	.+0      	; 0x5582 <LM35_enuReadTemp+0x6>
-    5582:	00 d0       	rcall	.+0      	; 0x5584 <LM35_enuReadTemp+0x8>
-    5584:	0f 92       	push	r0
-    5586:	cd b7       	in	r28, 0x3d	; 61
-    5588:	de b7       	in	r29, 0x3e	; 62
-    558a:	9d 83       	std	Y+5, r25	; 0x05
-    558c:	8c 83       	std	Y+4, r24	; 0x04
+    5634:	df 93       	push	r29
+    5636:	cf 93       	push	r28
+    5638:	00 d0       	rcall	.+0      	; 0x563a <LM35_enuReadTemp+0x6>
+    563a:	00 d0       	rcall	.+0      	; 0x563c <LM35_enuReadTemp+0x8>
+    563c:	0f 92       	push	r0
+    563e:	cd b7       	in	r28, 0x3d	; 61
+    5640:	de b7       	in	r29, 0x3e	; 62
+    5642:	9d 83       	std	Y+5, r25	; 0x05
+    5644:	8c 83       	std	Y+4, r24	; 0x04
 	ES_t Local_enuErrorState = ES_NOK ;
-    558e:	81 e0       	ldi	r24, 0x01	; 1
-    5590:	89 83       	std	Y+1, r24	; 0x01
+    5646:	81 e0       	ldi	r24, 0x01	; 1
+    5648:	89 83       	std	Y+1, r24	; 0x01
 	u16 Local_u16TempValue;
 
 	if( Global_blConverted == TRUE )
-    5592:	80 91 37 02 	lds	r24, 0x0237
-    5596:	81 30       	cpi	r24, 0x01	; 1
-    5598:	31 f5       	brne	.+76     	; 0x55e6 <LM35_enuReadTemp+0x6a>
+    564a:	80 91 37 02 	lds	r24, 0x0237
+    564e:	81 30       	cpi	r24, 0x01	; 1
+    5650:	31 f5       	brne	.+76     	; 0x569e <LM35_enuReadTemp+0x6a>
 	{
-		Local_enuErrorState = ADC_enuRead( &Local_u16TempValue );
-    559a:	ce 01       	movw	r24, r28
-    559c:	02 96       	adiw	r24, 0x02	; 2
-    559e:	0e 94 18 24 	call	0x4830	; 0x4830 <ADC_enuRead>
-    55a2:	89 83       	std	Y+1, r24	; 0x01
-		*Copy_u16TempValue = (u16)( ( Local_u16TempValue * TEMP_CONVERSION_FACTOR )/* + TEMP_OFFSET */);
-    55a4:	8a 81       	ldd	r24, Y+2	; 0x02
-    55a6:	9b 81       	ldd	r25, Y+3	; 0x03
-    55a8:	cc 01       	movw	r24, r24
-    55aa:	a0 e0       	ldi	r26, 0x00	; 0
-    55ac:	b0 e0       	ldi	r27, 0x00	; 0
-    55ae:	bc 01       	movw	r22, r24
-    55b0:	cd 01       	movw	r24, r26
-    55b2:	0e 94 d7 04 	call	0x9ae	; 0x9ae <__floatunsisf>
-    55b6:	dc 01       	movw	r26, r24
-    55b8:	cb 01       	movw	r24, r22
-    55ba:	bc 01       	movw	r22, r24
-    55bc:	cd 01       	movw	r24, r26
-    55be:	20 e0       	ldi	r18, 0x00	; 0
-    55c0:	30 e0       	ldi	r19, 0x00	; 0
-    55c2:	40 e8       	ldi	r20, 0x80	; 128
-    55c4:	5e e3       	ldi	r21, 0x3E	; 62
-    55c6:	0e 94 1f 02 	call	0x43e	; 0x43e <__mulsf3>
-    55ca:	dc 01       	movw	r26, r24
-    55cc:	cb 01       	movw	r24, r22
-    55ce:	bc 01       	movw	r22, r24
-    55d0:	cd 01       	movw	r24, r26
-    55d2:	0e 94 49 00 	call	0x92	; 0x92 <__fixunssfsi>
-    55d6:	dc 01       	movw	r26, r24
-    55d8:	cb 01       	movw	r24, r22
-    55da:	ec 81       	ldd	r30, Y+4	; 0x04
-    55dc:	fd 81       	ldd	r31, Y+5	; 0x05
-    55de:	91 83       	std	Z+1, r25	; 0x01
-    55e0:	80 83       	st	Z, r24
 		Global_blConverted = FALSE ;
-    55e2:	10 92 37 02 	sts	0x0237, r1
+    5652:	10 92 37 02 	sts	0x0237, r1
+		Local_enuErrorState = ADC_enuRead( &Local_u16TempValue );
+    5656:	ce 01       	movw	r24, r28
+    5658:	02 96       	adiw	r24, 0x02	; 2
+    565a:	0e 94 18 24 	call	0x4830	; 0x4830 <ADC_enuRead>
+    565e:	89 83       	std	Y+1, r24	; 0x01
+		*Copy_u16TempValue = (u16)( ( Local_u16TempValue * TEMP_CONVERSION_FACTOR )/* + TEMP_OFFSET */);
+    5660:	8a 81       	ldd	r24, Y+2	; 0x02
+    5662:	9b 81       	ldd	r25, Y+3	; 0x03
+    5664:	cc 01       	movw	r24, r24
+    5666:	a0 e0       	ldi	r26, 0x00	; 0
+    5668:	b0 e0       	ldi	r27, 0x00	; 0
+    566a:	bc 01       	movw	r22, r24
+    566c:	cd 01       	movw	r24, r26
+    566e:	0e 94 d7 04 	call	0x9ae	; 0x9ae <__floatunsisf>
+    5672:	dc 01       	movw	r26, r24
+    5674:	cb 01       	movw	r24, r22
+    5676:	bc 01       	movw	r22, r24
+    5678:	cd 01       	movw	r24, r26
+    567a:	20 e0       	ldi	r18, 0x00	; 0
+    567c:	30 e0       	ldi	r19, 0x00	; 0
+    567e:	40 e8       	ldi	r20, 0x80	; 128
+    5680:	5e e3       	ldi	r21, 0x3E	; 62
+    5682:	0e 94 1f 02 	call	0x43e	; 0x43e <__mulsf3>
+    5686:	dc 01       	movw	r26, r24
+    5688:	cb 01       	movw	r24, r22
+    568a:	bc 01       	movw	r22, r24
+    568c:	cd 01       	movw	r24, r26
+    568e:	0e 94 49 00 	call	0x92	; 0x92 <__fixunssfsi>
+    5692:	dc 01       	movw	r26, r24
+    5694:	cb 01       	movw	r24, r22
+    5696:	ec 81       	ldd	r30, Y+4	; 0x04
+    5698:	fd 81       	ldd	r31, Y+5	; 0x05
+    569a:	91 83       	std	Z+1, r25	; 0x01
+    569c:	80 83       	st	Z, r24
 	}
 
 	return Local_enuErrorState ;
-    55e6:	89 81       	ldd	r24, Y+1	; 0x01
+    569e:	89 81       	ldd	r24, Y+1	; 0x01
 }
-    55e8:	0f 90       	pop	r0
-    55ea:	0f 90       	pop	r0
-    55ec:	0f 90       	pop	r0
-    55ee:	0f 90       	pop	r0
-    55f0:	0f 90       	pop	r0
-    55f2:	cf 91       	pop	r28
-    55f4:	df 91       	pop	r29
-    55f6:	08 95       	ret
+    56a0:	0f 90       	pop	r0
+    56a2:	0f 90       	pop	r0
+    56a4:	0f 90       	pop	r0
+    56a6:	0f 90       	pop	r0
+    56a8:	0f 90       	pop	r0
+    56aa:	cf 91       	pop	r28
+    56ac:	df 91       	pop	r29
+    56ae:	08 95       	ret
 
-000055f8 <ADC_vidISR>:
+000056b0 <ADC_vidISR>:
 
 void ADC_vidISR(void)
 {
-    55f8:	df 93       	push	r29
-    55fa:	cf 93       	push	r28
-    55fc:	cd b7       	in	r28, 0x3d	; 61
-    55fe:	de b7       	in	r29, 0x3e	; 62
+    56b0:	df 93       	push	r29
+    56b2:	cf 93       	push	r28
+    56b4:	cd b7       	in	r28, 0x3d	; 61
+    56b6:	de b7       	in	r29, 0x3e	; 62
 	Global_blConverted = TRUE;
-    5600:	81 e0       	ldi	r24, 0x01	; 1
-    5602:	80 93 37 02 	sts	0x0237, r24
+    56b8:	81 e0       	ldi	r24, 0x01	; 1
+    56ba:	80 93 37 02 	sts	0x0237, r24
 }
-    5606:	cf 91       	pop	r28
-    5608:	df 91       	pop	r29
-    560a:	08 95       	ret
+    56be:	cf 91       	pop	r28
+    56c0:	df 91       	pop	r29
+    56c2:	08 95       	ret
 
-0000560c <main>:
+000056c4 <main>:
 u8 Global_u8TempValue = 30;					// Actual Temperature
 s8 Global_s8TempError ;						// Difference between Set point and Actual Temp
 
 int
 main(void)
 {
-    560c:	ef 92       	push	r14
-    560e:	0f 93       	push	r16
-    5610:	1f 93       	push	r17
-    5612:	df 93       	push	r29
-    5614:	cf 93       	push	r28
-    5616:	0f 92       	push	r0
-    5618:	cd b7       	in	r28, 0x3d	; 61
-    561a:	de b7       	in	r29, 0x3e	; 62
+    56c4:	ef 92       	push	r14
+    56c6:	0f 93       	push	r16
+    56c8:	1f 93       	push	r17
+    56ca:	df 93       	push	r29
+    56cc:	cf 93       	push	r28
+    56ce:	0f 92       	push	r0
+    56d0:	cd b7       	in	r28, 0x3d	; 61
+    56d2:	de b7       	in	r29, 0x3e	; 62
 
 	u8 SSeg_u8ActiveModule = TEMP_UNITS ;
-    561c:	8c e0       	ldi	r24, 0x0C	; 12
-    561e:	89 83       	std	Y+1, r24	; 0x01
+    56d4:	8c e0       	ldi	r24, 0x0C	; 12
+    56d6:	89 83       	std	Y+1, r24	; 0x01
 
 	LD_enuInit();
-    5620:	0e 94 ca 28 	call	0x5194	; 0x5194 <LD_enuInit>
+    56d8:	0e 94 ca 28 	call	0x5194	; 0x5194 <LD_enuInit>
 	Switch_enuInit();
-    5624:	0e 94 a2 25 	call	0x4b44	; 0x4b44 <Switch_enuInit>
+    56dc:	0e 94 a2 25 	call	0x4b44	; 0x4b44 <Switch_enuInit>
 	SevSeg_enuInit();
-    5628:	0e 94 4f 26 	call	0x4c9e	; 0x4c9e <SevSeg_enuInit>
+    56e0:	0e 94 4f 26 	call	0x4c9e	; 0x4c9e <SevSeg_enuInit>
 	LM35_enuInit();
-    562c:	0e 94 81 2a 	call	0x5502	; 0x5502 <LM35_enuInit>
+    56e4:	0e 94 dd 2a 	call	0x55ba	; 0x55ba <LM35_enuInit>
 	Heater_enuInit();
-    5630:	0e 94 ee 29 	call	0x53dc	; 0x53dc <Heater_enuInit>
+    56e8:	0e 94 1c 2a 	call	0x5438	; 0x5438 <Heater_enuInit>
 	Coolent_enuInit();
-    5634:	0e 94 5b 29 	call	0x52b6	; 0x52b6 <Coolent_enuInit>
+    56ec:	0e 94 5b 29 	call	0x52b6	; 0x52b6 <Coolent_enuInit>
 	TMU_vidInit();
-    5638:	0e 94 45 07 	call	0xe8a	; 0xe8a <TMU_vidInit>
+    56f0:	0e 94 45 07 	call	0xe8a	; 0xe8a <TMU_vidInit>
 
 	TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , READY  , 1  , 0 );
-    563c:	8a ed       	ldi	r24, 0xDA	; 218
-    563e:	9e e2       	ldi	r25, 0x2E	; 46
-    5640:	22 ec       	ldi	r18, 0xC2	; 194
-    5642:	31 e0       	ldi	r19, 0x01	; 1
-    5644:	b9 01       	movw	r22, r18
-    5646:	48 e0       	ldi	r20, 0x08	; 8
-    5648:	27 e1       	ldi	r18, 0x17	; 23
-    564a:	01 e0       	ldi	r16, 0x01	; 1
-    564c:	10 e0       	ldi	r17, 0x00	; 0
-    564e:	ee 24       	eor	r14, r14
-    5650:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    56f4:	86 e3       	ldi	r24, 0x36	; 54
+    56f6:	9f e2       	ldi	r25, 0x2F	; 47
+    56f8:	22 ec       	ldi	r18, 0xC2	; 194
+    56fa:	31 e0       	ldi	r19, 0x01	; 1
+    56fc:	b9 01       	movw	r22, r18
+    56fe:	48 e0       	ldi	r20, 0x08	; 8
+    5700:	27 e1       	ldi	r18, 0x17	; 23
+    5702:	01 e0       	ldi	r16, 0x01	; 1
+    5704:	10 e0       	ldi	r17, 0x00	; 0
+    5706:	ee 24       	eor	r14, r14
+    5708:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(DisplayTemperature	, &SSeg_u8ActiveModule	, 7 , PAUSED , 4  , 0 );
-    5654:	87 e9       	ldi	r24, 0x97	; 151
-    5656:	9b e2       	ldi	r25, 0x2B	; 43
-    5658:	9e 01       	movw	r18, r28
-    565a:	2f 5f       	subi	r18, 0xFF	; 255
-    565c:	3f 4f       	sbci	r19, 0xFF	; 255
-    565e:	b9 01       	movw	r22, r18
-    5660:	47 e0       	ldi	r20, 0x07	; 7
-    5662:	28 e3       	ldi	r18, 0x38	; 56
-    5664:	04 e0       	ldi	r16, 0x04	; 4
-    5666:	10 e0       	ldi	r17, 0x00	; 0
-    5668:	ee 24       	eor	r14, r14
-    566a:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    570c:	83 ef       	ldi	r24, 0xF3	; 243
+    570e:	9b e2       	ldi	r25, 0x2B	; 43
+    5710:	9e 01       	movw	r18, r28
+    5712:	2f 5f       	subi	r18, 0xFF	; 255
+    5714:	3f 4f       	sbci	r19, 0xFF	; 255
+    5716:	b9 01       	movw	r22, r18
+    5718:	47 e0       	ldi	r20, 0x07	; 7
+    571a:	28 e3       	ldi	r18, 0x38	; 56
+    571c:	04 e0       	ldi	r16, 0x04	; 4
+    571e:	10 e0       	ldi	r17, 0x00	; 0
+    5720:	ee 24       	eor	r14, r14
+    5722:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(CheckTemperatureStatus, NULL					, 6 , PAUSED , 10 , 0 );
-    566e:	84 e2       	ldi	r24, 0x24	; 36
-    5670:	9c e2       	ldi	r25, 0x2C	; 44
-    5672:	60 e0       	ldi	r22, 0x00	; 0
-    5674:	70 e0       	ldi	r23, 0x00	; 0
-    5676:	46 e0       	ldi	r20, 0x06	; 6
-    5678:	28 e3       	ldi	r18, 0x38	; 56
-    567a:	0a e0       	ldi	r16, 0x0A	; 10
-    567c:	10 e0       	ldi	r17, 0x00	; 0
-    567e:	ee 24       	eor	r14, r14
-    5680:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    5726:	80 e8       	ldi	r24, 0x80	; 128
+    5728:	9c e2       	ldi	r25, 0x2C	; 44
+    572a:	60 e0       	ldi	r22, 0x00	; 0
+    572c:	70 e0       	ldi	r23, 0x00	; 0
+    572e:	46 e0       	ldi	r20, 0x06	; 6
+    5730:	28 e3       	ldi	r18, 0x38	; 56
+    5732:	0a e0       	ldi	r16, 0x0A	; 10
+    5734:	10 e0       	ldi	r17, 0x00	; 0
+    5736:	ee 24       	eor	r14, r14
+    5738:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(AdjustHeaterStatus	, NULL					, 5 , PAUSED , 100, 3 );
-    5684:	84 ea       	ldi	r24, 0xA4	; 164
-    5686:	9e e2       	ldi	r25, 0x2E	; 46
-    5688:	60 e0       	ldi	r22, 0x00	; 0
-    568a:	70 e0       	ldi	r23, 0x00	; 0
-    568c:	45 e0       	ldi	r20, 0x05	; 5
-    568e:	28 e3       	ldi	r18, 0x38	; 56
-    5690:	04 e6       	ldi	r16, 0x64	; 100
-    5692:	10 e0       	ldi	r17, 0x00	; 0
-    5694:	0f 2e       	mov	r0, r31
-    5696:	f3 e0       	ldi	r31, 0x03	; 3
-    5698:	ef 2e       	mov	r14, r31
-    569a:	f0 2d       	mov	r31, r0
-    569c:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    573c:	80 e0       	ldi	r24, 0x00	; 0
+    573e:	9f e2       	ldi	r25, 0x2F	; 47
+    5740:	60 e0       	ldi	r22, 0x00	; 0
+    5742:	70 e0       	ldi	r23, 0x00	; 0
+    5744:	45 e0       	ldi	r20, 0x05	; 5
+    5746:	28 e3       	ldi	r18, 0x38	; 56
+    5748:	04 e6       	ldi	r16, 0x64	; 100
+    574a:	10 e0       	ldi	r17, 0x00	; 0
+    574c:	0f 2e       	mov	r0, r31
+    574e:	f3 e0       	ldi	r31, 0x03	; 3
+    5750:	ef 2e       	mov	r14, r31
+    5752:	f0 2d       	mov	r31, r0
+    5754:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(AdjustCoolentStatus	, NULL					, 4 , PAUSED , 100, 3 );
-    56a0:	8f eb       	ldi	r24, 0xBF	; 191
-    56a2:	9e e2       	ldi	r25, 0x2E	; 46
-    56a4:	60 e0       	ldi	r22, 0x00	; 0
-    56a6:	70 e0       	ldi	r23, 0x00	; 0
-    56a8:	44 e0       	ldi	r20, 0x04	; 4
-    56aa:	28 e3       	ldi	r18, 0x38	; 56
-    56ac:	04 e6       	ldi	r16, 0x64	; 100
-    56ae:	10 e0       	ldi	r17, 0x00	; 0
-    56b0:	0f 2e       	mov	r0, r31
-    56b2:	f3 e0       	ldi	r31, 0x03	; 3
-    56b4:	ef 2e       	mov	r14, r31
-    56b6:	f0 2d       	mov	r31, r0
-    56b8:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    5758:	8b e1       	ldi	r24, 0x1B	; 27
+    575a:	9f e2       	ldi	r25, 0x2F	; 47
+    575c:	60 e0       	ldi	r22, 0x00	; 0
+    575e:	70 e0       	ldi	r23, 0x00	; 0
+    5760:	44 e0       	ldi	r20, 0x04	; 4
+    5762:	28 e3       	ldi	r18, 0x38	; 56
+    5764:	04 e6       	ldi	r16, 0x64	; 100
+    5766:	10 e0       	ldi	r17, 0x00	; 0
+    5768:	0f 2e       	mov	r0, r31
+    576a:	f3 e0       	ldi	r31, 0x03	; 3
+    576c:	ef 2e       	mov	r14, r31
+    576e:	f0 2d       	mov	r31, r0
+    5770:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(AdjustRedLampStatus	, NULL					, 3 , PAUSED , 50 , 1 );
-    56bc:	84 e5       	ldi	r24, 0x54	; 84
-    56be:	9e e2       	ldi	r25, 0x2E	; 46
-    56c0:	60 e0       	ldi	r22, 0x00	; 0
-    56c2:	70 e0       	ldi	r23, 0x00	; 0
-    56c4:	43 e0       	ldi	r20, 0x03	; 3
-    56c6:	28 e3       	ldi	r18, 0x38	; 56
-    56c8:	02 e3       	ldi	r16, 0x32	; 50
-    56ca:	10 e0       	ldi	r17, 0x00	; 0
-    56cc:	ee 24       	eor	r14, r14
-    56ce:	e3 94       	inc	r14
-    56d0:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    5774:	80 eb       	ldi	r24, 0xB0	; 176
+    5776:	9e e2       	ldi	r25, 0x2E	; 46
+    5778:	60 e0       	ldi	r22, 0x00	; 0
+    577a:	70 e0       	ldi	r23, 0x00	; 0
+    577c:	43 e0       	ldi	r20, 0x03	; 3
+    577e:	28 e3       	ldi	r18, 0x38	; 56
+    5780:	02 e3       	ldi	r16, 0x32	; 50
+    5782:	10 e0       	ldi	r17, 0x00	; 0
+    5784:	ee 24       	eor	r14, r14
+    5786:	e3 94       	inc	r14
+    5788:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(CheckIncrementSwitch	, NULL					, 2 , PAUSED , 2  , 0 );
-    56d4:	8a ea       	ldi	r24, 0xAA	; 170
-    56d6:	9c e2       	ldi	r25, 0x2C	; 44
-    56d8:	60 e0       	ldi	r22, 0x00	; 0
-    56da:	70 e0       	ldi	r23, 0x00	; 0
-    56dc:	42 e0       	ldi	r20, 0x02	; 2
-    56de:	28 e3       	ldi	r18, 0x38	; 56
-    56e0:	02 e0       	ldi	r16, 0x02	; 2
-    56e2:	10 e0       	ldi	r17, 0x00	; 0
-    56e4:	ee 24       	eor	r14, r14
-    56e6:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    578c:	86 e0       	ldi	r24, 0x06	; 6
+    578e:	9d e2       	ldi	r25, 0x2D	; 45
+    5790:	60 e0       	ldi	r22, 0x00	; 0
+    5792:	70 e0       	ldi	r23, 0x00	; 0
+    5794:	42 e0       	ldi	r20, 0x02	; 2
+    5796:	28 e3       	ldi	r18, 0x38	; 56
+    5798:	02 e0       	ldi	r16, 0x02	; 2
+    579a:	10 e0       	ldi	r17, 0x00	; 0
+    579c:	ee 24       	eor	r14, r14
+    579e:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(CheckDecrementSwitch	, NULL					, 1 , PAUSED , 2  , 1 );
-    56ea:	85 e4       	ldi	r24, 0x45	; 69
-    56ec:	9d e2       	ldi	r25, 0x2D	; 45
-    56ee:	60 e0       	ldi	r22, 0x00	; 0
-    56f0:	70 e0       	ldi	r23, 0x00	; 0
-    56f2:	41 e0       	ldi	r20, 0x01	; 1
-    56f4:	28 e3       	ldi	r18, 0x38	; 56
-    56f6:	02 e0       	ldi	r16, 0x02	; 2
-    56f8:	10 e0       	ldi	r17, 0x00	; 0
-    56fa:	ee 24       	eor	r14, r14
-    56fc:	e3 94       	inc	r14
-    56fe:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    57a2:	81 ea       	ldi	r24, 0xA1	; 161
+    57a4:	9d e2       	ldi	r25, 0x2D	; 45
+    57a6:	60 e0       	ldi	r22, 0x00	; 0
+    57a8:	70 e0       	ldi	r23, 0x00	; 0
+    57aa:	41 e0       	ldi	r20, 0x01	; 1
+    57ac:	28 e3       	ldi	r18, 0x38	; 56
+    57ae:	02 e0       	ldi	r16, 0x02	; 2
+    57b0:	10 e0       	ldi	r17, 0x00	; 0
+    57b2:	ee 24       	eor	r14, r14
+    57b4:	e3 94       	inc	r14
+    57b6:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 	TMU_vidCreateTask(CheckPowerSwitch		, NULL					, 0 , READY  , 2  , 0 );
-    5702:	8a ed       	ldi	r24, 0xDA	; 218
-    5704:	9d e2       	ldi	r25, 0x2D	; 45
-    5706:	60 e0       	ldi	r22, 0x00	; 0
-    5708:	70 e0       	ldi	r23, 0x00	; 0
-    570a:	40 e0       	ldi	r20, 0x00	; 0
-    570c:	27 e1       	ldi	r18, 0x17	; 23
-    570e:	02 e0       	ldi	r16, 0x02	; 2
-    5710:	10 e0       	ldi	r17, 0x00	; 0
-    5712:	ee 24       	eor	r14, r14
-    5714:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
+    57ba:	86 e3       	ldi	r24, 0x36	; 54
+    57bc:	9e e2       	ldi	r25, 0x2E	; 46
+    57be:	60 e0       	ldi	r22, 0x00	; 0
+    57c0:	70 e0       	ldi	r23, 0x00	; 0
+    57c2:	40 e0       	ldi	r20, 0x00	; 0
+    57c4:	27 e1       	ldi	r18, 0x17	; 23
+    57c6:	02 e0       	ldi	r16, 0x02	; 2
+    57c8:	10 e0       	ldi	r17, 0x00	; 0
+    57ca:	ee 24       	eor	r14, r14
+    57cc:	0e 94 6f 07 	call	0xede	; 0xede <TMU_vidCreateTask>
 
 	TMU_vidStartScheduler();
-    5718:	0e 94 e8 07 	call	0xfd0	; 0xfd0 <TMU_vidStartScheduler>
-    571c:	80 e0       	ldi	r24, 0x00	; 0
-    571e:	90 e0       	ldi	r25, 0x00	; 0
+    57d0:	0e 94 e8 07 	call	0xfd0	; 0xfd0 <TMU_vidStartScheduler>
+    57d4:	80 e0       	ldi	r24, 0x00	; 0
+    57d6:	90 e0       	ldi	r25, 0x00	; 0
 }
-    5720:	0f 90       	pop	r0
-    5722:	cf 91       	pop	r28
-    5724:	df 91       	pop	r29
-    5726:	1f 91       	pop	r17
-    5728:	0f 91       	pop	r16
-    572a:	ef 90       	pop	r14
-    572c:	08 95       	ret
+    57d8:	0f 90       	pop	r0
+    57da:	cf 91       	pop	r28
+    57dc:	df 91       	pop	r29
+    57de:	1f 91       	pop	r17
+    57e0:	0f 91       	pop	r16
+    57e2:	ef 90       	pop	r14
+    57e4:	08 95       	ret
 
-0000572e <DisplayTemperature>:
+000057e6 <DisplayTemperature>:
 
 void DisplayTemperature(void *Copy_pu8ActiveModule)
 {
-    572e:	df 93       	push	r29
-    5730:	cf 93       	push	r28
-    5732:	00 d0       	rcall	.+0      	; 0x5734 <DisplayTemperature+0x6>
-    5734:	00 d0       	rcall	.+0      	; 0x5736 <DisplayTemperature+0x8>
-    5736:	00 d0       	rcall	.+0      	; 0x5738 <DisplayTemperature+0xa>
-    5738:	cd b7       	in	r28, 0x3d	; 61
-    573a:	de b7       	in	r29, 0x3e	; 62
-    573c:	9d 83       	std	Y+5, r25	; 0x05
-    573e:	8c 83       	std	Y+4, r24	; 0x04
+    57e6:	df 93       	push	r29
+    57e8:	cf 93       	push	r28
+    57ea:	00 d0       	rcall	.+0      	; 0x57ec <DisplayTemperature+0x6>
+    57ec:	00 d0       	rcall	.+0      	; 0x57ee <DisplayTemperature+0x8>
+    57ee:	00 d0       	rcall	.+0      	; 0x57f0 <DisplayTemperature+0xa>
+    57f0:	cd b7       	in	r28, 0x3d	; 61
+    57f2:	de b7       	in	r29, 0x3e	; 62
+    57f4:	9d 83       	std	Y+5, r25	; 0x05
+    57f6:	8c 83       	std	Y+4, r24	; 0x04
 	u8 *Local_u8ActiveModule = (u8*)Copy_pu8ActiveModule ;
-    5740:	8c 81       	ldd	r24, Y+4	; 0x04
-    5742:	9d 81       	ldd	r25, Y+5	; 0x05
-    5744:	9b 83       	std	Y+3, r25	; 0x03
-    5746:	8a 83       	std	Y+2, r24	; 0x02
+    57f8:	8c 81       	ldd	r24, Y+4	; 0x04
+    57fa:	9d 81       	ldd	r25, Y+5	; 0x05
+    57fc:	9b 83       	std	Y+3, r25	; 0x03
+    57fe:	8a 83       	std	Y+2, r24	; 0x02
 	u8 Local_u8DisplayValue;
 	static u8 BlinkDelay = BLINK_COUNTS ;
 	static bool BlinkStatus = FALSE ;
 
 	if( PowerStatus == ON)
-    5748:	80 91 be 01 	lds	r24, 0x01BE
-    574c:	88 23       	and	r24, r24
-    574e:	09 f0       	breq	.+2      	; 0x5752 <DisplayTemperature+0x24>
-    5750:	63 c0       	rjmp	.+198    	; 0x5818 <DisplayTemperature+0xea>
+    5800:	80 91 be 01 	lds	r24, 0x01BE
+    5804:	88 23       	and	r24, r24
+    5806:	09 f0       	breq	.+2      	; 0x580a <DisplayTemperature+0x24>
+    5808:	63 c0       	rjmp	.+198    	; 0x58d0 <DisplayTemperature+0xea>
 	{
 		if( Global_u8DisplayMode == NORMAL )			// NORMAL Operation Mode
-    5752:	80 91 c1 01 	lds	r24, 0x01C1
-    5756:	85 30       	cpi	r24, 0x05	; 5
-    5758:	51 f4       	brne	.+20     	; 0x576e <DisplayTemperature+0x40>
+    580a:	80 91 c1 01 	lds	r24, 0x01C1
+    580e:	85 30       	cpi	r24, 0x05	; 5
+    5810:	51 f4       	brne	.+20     	; 0x5826 <DisplayTemperature+0x40>
 		{
 			Local_u8DisplayValue = Global_u8TempValue ;
-    575a:	80 91 c5 01 	lds	r24, 0x01C5
-    575e:	89 83       	std	Y+1, r24	; 0x01
+    5812:	80 91 c5 01 	lds	r24, 0x01C5
+    5816:	89 83       	std	Y+1, r24	; 0x01
 			if( BlinkStatus == TRUE ) BlinkStatus = FALSE ;
-    5760:	80 91 39 02 	lds	r24, 0x0239
-    5764:	81 30       	cpi	r24, 0x01	; 1
-    5766:	e1 f4       	brne	.+56     	; 0x57a0 <DisplayTemperature+0x72>
-    5768:	10 92 39 02 	sts	0x0239, r1
-    576c:	19 c0       	rjmp	.+50     	; 0x57a0 <DisplayTemperature+0x72>
+    5818:	80 91 39 02 	lds	r24, 0x0239
+    581c:	81 30       	cpi	r24, 0x01	; 1
+    581e:	e1 f4       	brne	.+56     	; 0x5858 <DisplayTemperature+0x72>
+    5820:	10 92 39 02 	sts	0x0239, r1
+    5824:	19 c0       	rjmp	.+50     	; 0x5858 <DisplayTemperature+0x72>
 		}
 		else											// SETUP Mode
 		{
 			Local_u8DisplayValue = Global_u8TempSetValue ;
-    576e:	80 91 45 02 	lds	r24, 0x0245
-    5772:	89 83       	std	Y+1, r24	; 0x01
+    5826:	80 91 45 02 	lds	r24, 0x0245
+    582a:	89 83       	std	Y+1, r24	; 0x01
 			BlinkDelay--;
-    5774:	80 91 c6 01 	lds	r24, 0x01C6
-    5778:	81 50       	subi	r24, 0x01	; 1
-    577a:	80 93 c6 01 	sts	0x01C6, r24
+    582c:	80 91 c6 01 	lds	r24, 0x01C6
+    5830:	81 50       	subi	r24, 0x01	; 1
+    5832:	80 93 c6 01 	sts	0x01C6, r24
 			if(!BlinkDelay)
-    577e:	80 91 c6 01 	lds	r24, 0x01C6
-    5782:	88 23       	and	r24, r24
-    5784:	69 f4       	brne	.+26     	; 0x57a0 <DisplayTemperature+0x72>
+    5836:	80 91 c6 01 	lds	r24, 0x01C6
+    583a:	88 23       	and	r24, r24
+    583c:	69 f4       	brne	.+26     	; 0x5858 <DisplayTemperature+0x72>
 			{
 				BlinkDelay = BLINK_COUNTS;
-    5786:	8a e0       	ldi	r24, 0x0A	; 10
-    5788:	80 93 c6 01 	sts	0x01C6, r24
+    583e:	8a e0       	ldi	r24, 0x0A	; 10
+    5840:	80 93 c6 01 	sts	0x01C6, r24
 				BlinkStatus = ( ( BlinkStatus == TRUE )? FALSE : TRUE ) ;
-    578c:	80 91 39 02 	lds	r24, 0x0239
-    5790:	1e 82       	std	Y+6, r1	; 0x06
-    5792:	81 30       	cpi	r24, 0x01	; 1
-    5794:	11 f0       	breq	.+4      	; 0x579a <DisplayTemperature+0x6c>
-    5796:	81 e0       	ldi	r24, 0x01	; 1
-    5798:	8e 83       	std	Y+6, r24	; 0x06
-    579a:	8e 81       	ldd	r24, Y+6	; 0x06
-    579c:	80 93 39 02 	sts	0x0239, r24
+    5844:	80 91 39 02 	lds	r24, 0x0239
+    5848:	1e 82       	std	Y+6, r1	; 0x06
+    584a:	81 30       	cpi	r24, 0x01	; 1
+    584c:	11 f0       	breq	.+4      	; 0x5852 <DisplayTemperature+0x6c>
+    584e:	81 e0       	ldi	r24, 0x01	; 1
+    5850:	8e 83       	std	Y+6, r24	; 0x06
+    5852:	8e 81       	ldd	r24, Y+6	; 0x06
+    5854:	80 93 39 02 	sts	0x0239, r24
 			}
 		}
 
 		if( *Local_u8ActiveModule == TEMP_UNITS )
-    57a0:	ea 81       	ldd	r30, Y+2	; 0x02
-    57a2:	fb 81       	ldd	r31, Y+3	; 0x03
-    57a4:	80 81       	ld	r24, Z
-    57a6:	8c 30       	cpi	r24, 0x0C	; 12
-    57a8:	e1 f4       	brne	.+56     	; 0x57e2 <DisplayTemperature+0xb4>
+    5858:	ea 81       	ldd	r30, Y+2	; 0x02
+    585a:	fb 81       	ldd	r31, Y+3	; 0x03
+    585c:	80 81       	ld	r24, Z
+    585e:	8c 30       	cpi	r24, 0x0C	; 12
+    5860:	e1 f4       	brne	.+56     	; 0x589a <DisplayTemperature+0xb4>
 		{
 			SevSeg_enuModuleControl( TEMP_TENS , MODULE_DISABLE);
-    57aa:	8b e0       	ldi	r24, 0x0B	; 11
-    57ac:	6d e0       	ldi	r22, 0x0D	; 13
-    57ae:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
+    5862:	8b e0       	ldi	r24, 0x0B	; 11
+    5864:	6d e0       	ldi	r22, 0x0D	; 13
+    5866:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
 			SevSeg_enuSetDigitValue( TEMP_UNITS , ( Local_u8DisplayValue % 10 ) );
-    57b2:	89 81       	ldd	r24, Y+1	; 0x01
-    57b4:	9a e0       	ldi	r25, 0x0A	; 10
-    57b6:	69 2f       	mov	r22, r25
-    57b8:	0e 94 32 2f 	call	0x5e64	; 0x5e64 <__udivmodqi4>
-    57bc:	89 2f       	mov	r24, r25
-    57be:	98 2f       	mov	r25, r24
-    57c0:	8c e0       	ldi	r24, 0x0C	; 12
-    57c2:	69 2f       	mov	r22, r25
-    57c4:	0e 94 7d 27 	call	0x4efa	; 0x4efa <SevSeg_enuSetDigitValue>
+    586a:	89 81       	ldd	r24, Y+1	; 0x01
+    586c:	9a e0       	ldi	r25, 0x0A	; 10
+    586e:	69 2f       	mov	r22, r25
+    5870:	0e 94 8e 2f 	call	0x5f1c	; 0x5f1c <__udivmodqi4>
+    5874:	89 2f       	mov	r24, r25
+    5876:	98 2f       	mov	r25, r24
+    5878:	8c e0       	ldi	r24, 0x0C	; 12
+    587a:	69 2f       	mov	r22, r25
+    587c:	0e 94 7d 27 	call	0x4efa	; 0x4efa <SevSeg_enuSetDigitValue>
 			if( BlinkStatus == FALSE )	SevSeg_enuModuleControl( TEMP_UNITS , MODULE_ENABLE);
-    57c8:	80 91 39 02 	lds	r24, 0x0239
-    57cc:	88 23       	and	r24, r24
-    57ce:	21 f4       	brne	.+8      	; 0x57d8 <DisplayTemperature+0xaa>
-    57d0:	8c e0       	ldi	r24, 0x0C	; 12
-    57d2:	6e e0       	ldi	r22, 0x0E	; 14
-    57d4:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
+    5880:	80 91 39 02 	lds	r24, 0x0239
+    5884:	88 23       	and	r24, r24
+    5886:	21 f4       	brne	.+8      	; 0x5890 <DisplayTemperature+0xaa>
+    5888:	8c e0       	ldi	r24, 0x0C	; 12
+    588a:	6e e0       	ldi	r22, 0x0E	; 14
+    588c:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
 			*Local_u8ActiveModule = TEMP_TENS ;
-    57d8:	ea 81       	ldd	r30, Y+2	; 0x02
-    57da:	fb 81       	ldd	r31, Y+3	; 0x03
-    57dc:	8b e0       	ldi	r24, 0x0B	; 11
-    57de:	80 83       	st	Z, r24
-    57e0:	2a c0       	rjmp	.+84     	; 0x5836 <DisplayTemperature+0x108>
+    5890:	ea 81       	ldd	r30, Y+2	; 0x02
+    5892:	fb 81       	ldd	r31, Y+3	; 0x03
+    5894:	8b e0       	ldi	r24, 0x0B	; 11
+    5896:	80 83       	st	Z, r24
+    5898:	2a c0       	rjmp	.+84     	; 0x58ee <DisplayTemperature+0x108>
 		}
 		else
 		{
 			SevSeg_enuModuleControl( TEMP_UNITS , MODULE_DISABLE);
-    57e2:	8c e0       	ldi	r24, 0x0C	; 12
-    57e4:	6d e0       	ldi	r22, 0x0D	; 13
-    57e6:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
+    589a:	8c e0       	ldi	r24, 0x0C	; 12
+    589c:	6d e0       	ldi	r22, 0x0D	; 13
+    589e:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
 			SevSeg_enuSetDigitValue( TEMP_TENS , ( Local_u8DisplayValue / 10 ) );
-    57ea:	89 81       	ldd	r24, Y+1	; 0x01
-    57ec:	9a e0       	ldi	r25, 0x0A	; 10
-    57ee:	69 2f       	mov	r22, r25
-    57f0:	0e 94 32 2f 	call	0x5e64	; 0x5e64 <__udivmodqi4>
-    57f4:	98 2f       	mov	r25, r24
-    57f6:	8b e0       	ldi	r24, 0x0B	; 11
-    57f8:	69 2f       	mov	r22, r25
-    57fa:	0e 94 7d 27 	call	0x4efa	; 0x4efa <SevSeg_enuSetDigitValue>
+    58a2:	89 81       	ldd	r24, Y+1	; 0x01
+    58a4:	9a e0       	ldi	r25, 0x0A	; 10
+    58a6:	69 2f       	mov	r22, r25
+    58a8:	0e 94 8e 2f 	call	0x5f1c	; 0x5f1c <__udivmodqi4>
+    58ac:	98 2f       	mov	r25, r24
+    58ae:	8b e0       	ldi	r24, 0x0B	; 11
+    58b0:	69 2f       	mov	r22, r25
+    58b2:	0e 94 7d 27 	call	0x4efa	; 0x4efa <SevSeg_enuSetDigitValue>
 			if( BlinkStatus == FALSE )SevSeg_enuModuleControl( TEMP_TENS , MODULE_ENABLE);
-    57fe:	80 91 39 02 	lds	r24, 0x0239
-    5802:	88 23       	and	r24, r24
-    5804:	21 f4       	brne	.+8      	; 0x580e <DisplayTemperature+0xe0>
-    5806:	8b e0       	ldi	r24, 0x0B	; 11
-    5808:	6e e0       	ldi	r22, 0x0E	; 14
-    580a:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
+    58b6:	80 91 39 02 	lds	r24, 0x0239
+    58ba:	88 23       	and	r24, r24
+    58bc:	21 f4       	brne	.+8      	; 0x58c6 <DisplayTemperature+0xe0>
+    58be:	8b e0       	ldi	r24, 0x0B	; 11
+    58c0:	6e e0       	ldi	r22, 0x0E	; 14
+    58c2:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
 			*Local_u8ActiveModule = TEMP_UNITS ;
-    580e:	ea 81       	ldd	r30, Y+2	; 0x02
-    5810:	fb 81       	ldd	r31, Y+3	; 0x03
-    5812:	8c e0       	ldi	r24, 0x0C	; 12
-    5814:	80 83       	st	Z, r24
-    5816:	0f c0       	rjmp	.+30     	; 0x5836 <DisplayTemperature+0x108>
+    58c6:	ea 81       	ldd	r30, Y+2	; 0x02
+    58c8:	fb 81       	ldd	r31, Y+3	; 0x03
+    58ca:	8c e0       	ldi	r24, 0x0C	; 12
+    58cc:	80 83       	st	Z, r24
+    58ce:	0f c0       	rjmp	.+30     	; 0x58ee <DisplayTemperature+0x108>
 		}
 	}
 	else
 	{
 		SevSeg_enuModuleControl( TEMP_UNITS , MODULE_DISABLE);
-    5818:	8c e0       	ldi	r24, 0x0C	; 12
-    581a:	6d e0       	ldi	r22, 0x0D	; 13
-    581c:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
+    58d0:	8c e0       	ldi	r24, 0x0C	; 12
+    58d2:	6d e0       	ldi	r22, 0x0D	; 13
+    58d4:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
 		SevSeg_enuModuleControl( TEMP_TENS , MODULE_DISABLE);
-    5820:	8b e0       	ldi	r24, 0x0B	; 11
-    5822:	6d e0       	ldi	r22, 0x0D	; 13
-    5824:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
+    58d8:	8b e0       	ldi	r24, 0x0B	; 11
+    58da:	6d e0       	ldi	r22, 0x0D	; 13
+    58dc:	0e 94 73 28 	call	0x50e6	; 0x50e6 <SevSeg_enuModuleControl>
 		*Local_u8ActiveModule = TEMP_UNITS;
-    5828:	ea 81       	ldd	r30, Y+2	; 0x02
-    582a:	fb 81       	ldd	r31, Y+3	; 0x03
-    582c:	8c e0       	ldi	r24, 0x0C	; 12
-    582e:	80 83       	st	Z, r24
+    58e0:	ea 81       	ldd	r30, Y+2	; 0x02
+    58e2:	fb 81       	ldd	r31, Y+3	; 0x03
+    58e4:	8c e0       	ldi	r24, 0x0C	; 12
+    58e6:	80 83       	st	Z, r24
 		TMU_vidPauseTask( 7 );
-    5830:	87 e0       	ldi	r24, 0x07	; 7
-    5832:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    58e8:	87 e0       	ldi	r24, 0x07	; 7
+    58ea:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
 	}
 }
-    5836:	26 96       	adiw	r28, 0x06	; 6
-    5838:	0f b6       	in	r0, 0x3f	; 63
-    583a:	f8 94       	cli
-    583c:	de bf       	out	0x3e, r29	; 62
-    583e:	0f be       	out	0x3f, r0	; 63
-    5840:	cd bf       	out	0x3d, r28	; 61
-    5842:	cf 91       	pop	r28
-    5844:	df 91       	pop	r29
-    5846:	08 95       	ret
+    58ee:	26 96       	adiw	r28, 0x06	; 6
+    58f0:	0f b6       	in	r0, 0x3f	; 63
+    58f2:	f8 94       	cli
+    58f4:	de bf       	out	0x3e, r29	; 62
+    58f6:	0f be       	out	0x3f, r0	; 63
+    58f8:	cd bf       	out	0x3d, r28	; 61
+    58fa:	cf 91       	pop	r28
+    58fc:	df 91       	pop	r29
+    58fe:	08 95       	ret
 
-00005848 <CheckTemperatureStatus>:
+00005900 <CheckTemperatureStatus>:
 
 void CheckTemperatureStatus(void *pNULL)
 {
-    5848:	df 93       	push	r29
-    584a:	cf 93       	push	r28
-    584c:	00 d0       	rcall	.+0      	; 0x584e <CheckTemperatureStatus+0x6>
-    584e:	00 d0       	rcall	.+0      	; 0x5850 <CheckTemperatureStatus+0x8>
-    5850:	cd b7       	in	r28, 0x3d	; 61
-    5852:	de b7       	in	r29, 0x3e	; 62
-    5854:	9c 83       	std	Y+4, r25	; 0x04
-    5856:	8b 83       	std	Y+3, r24	; 0x03
+    5900:	df 93       	push	r29
+    5902:	cf 93       	push	r28
+    5904:	00 d0       	rcall	.+0      	; 0x5906 <CheckTemperatureStatus+0x6>
+    5906:	00 d0       	rcall	.+0      	; 0x5908 <CheckTemperatureStatus+0x8>
+    5908:	cd b7       	in	r28, 0x3d	; 61
+    590a:	de b7       	in	r29, 0x3e	; 62
+    590c:	9c 83       	std	Y+4, r25	; 0x04
+    590e:	8b 83       	std	Y+3, r24	; 0x03
 	u16 Local_u16TempValue ;
 	static u16 Local_u16TempAccValue = 0 ;
 	static u8 Local_u8PrevTempValue = 0 ;
 	static u8 Local_u8TempReadCounter = TEMP_AVG_READINGS ;
 
 	if( Global_u8DisplayMode == NORMAL && PowerStatus == ON )
-    5858:	80 91 c1 01 	lds	r24, 0x01C1
-    585c:	85 30       	cpi	r24, 0x05	; 5
-    585e:	09 f0       	breq	.+2      	; 0x5862 <CheckTemperatureStatus+0x1a>
-    5860:	67 c0       	rjmp	.+206    	; 0x5930 <CheckTemperatureStatus+0xe8>
-    5862:	80 91 be 01 	lds	r24, 0x01BE
-    5866:	88 23       	and	r24, r24
-    5868:	09 f0       	breq	.+2      	; 0x586c <CheckTemperatureStatus+0x24>
-    586a:	62 c0       	rjmp	.+196    	; 0x5930 <CheckTemperatureStatus+0xe8>
+    5910:	80 91 c1 01 	lds	r24, 0x01C1
+    5914:	85 30       	cpi	r24, 0x05	; 5
+    5916:	09 f0       	breq	.+2      	; 0x591a <CheckTemperatureStatus+0x1a>
+    5918:	67 c0       	rjmp	.+206    	; 0x59e8 <CheckTemperatureStatus+0xe8>
+    591a:	80 91 be 01 	lds	r24, 0x01BE
+    591e:	88 23       	and	r24, r24
+    5920:	09 f0       	breq	.+2      	; 0x5924 <CheckTemperatureStatus+0x24>
+    5922:	62 c0       	rjmp	.+196    	; 0x59e8 <CheckTemperatureStatus+0xe8>
 	{
 		LM35_enuReadTemp( &Local_u16TempValue );
-    586c:	ce 01       	movw	r24, r28
-    586e:	01 96       	adiw	r24, 0x01	; 1
-    5870:	0e 94 be 2a 	call	0x557c	; 0x557c <LM35_enuReadTemp>
+    5924:	ce 01       	movw	r24, r28
+    5926:	01 96       	adiw	r24, 0x01	; 1
+    5928:	0e 94 1a 2b 	call	0x5634	; 0x5634 <LM35_enuReadTemp>
 		Local_u16TempAccValue += Local_u16TempValue ;
-    5874:	20 91 3b 02 	lds	r18, 0x023B
-    5878:	30 91 3c 02 	lds	r19, 0x023C
-    587c:	89 81       	ldd	r24, Y+1	; 0x01
-    587e:	9a 81       	ldd	r25, Y+2	; 0x02
-    5880:	82 0f       	add	r24, r18
-    5882:	93 1f       	adc	r25, r19
-    5884:	90 93 3c 02 	sts	0x023C, r25
-    5888:	80 93 3b 02 	sts	0x023B, r24
+    592c:	20 91 3b 02 	lds	r18, 0x023B
+    5930:	30 91 3c 02 	lds	r19, 0x023C
+    5934:	89 81       	ldd	r24, Y+1	; 0x01
+    5936:	9a 81       	ldd	r25, Y+2	; 0x02
+    5938:	82 0f       	add	r24, r18
+    593a:	93 1f       	adc	r25, r19
+    593c:	90 93 3c 02 	sts	0x023C, r25
+    5940:	80 93 3b 02 	sts	0x023B, r24
 		ADC_enuStartConversion();
-    588c:	0e 94 c6 23 	call	0x478c	; 0x478c <ADC_enuStartConversion>
+    5944:	0e 94 c6 23 	call	0x478c	; 0x478c <ADC_enuStartConversion>
 		Local_u8TempReadCounter--;
-    5890:	80 91 c7 01 	lds	r24, 0x01C7
-    5894:	81 50       	subi	r24, 0x01	; 1
-    5896:	80 93 c7 01 	sts	0x01C7, r24
+    5948:	80 91 c7 01 	lds	r24, 0x01C7
+    594c:	81 50       	subi	r24, 0x01	; 1
+    594e:	80 93 c7 01 	sts	0x01C7, r24
 		if( !Local_u8TempReadCounter )
-    589a:	80 91 c7 01 	lds	r24, 0x01C7
-    589e:	88 23       	and	r24, r24
-    58a0:	09 f0       	breq	.+2      	; 0x58a4 <CheckTemperatureStatus+0x5c>
-    58a2:	51 c0       	rjmp	.+162    	; 0x5946 <CheckTemperatureStatus+0xfe>
+    5952:	80 91 c7 01 	lds	r24, 0x01C7
+    5956:	88 23       	and	r24, r24
+    5958:	09 f0       	breq	.+2      	; 0x595c <CheckTemperatureStatus+0x5c>
+    595a:	51 c0       	rjmp	.+162    	; 0x59fe <CheckTemperatureStatus+0xfe>
 		{
 			Local_u8TempReadCounter = TEMP_AVG_READINGS;
-    58a4:	8a e0       	ldi	r24, 0x0A	; 10
-    58a6:	80 93 c7 01 	sts	0x01C7, r24
+    595c:	8a e0       	ldi	r24, 0x0A	; 10
+    595e:	80 93 c7 01 	sts	0x01C7, r24
 			Global_u8TempValue = Local_u16TempAccValue / TEMP_AVG_READINGS ;
-    58aa:	80 91 3b 02 	lds	r24, 0x023B
-    58ae:	90 91 3c 02 	lds	r25, 0x023C
-    58b2:	2a e0       	ldi	r18, 0x0A	; 10
-    58b4:	30 e0       	ldi	r19, 0x00	; 0
-    58b6:	b9 01       	movw	r22, r18
-    58b8:	0e 94 3e 2f 	call	0x5e7c	; 0x5e7c <__udivmodhi4>
-    58bc:	cb 01       	movw	r24, r22
-    58be:	80 93 c5 01 	sts	0x01C5, r24
+    5962:	80 91 3b 02 	lds	r24, 0x023B
+    5966:	90 91 3c 02 	lds	r25, 0x023C
+    596a:	2a e0       	ldi	r18, 0x0A	; 10
+    596c:	30 e0       	ldi	r19, 0x00	; 0
+    596e:	b9 01       	movw	r22, r18
+    5970:	0e 94 9a 2f 	call	0x5f34	; 0x5f34 <__udivmodhi4>
+    5974:	cb 01       	movw	r24, r22
+    5976:	80 93 c5 01 	sts	0x01C5, r24
 			Global_s8TempError = Global_u8TempValue - Local_u8PrevTempValue ;
-    58c2:	90 91 c5 01 	lds	r25, 0x01C5
-    58c6:	80 91 3a 02 	lds	r24, 0x023A
-    58ca:	29 2f       	mov	r18, r25
-    58cc:	28 1b       	sub	r18, r24
-    58ce:	82 2f       	mov	r24, r18
-    58d0:	80 93 46 02 	sts	0x0246, r24
+    597a:	90 91 c5 01 	lds	r25, 0x01C5
+    597e:	80 91 3a 02 	lds	r24, 0x023A
+    5982:	29 2f       	mov	r18, r25
+    5984:	28 1b       	sub	r18, r24
+    5986:	82 2f       	mov	r24, r18
+    5988:	80 93 46 02 	sts	0x0246, r24
 			Local_u8PrevTempValue = Global_u8TempValue ;
-    58d4:	80 91 c5 01 	lds	r24, 0x01C5
-    58d8:	80 93 3a 02 	sts	0x023A, r24
+    598c:	80 91 c5 01 	lds	r24, 0x01C5
+    5990:	80 93 3a 02 	sts	0x023A, r24
 			if( Global_s8TempError >= HTR_TEMP_TOLERANCE )
-    58dc:	80 91 46 02 	lds	r24, 0x0246
-    58e0:	85 30       	cpi	r24, 0x05	; 5
-    58e2:	8c f0       	brlt	.+34     	; 0x5906 <CheckTemperatureStatus+0xbe>
+    5994:	80 91 46 02 	lds	r24, 0x0246
+    5998:	85 30       	cpi	r24, 0x05	; 5
+    599a:	8c f0       	brlt	.+34     	; 0x59be <CheckTemperatureStatus+0xbe>
 			{
 				if( HeaterStatus == OFF )
-    58e4:	80 91 bf 01 	lds	r24, 0x01BF
-    58e8:	81 30       	cpi	r24, 0x01	; 1
-    58ea:	49 f4       	brne	.+18     	; 0x58fe <CheckTemperatureStatus+0xb6>
+    599c:	80 91 bf 01 	lds	r24, 0x01BF
+    59a0:	81 30       	cpi	r24, 0x01	; 1
+    59a2:	49 f4       	brne	.+18     	; 0x59b6 <CheckTemperatureStatus+0xb6>
 				{
 					CoolentStatus = ON ;
-    58ec:	10 92 c0 01 	sts	0x01C0, r1
+    59a4:	10 92 c0 01 	sts	0x01C0, r1
 					LedStatus = LD_ON ;
-    58f0:	81 e0       	ldi	r24, 0x01	; 1
-    58f2:	80 93 38 02 	sts	0x0238, r24
+    59a8:	81 e0       	ldi	r24, 0x01	; 1
+    59aa:	80 93 38 02 	sts	0x0238, r24
 					TMU_vidResumeTask( 4 );
-    58f6:	84 e0       	ldi	r24, 0x04	; 4
-    58f8:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
-    58fc:	24 c0       	rjmp	.+72     	; 0x5946 <CheckTemperatureStatus+0xfe>
+    59ae:	84 e0       	ldi	r24, 0x04	; 4
+    59b0:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    59b4:	24 c0       	rjmp	.+72     	; 0x59fe <CheckTemperatureStatus+0xfe>
 				}
 				else
 				{
 					HeaterStatus = OFF ;
-    58fe:	81 e0       	ldi	r24, 0x01	; 1
-    5900:	80 93 bf 01 	sts	0x01BF, r24
-    5904:	20 c0       	rjmp	.+64     	; 0x5946 <CheckTemperatureStatus+0xfe>
+    59b6:	81 e0       	ldi	r24, 0x01	; 1
+    59b8:	80 93 bf 01 	sts	0x01BF, r24
+    59bc:	20 c0       	rjmp	.+64     	; 0x59fe <CheckTemperatureStatus+0xfe>
 				}
 			}
 			else if( Global_s8TempError <= -COOLENT_TEMP_TOLERANCE )
-    5906:	80 91 46 02 	lds	r24, 0x0246
-    590a:	8c 3f       	cpi	r24, 0xFC	; 252
-    590c:	e4 f4       	brge	.+56     	; 0x5946 <CheckTemperatureStatus+0xfe>
+    59be:	80 91 46 02 	lds	r24, 0x0246
+    59c2:	8c 3f       	cpi	r24, 0xFC	; 252
+    59c4:	e4 f4       	brge	.+56     	; 0x59fe <CheckTemperatureStatus+0xfe>
 			{
 				if( CoolentStatus == OFF )
-    590e:	80 91 c0 01 	lds	r24, 0x01C0
-    5912:	81 30       	cpi	r24, 0x01	; 1
-    5914:	49 f4       	brne	.+18     	; 0x5928 <CheckTemperatureStatus+0xe0>
+    59c6:	80 91 c0 01 	lds	r24, 0x01C0
+    59ca:	81 30       	cpi	r24, 0x01	; 1
+    59cc:	49 f4       	brne	.+18     	; 0x59e0 <CheckTemperatureStatus+0xe0>
 				{
 					HeaterStatus = ON ;
-    5916:	10 92 bf 01 	sts	0x01BF, r1
+    59ce:	10 92 bf 01 	sts	0x01BF, r1
 					TMU_vidResumeTask( 5 );
-    591a:	85 e0       	ldi	r24, 0x05	; 5
-    591c:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    59d2:	85 e0       	ldi	r24, 0x05	; 5
+    59d4:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 					LedStatus = LD_BLINK ;
-    5920:	83 e1       	ldi	r24, 0x13	; 19
-    5922:	80 93 38 02 	sts	0x0238, r24
-    5926:	0f c0       	rjmp	.+30     	; 0x5946 <CheckTemperatureStatus+0xfe>
+    59d8:	83 e1       	ldi	r24, 0x13	; 19
+    59da:	80 93 38 02 	sts	0x0238, r24
+    59de:	0f c0       	rjmp	.+30     	; 0x59fe <CheckTemperatureStatus+0xfe>
 				}
 				else
 				{
 					CoolentStatus = OFF ;
-    5928:	81 e0       	ldi	r24, 0x01	; 1
-    592a:	80 93 c0 01 	sts	0x01C0, r24
-    592e:	0b c0       	rjmp	.+22     	; 0x5946 <CheckTemperatureStatus+0xfe>
+    59e0:	81 e0       	ldi	r24, 0x01	; 1
+    59e2:	80 93 c0 01 	sts	0x01C0, r24
+    59e6:	0b c0       	rjmp	.+22     	; 0x59fe <CheckTemperatureStatus+0xfe>
 			}
 		}
 	}
 	else
 	{
 		LedStatus = LD_OFF ;
-    5930:	10 92 38 02 	sts	0x0238, r1
+    59e8:	10 92 38 02 	sts	0x0238, r1
 		HeaterStatus = OFF ;
-    5934:	81 e0       	ldi	r24, 0x01	; 1
-    5936:	80 93 bf 01 	sts	0x01BF, r24
+    59ec:	81 e0       	ldi	r24, 0x01	; 1
+    59ee:	80 93 bf 01 	sts	0x01BF, r24
 		CoolentStatus = OFF ;
-    593a:	81 e0       	ldi	r24, 0x01	; 1
-    593c:	80 93 c0 01 	sts	0x01C0, r24
+    59f2:	81 e0       	ldi	r24, 0x01	; 1
+    59f4:	80 93 c0 01 	sts	0x01C0, r24
 		TMU_vidPauseTask( 6 );
-    5940:	86 e0       	ldi	r24, 0x06	; 6
-    5942:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    59f8:	86 e0       	ldi	r24, 0x06	; 6
+    59fa:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
 	}
 }
-    5946:	0f 90       	pop	r0
-    5948:	0f 90       	pop	r0
-    594a:	0f 90       	pop	r0
-    594c:	0f 90       	pop	r0
-    594e:	cf 91       	pop	r28
-    5950:	df 91       	pop	r29
-    5952:	08 95       	ret
+    59fe:	0f 90       	pop	r0
+    5a00:	0f 90       	pop	r0
+    5a02:	0f 90       	pop	r0
+    5a04:	0f 90       	pop	r0
+    5a06:	cf 91       	pop	r28
+    5a08:	df 91       	pop	r29
+    5a0a:	08 95       	ret
 
-00005954 <CheckIncrementSwitch>:
+00005a0c <CheckIncrementSwitch>:
 
 void CheckIncrementSwitch(void *pNULL)
 {
-    5954:	df 93       	push	r29
-    5956:	cf 93       	push	r28
-    5958:	00 d0       	rcall	.+0      	; 0x595a <CheckIncrementSwitch+0x6>
-    595a:	0f 92       	push	r0
-    595c:	cd b7       	in	r28, 0x3d	; 61
-    595e:	de b7       	in	r29, 0x3e	; 62
-    5960:	9b 83       	std	Y+3, r25	; 0x03
-    5962:	8a 83       	std	Y+2, r24	; 0x02
+    5a0c:	df 93       	push	r29
+    5a0e:	cf 93       	push	r28
+    5a10:	00 d0       	rcall	.+0      	; 0x5a12 <CheckIncrementSwitch+0x6>
+    5a12:	0f 92       	push	r0
+    5a14:	cd b7       	in	r28, 0x3d	; 61
+    5a16:	de b7       	in	r29, 0x3e	; 62
+    5a18:	9b 83       	std	Y+3, r25	; 0x03
+    5a1a:	8a 83       	std	Y+2, r24	; 0x02
 	u8 Local_u8SwitchValue;
 
 
 		if( ES_OK == Switch_enuGetPressed( INC_SW , &Local_u8SwitchValue ) )
-    5964:	8a ec       	ldi	r24, 0xCA	; 202
-    5966:	9e 01       	movw	r18, r28
-    5968:	2f 5f       	subi	r18, 0xFF	; 255
-    596a:	3f 4f       	sbci	r19, 0xFF	; 255
-    596c:	b9 01       	movw	r22, r18
-    596e:	0e 94 11 26 	call	0x4c22	; 0x4c22 <Switch_enuGetPressed>
-    5972:	88 23       	and	r24, r24
-    5974:	09 f0       	breq	.+2      	; 0x5978 <CheckIncrementSwitch+0x24>
-    5976:	83 c0       	rjmp	.+262    	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5a1c:	8a ec       	ldi	r24, 0xCA	; 202
+    5a1e:	9e 01       	movw	r18, r28
+    5a20:	2f 5f       	subi	r18, 0xFF	; 255
+    5a22:	3f 4f       	sbci	r19, 0xFF	; 255
+    5a24:	b9 01       	movw	r22, r18
+    5a26:	0e 94 11 26 	call	0x4c22	; 0x4c22 <Switch_enuGetPressed>
+    5a2a:	88 23       	and	r24, r24
+    5a2c:	09 f0       	breq	.+2      	; 0x5a30 <CheckIncrementSwitch+0x24>
+    5a2e:	83 c0       	rjmp	.+262    	; 0x5b36 <CheckIncrementSwitch+0x12a>
 		{
 			static u8 press = 0, hold = 0 , BounceDelay = BOUNCE_COUNTS ;
 			static u16 SetupDelay = SETUP_COUNTS ;
 			if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 && hold == 0 )  // First press
-    5978:	89 81       	ldd	r24, Y+1	; 0x01
-    597a:	81 30       	cpi	r24, 0x01	; 1
-    597c:	39 f5       	brne	.+78     	; 0x59cc <CheckIncrementSwitch+0x78>
-    597e:	80 91 3e 02 	lds	r24, 0x023E
-    5982:	88 23       	and	r24, r24
-    5984:	19 f5       	brne	.+70     	; 0x59cc <CheckIncrementSwitch+0x78>
-    5986:	80 91 3d 02 	lds	r24, 0x023D
-    598a:	88 23       	and	r24, r24
-    598c:	f9 f4       	brne	.+62     	; 0x59cc <CheckIncrementSwitch+0x78>
+    5a30:	89 81       	ldd	r24, Y+1	; 0x01
+    5a32:	81 30       	cpi	r24, 0x01	; 1
+    5a34:	39 f5       	brne	.+78     	; 0x5a84 <CheckIncrementSwitch+0x78>
+    5a36:	80 91 3e 02 	lds	r24, 0x023E
+    5a3a:	88 23       	and	r24, r24
+    5a3c:	19 f5       	brne	.+70     	; 0x5a84 <CheckIncrementSwitch+0x78>
+    5a3e:	80 91 3d 02 	lds	r24, 0x023D
+    5a42:	88 23       	and	r24, r24
+    5a44:	f9 f4       	brne	.+62     	; 0x5a84 <CheckIncrementSwitch+0x78>
 			{
 				if( Global_u8DisplayMode == NORMAL )
-    598e:	80 91 c1 01 	lds	r24, 0x01C1
-    5992:	85 30       	cpi	r24, 0x05	; 5
-    5994:	69 f4       	brne	.+26     	; 0x59b0 <CheckIncrementSwitch+0x5c>
+    5a46:	80 91 c1 01 	lds	r24, 0x01C1
+    5a4a:	85 30       	cpi	r24, 0x05	; 5
+    5a4c:	69 f4       	brne	.+26     	; 0x5a68 <CheckIncrementSwitch+0x5c>
 				{
 					Global_u8DisplayMode = SETUP ;
-    5996:	89 e0       	ldi	r24, 0x09	; 9
-    5998:	80 93 c1 01 	sts	0x01C1, r24
+    5a4e:	89 e0       	ldi	r24, 0x09	; 9
+    5a50:	80 93 c1 01 	sts	0x01C1, r24
 					Global_u8SetupSw = INC_SW ;
-    599c:	8a ec       	ldi	r24, 0xCA	; 202
-    599e:	80 93 47 02 	sts	0x0247, r24
+    5a54:	8a ec       	ldi	r24, 0xCA	; 202
+    5a56:	80 93 47 02 	sts	0x0247, r24
 					SetupDelay = SETUP_COUNTS;
-    59a2:	82 e3       	ldi	r24, 0x32	; 50
-    59a4:	90 e0       	ldi	r25, 0x00	; 0
-    59a6:	90 93 c9 01 	sts	0x01C9, r25
-    59aa:	80 93 c8 01 	sts	0x01C8, r24
-    59ae:	67 c0       	rjmp	.+206    	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5a5a:	82 e3       	ldi	r24, 0x32	; 50
+    5a5c:	90 e0       	ldi	r25, 0x00	; 0
+    5a5e:	90 93 c9 01 	sts	0x01C9, r25
+    5a62:	80 93 c8 01 	sts	0x01C8, r24
+    5a66:	67 c0       	rjmp	.+206    	; 0x5b36 <CheckIncrementSwitch+0x12a>
 				}
 				else
 				{
 					if( Global_u8TempSetValue < TEMP_MAX_LIMIT )
-    59b0:	80 91 45 02 	lds	r24, 0x0245
-    59b4:	8b 34       	cpi	r24, 0x4B	; 75
-    59b6:	08 f0       	brcs	.+2      	; 0x59ba <CheckIncrementSwitch+0x66>
-    59b8:	62 c0       	rjmp	.+196    	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5a68:	80 91 45 02 	lds	r24, 0x0245
+    5a6c:	8b 34       	cpi	r24, 0x4B	; 75
+    5a6e:	08 f0       	brcs	.+2      	; 0x5a72 <CheckIncrementSwitch+0x66>
+    5a70:	62 c0       	rjmp	.+196    	; 0x5b36 <CheckIncrementSwitch+0x12a>
 					{
 						Global_u8TempSetValue++;
-    59ba:	80 91 45 02 	lds	r24, 0x0245
-    59be:	8f 5f       	subi	r24, 0xFF	; 255
-    59c0:	80 93 45 02 	sts	0x0245, r24
+    5a72:	80 91 45 02 	lds	r24, 0x0245
+    5a76:	8f 5f       	subi	r24, 0xFF	; 255
+    5a78:	80 93 45 02 	sts	0x0245, r24
 						press = 1 ;
-    59c4:	81 e0       	ldi	r24, 0x01	; 1
-    59c6:	80 93 3e 02 	sts	0x023E, r24
-    59ca:	59 c0       	rjmp	.+178    	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5a7c:	81 e0       	ldi	r24, 0x01	; 1
+    5a7e:	80 93 3e 02 	sts	0x023E, r24
+    5a82:	59 c0       	rjmp	.+178    	; 0x5b36 <CheckIncrementSwitch+0x12a>
 					}
 				}
 			}
 			else if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 1 && hold == 0 ) // Continued first press
-    59cc:	89 81       	ldd	r24, Y+1	; 0x01
-    59ce:	81 30       	cpi	r24, 0x01	; 1
-    59d0:	61 f4       	brne	.+24     	; 0x59ea <CheckIncrementSwitch+0x96>
-    59d2:	80 91 3e 02 	lds	r24, 0x023E
-    59d6:	81 30       	cpi	r24, 0x01	; 1
-    59d8:	41 f4       	brne	.+16     	; 0x59ea <CheckIncrementSwitch+0x96>
-    59da:	80 91 3d 02 	lds	r24, 0x023D
-    59de:	88 23       	and	r24, r24
-    59e0:	21 f4       	brne	.+8      	; 0x59ea <CheckIncrementSwitch+0x96>
+    5a84:	89 81       	ldd	r24, Y+1	; 0x01
+    5a86:	81 30       	cpi	r24, 0x01	; 1
+    5a88:	61 f4       	brne	.+24     	; 0x5aa2 <CheckIncrementSwitch+0x96>
+    5a8a:	80 91 3e 02 	lds	r24, 0x023E
+    5a8e:	81 30       	cpi	r24, 0x01	; 1
+    5a90:	41 f4       	brne	.+16     	; 0x5aa2 <CheckIncrementSwitch+0x96>
+    5a92:	80 91 3d 02 	lds	r24, 0x023D
+    5a96:	88 23       	and	r24, r24
+    5a98:	21 f4       	brne	.+8      	; 0x5aa2 <CheckIncrementSwitch+0x96>
 			{
 				hold = 1;
-    59e2:	81 e0       	ldi	r24, 0x01	; 1
-    59e4:	80 93 3d 02 	sts	0x023D, r24
-    59e8:	4a c0       	rjmp	.+148    	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5a9a:	81 e0       	ldi	r24, 0x01	; 1
+    5a9c:	80 93 3d 02 	sts	0x023D, r24
+    5aa0:	4a c0       	rjmp	.+148    	; 0x5b36 <CheckIncrementSwitch+0x12a>
 			}
 			else if ( (Local_u8SwitchValue == DIO_u8LOW ) && press == 1 && hold == 1 ) // Removed first press
-    59ea:	89 81       	ldd	r24, Y+1	; 0x01
-    59ec:	88 23       	and	r24, r24
-    59ee:	f9 f4       	brne	.+62     	; 0x5a2e <CheckIncrementSwitch+0xda>
-    59f0:	80 91 3e 02 	lds	r24, 0x023E
-    59f4:	81 30       	cpi	r24, 0x01	; 1
-    59f6:	d9 f4       	brne	.+54     	; 0x5a2e <CheckIncrementSwitch+0xda>
-    59f8:	80 91 3d 02 	lds	r24, 0x023D
-    59fc:	81 30       	cpi	r24, 0x01	; 1
-    59fe:	b9 f4       	brne	.+46     	; 0x5a2e <CheckIncrementSwitch+0xda>
+    5aa2:	89 81       	ldd	r24, Y+1	; 0x01
+    5aa4:	88 23       	and	r24, r24
+    5aa6:	f9 f4       	brne	.+62     	; 0x5ae6 <CheckIncrementSwitch+0xda>
+    5aa8:	80 91 3e 02 	lds	r24, 0x023E
+    5aac:	81 30       	cpi	r24, 0x01	; 1
+    5aae:	d9 f4       	brne	.+54     	; 0x5ae6 <CheckIncrementSwitch+0xda>
+    5ab0:	80 91 3d 02 	lds	r24, 0x023D
+    5ab4:	81 30       	cpi	r24, 0x01	; 1
+    5ab6:	b9 f4       	brne	.+46     	; 0x5ae6 <CheckIncrementSwitch+0xda>
 			{
 				BounceDelay--;
-    5a00:	80 91 ca 01 	lds	r24, 0x01CA
-    5a04:	81 50       	subi	r24, 0x01	; 1
-    5a06:	80 93 ca 01 	sts	0x01CA, r24
+    5ab8:	80 91 ca 01 	lds	r24, 0x01CA
+    5abc:	81 50       	subi	r24, 0x01	; 1
+    5abe:	80 93 ca 01 	sts	0x01CA, r24
 				if( !BounceDelay )
-    5a0a:	80 91 ca 01 	lds	r24, 0x01CA
-    5a0e:	88 23       	and	r24, r24
-    5a10:	b1 f5       	brne	.+108    	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5ac2:	80 91 ca 01 	lds	r24, 0x01CA
+    5ac6:	88 23       	and	r24, r24
+    5ac8:	b1 f5       	brne	.+108    	; 0x5b36 <CheckIncrementSwitch+0x12a>
 				{
 					press = 0 ;
-    5a12:	10 92 3e 02 	sts	0x023E, r1
+    5aca:	10 92 3e 02 	sts	0x023E, r1
 					hold = 0 ;
-    5a16:	10 92 3d 02 	sts	0x023D, r1
+    5ace:	10 92 3d 02 	sts	0x023D, r1
 					BounceDelay = BOUNCE_COUNTS ;
-    5a1a:	82 e0       	ldi	r24, 0x02	; 2
-    5a1c:	80 93 ca 01 	sts	0x01CA, r24
+    5ad2:	82 e0       	ldi	r24, 0x02	; 2
+    5ad4:	80 93 ca 01 	sts	0x01CA, r24
 					SetupDelay = SETUP_COUNTS ;
-    5a20:	82 e3       	ldi	r24, 0x32	; 50
-    5a22:	90 e0       	ldi	r25, 0x00	; 0
-    5a24:	90 93 c9 01 	sts	0x01C9, r25
-    5a28:	80 93 c8 01 	sts	0x01C8, r24
-    5a2c:	28 c0       	rjmp	.+80     	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5ad8:	82 e3       	ldi	r24, 0x32	; 50
+    5ada:	90 e0       	ldi	r25, 0x00	; 0
+    5adc:	90 93 c9 01 	sts	0x01C9, r25
+    5ae0:	80 93 c8 01 	sts	0x01C8, r24
+    5ae4:	28 c0       	rjmp	.+80     	; 0x5b36 <CheckIncrementSwitch+0x12a>
 				}
 			}
 			else if (	( Global_u8DisplayMode == SETUP )	&&  ( Global_u8SetupSw == INC_SW ) &&
-    5a2e:	80 91 c1 01 	lds	r24, 0x01C1
-    5a32:	89 30       	cpi	r24, 0x09	; 9
-    5a34:	21 f5       	brne	.+72     	; 0x5a7e <CheckIncrementSwitch+0x12a>
-    5a36:	80 91 47 02 	lds	r24, 0x0247
-    5a3a:	8a 3c       	cpi	r24, 0xCA	; 202
-    5a3c:	01 f5       	brne	.+64     	; 0x5a7e <CheckIncrementSwitch+0x12a>
-    5a3e:	89 81       	ldd	r24, Y+1	; 0x01
-    5a40:	88 23       	and	r24, r24
-    5a42:	e9 f4       	brne	.+58     	; 0x5a7e <CheckIncrementSwitch+0x12a>
-    5a44:	80 91 3e 02 	lds	r24, 0x023E
-    5a48:	88 23       	and	r24, r24
-    5a4a:	c9 f4       	brne	.+50     	; 0x5a7e <CheckIncrementSwitch+0x12a>
-    5a4c:	80 91 3d 02 	lds	r24, 0x023D
-    5a50:	88 23       	and	r24, r24
-    5a52:	a9 f4       	brne	.+42     	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5ae6:	80 91 c1 01 	lds	r24, 0x01C1
+    5aea:	89 30       	cpi	r24, 0x09	; 9
+    5aec:	21 f5       	brne	.+72     	; 0x5b36 <CheckIncrementSwitch+0x12a>
+    5aee:	80 91 47 02 	lds	r24, 0x0247
+    5af2:	8a 3c       	cpi	r24, 0xCA	; 202
+    5af4:	01 f5       	brne	.+64     	; 0x5b36 <CheckIncrementSwitch+0x12a>
+    5af6:	89 81       	ldd	r24, Y+1	; 0x01
+    5af8:	88 23       	and	r24, r24
+    5afa:	e9 f4       	brne	.+58     	; 0x5b36 <CheckIncrementSwitch+0x12a>
+    5afc:	80 91 3e 02 	lds	r24, 0x023E
+    5b00:	88 23       	and	r24, r24
+    5b02:	c9 f4       	brne	.+50     	; 0x5b36 <CheckIncrementSwitch+0x12a>
+    5b04:	80 91 3d 02 	lds	r24, 0x023D
+    5b08:	88 23       	and	r24, r24
+    5b0a:	a9 f4       	brne	.+42     	; 0x5b36 <CheckIncrementSwitch+0x12a>
 						(Local_u8SwitchValue == DIO_u8LOW ) &&	press == 0 		&&		hold == 0 ) // Unpress delay in Setup mode
 			{
 				SetupDelay--;
-    5a54:	80 91 c8 01 	lds	r24, 0x01C8
-    5a58:	90 91 c9 01 	lds	r25, 0x01C9
-    5a5c:	01 97       	sbiw	r24, 0x01	; 1
-    5a5e:	90 93 c9 01 	sts	0x01C9, r25
-    5a62:	80 93 c8 01 	sts	0x01C8, r24
+    5b0c:	80 91 c8 01 	lds	r24, 0x01C8
+    5b10:	90 91 c9 01 	lds	r25, 0x01C9
+    5b14:	01 97       	sbiw	r24, 0x01	; 1
+    5b16:	90 93 c9 01 	sts	0x01C9, r25
+    5b1a:	80 93 c8 01 	sts	0x01C8, r24
 				if( !SetupDelay )
-    5a66:	80 91 c8 01 	lds	r24, 0x01C8
-    5a6a:	90 91 c9 01 	lds	r25, 0x01C9
-    5a6e:	00 97       	sbiw	r24, 0x00	; 0
-    5a70:	31 f4       	brne	.+12     	; 0x5a7e <CheckIncrementSwitch+0x12a>
+    5b1e:	80 91 c8 01 	lds	r24, 0x01C8
+    5b22:	90 91 c9 01 	lds	r25, 0x01C9
+    5b26:	00 97       	sbiw	r24, 0x00	; 0
+    5b28:	31 f4       	brne	.+12     	; 0x5b36 <CheckIncrementSwitch+0x12a>
 				{
 					TMU_vidResumeTask( 8 );
-    5a72:	88 e0       	ldi	r24, 0x08	; 8
-    5a74:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5b2a:	88 e0       	ldi	r24, 0x08	; 8
+    5b2c:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 					Global_u8DisplayMode = NORMAL ;
-    5a78:	85 e0       	ldi	r24, 0x05	; 5
-    5a7a:	80 93 c1 01 	sts	0x01C1, r24
+    5b30:	85 e0       	ldi	r24, 0x05	; 5
+    5b32:	80 93 c1 01 	sts	0x01C1, r24
 				}
 			}
 
 		}
 }
-    5a7e:	0f 90       	pop	r0
-    5a80:	0f 90       	pop	r0
-    5a82:	0f 90       	pop	r0
-    5a84:	cf 91       	pop	r28
-    5a86:	df 91       	pop	r29
-    5a88:	08 95       	ret
+    5b36:	0f 90       	pop	r0
+    5b38:	0f 90       	pop	r0
+    5b3a:	0f 90       	pop	r0
+    5b3c:	cf 91       	pop	r28
+    5b3e:	df 91       	pop	r29
+    5b40:	08 95       	ret
 
-00005a8a <CheckDecrementSwitch>:
+00005b42 <CheckDecrementSwitch>:
 void CheckDecrementSwitch(void *pNULL )
 {
-    5a8a:	df 93       	push	r29
-    5a8c:	cf 93       	push	r28
-    5a8e:	00 d0       	rcall	.+0      	; 0x5a90 <CheckDecrementSwitch+0x6>
-    5a90:	0f 92       	push	r0
-    5a92:	cd b7       	in	r28, 0x3d	; 61
-    5a94:	de b7       	in	r29, 0x3e	; 62
-    5a96:	9b 83       	std	Y+3, r25	; 0x03
-    5a98:	8a 83       	std	Y+2, r24	; 0x02
+    5b42:	df 93       	push	r29
+    5b44:	cf 93       	push	r28
+    5b46:	00 d0       	rcall	.+0      	; 0x5b48 <CheckDecrementSwitch+0x6>
+    5b48:	0f 92       	push	r0
+    5b4a:	cd b7       	in	r28, 0x3d	; 61
+    5b4c:	de b7       	in	r29, 0x3e	; 62
+    5b4e:	9b 83       	std	Y+3, r25	; 0x03
+    5b50:	8a 83       	std	Y+2, r24	; 0x02
 	u8 Local_u8SwitchValue;
 
 	if( ES_OK == Switch_enuGetPressed( DEC_SW , &Local_u8SwitchValue ) )
-    5a9a:	8b ec       	ldi	r24, 0xCB	; 203
-    5a9c:	9e 01       	movw	r18, r28
-    5a9e:	2f 5f       	subi	r18, 0xFF	; 255
-    5aa0:	3f 4f       	sbci	r19, 0xFF	; 255
-    5aa2:	b9 01       	movw	r22, r18
-    5aa4:	0e 94 11 26 	call	0x4c22	; 0x4c22 <Switch_enuGetPressed>
-    5aa8:	88 23       	and	r24, r24
-    5aaa:	09 f0       	breq	.+2      	; 0x5aae <CheckDecrementSwitch+0x24>
-    5aac:	7d c0       	rjmp	.+250    	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5b52:	8b ec       	ldi	r24, 0xCB	; 203
+    5b54:	9e 01       	movw	r18, r28
+    5b56:	2f 5f       	subi	r18, 0xFF	; 255
+    5b58:	3f 4f       	sbci	r19, 0xFF	; 255
+    5b5a:	b9 01       	movw	r22, r18
+    5b5c:	0e 94 11 26 	call	0x4c22	; 0x4c22 <Switch_enuGetPressed>
+    5b60:	88 23       	and	r24, r24
+    5b62:	09 f0       	breq	.+2      	; 0x5b66 <CheckDecrementSwitch+0x24>
+    5b64:	7d c0       	rjmp	.+250    	; 0x5c60 <CheckDecrementSwitch+0x11e>
 	{
 		static u8 press = 0, hold = 0 , BounceDelay = BOUNCE_COUNTS ;
 		static u16 SetupDelay = SETUP_COUNTS ;
 		if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 && hold == 0 )  //First press
-    5aae:	89 81       	ldd	r24, Y+1	; 0x01
-    5ab0:	81 30       	cpi	r24, 0x01	; 1
-    5ab2:	09 f5       	brne	.+66     	; 0x5af6 <CheckDecrementSwitch+0x6c>
-    5ab4:	80 91 40 02 	lds	r24, 0x0240
-    5ab8:	88 23       	and	r24, r24
-    5aba:	e9 f4       	brne	.+58     	; 0x5af6 <CheckDecrementSwitch+0x6c>
-    5abc:	80 91 3f 02 	lds	r24, 0x023F
-    5ac0:	88 23       	and	r24, r24
-    5ac2:	c9 f4       	brne	.+50     	; 0x5af6 <CheckDecrementSwitch+0x6c>
+    5b66:	89 81       	ldd	r24, Y+1	; 0x01
+    5b68:	81 30       	cpi	r24, 0x01	; 1
+    5b6a:	09 f5       	brne	.+66     	; 0x5bae <CheckDecrementSwitch+0x6c>
+    5b6c:	80 91 40 02 	lds	r24, 0x0240
+    5b70:	88 23       	and	r24, r24
+    5b72:	e9 f4       	brne	.+58     	; 0x5bae <CheckDecrementSwitch+0x6c>
+    5b74:	80 91 3f 02 	lds	r24, 0x023F
+    5b78:	88 23       	and	r24, r24
+    5b7a:	c9 f4       	brne	.+50     	; 0x5bae <CheckDecrementSwitch+0x6c>
 		{
 			if( Global_u8DisplayMode == NORMAL )
-    5ac4:	80 91 c1 01 	lds	r24, 0x01C1
-    5ac8:	85 30       	cpi	r24, 0x05	; 5
-    5aca:	39 f4       	brne	.+14     	; 0x5ada <CheckDecrementSwitch+0x50>
+    5b7c:	80 91 c1 01 	lds	r24, 0x01C1
+    5b80:	85 30       	cpi	r24, 0x05	; 5
+    5b82:	39 f4       	brne	.+14     	; 0x5b92 <CheckDecrementSwitch+0x50>
 			{
 				Global_u8DisplayMode = SETUP ;
-    5acc:	89 e0       	ldi	r24, 0x09	; 9
-    5ace:	80 93 c1 01 	sts	0x01C1, r24
+    5b84:	89 e0       	ldi	r24, 0x09	; 9
+    5b86:	80 93 c1 01 	sts	0x01C1, r24
 				Global_u8SetupSw = DEC_SW ;
-    5ad2:	8b ec       	ldi	r24, 0xCB	; 203
-    5ad4:	80 93 47 02 	sts	0x0247, r24
-    5ad8:	67 c0       	rjmp	.+206    	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5b8a:	8b ec       	ldi	r24, 0xCB	; 203
+    5b8c:	80 93 47 02 	sts	0x0247, r24
+    5b90:	67 c0       	rjmp	.+206    	; 0x5c60 <CheckDecrementSwitch+0x11e>
 			}
 			else
 			{
 				if( Global_u8TempSetValue > TEMP_MIN_LIMIT )
-    5ada:	80 91 45 02 	lds	r24, 0x0245
-    5ade:	84 32       	cpi	r24, 0x24	; 36
-    5ae0:	08 f4       	brcc	.+2      	; 0x5ae4 <CheckDecrementSwitch+0x5a>
-    5ae2:	62 c0       	rjmp	.+196    	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5b92:	80 91 45 02 	lds	r24, 0x0245
+    5b96:	84 32       	cpi	r24, 0x24	; 36
+    5b98:	08 f4       	brcc	.+2      	; 0x5b9c <CheckDecrementSwitch+0x5a>
+    5b9a:	62 c0       	rjmp	.+196    	; 0x5c60 <CheckDecrementSwitch+0x11e>
 				{
 					Global_u8TempSetValue--;
-    5ae4:	80 91 45 02 	lds	r24, 0x0245
-    5ae8:	81 50       	subi	r24, 0x01	; 1
-    5aea:	80 93 45 02 	sts	0x0245, r24
+    5b9c:	80 91 45 02 	lds	r24, 0x0245
+    5ba0:	81 50       	subi	r24, 0x01	; 1
+    5ba2:	80 93 45 02 	sts	0x0245, r24
 					press = 1 ;
-    5aee:	81 e0       	ldi	r24, 0x01	; 1
-    5af0:	80 93 40 02 	sts	0x0240, r24
-    5af4:	59 c0       	rjmp	.+178    	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5ba6:	81 e0       	ldi	r24, 0x01	; 1
+    5ba8:	80 93 40 02 	sts	0x0240, r24
+    5bac:	59 c0       	rjmp	.+178    	; 0x5c60 <CheckDecrementSwitch+0x11e>
 				}
 			}
 		}
 		else if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 1 && hold == 0 ) //continued first press
-    5af6:	89 81       	ldd	r24, Y+1	; 0x01
-    5af8:	81 30       	cpi	r24, 0x01	; 1
-    5afa:	61 f4       	brne	.+24     	; 0x5b14 <CheckDecrementSwitch+0x8a>
-    5afc:	80 91 40 02 	lds	r24, 0x0240
-    5b00:	81 30       	cpi	r24, 0x01	; 1
-    5b02:	41 f4       	brne	.+16     	; 0x5b14 <CheckDecrementSwitch+0x8a>
-    5b04:	80 91 3f 02 	lds	r24, 0x023F
-    5b08:	88 23       	and	r24, r24
-    5b0a:	21 f4       	brne	.+8      	; 0x5b14 <CheckDecrementSwitch+0x8a>
+    5bae:	89 81       	ldd	r24, Y+1	; 0x01
+    5bb0:	81 30       	cpi	r24, 0x01	; 1
+    5bb2:	61 f4       	brne	.+24     	; 0x5bcc <CheckDecrementSwitch+0x8a>
+    5bb4:	80 91 40 02 	lds	r24, 0x0240
+    5bb8:	81 30       	cpi	r24, 0x01	; 1
+    5bba:	41 f4       	brne	.+16     	; 0x5bcc <CheckDecrementSwitch+0x8a>
+    5bbc:	80 91 3f 02 	lds	r24, 0x023F
+    5bc0:	88 23       	and	r24, r24
+    5bc2:	21 f4       	brne	.+8      	; 0x5bcc <CheckDecrementSwitch+0x8a>
 		{
 			hold = 1;
-    5b0c:	81 e0       	ldi	r24, 0x01	; 1
-    5b0e:	80 93 3f 02 	sts	0x023F, r24
-    5b12:	4a c0       	rjmp	.+148    	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5bc4:	81 e0       	ldi	r24, 0x01	; 1
+    5bc6:	80 93 3f 02 	sts	0x023F, r24
+    5bca:	4a c0       	rjmp	.+148    	; 0x5c60 <CheckDecrementSwitch+0x11e>
 		}
 		else if ( (Local_u8SwitchValue== DIO_u8LOW ) && press == 1 && hold == 1 ) // removed first press
-    5b14:	89 81       	ldd	r24, Y+1	; 0x01
-    5b16:	88 23       	and	r24, r24
-    5b18:	f9 f4       	brne	.+62     	; 0x5b58 <CheckDecrementSwitch+0xce>
-    5b1a:	80 91 40 02 	lds	r24, 0x0240
-    5b1e:	81 30       	cpi	r24, 0x01	; 1
-    5b20:	d9 f4       	brne	.+54     	; 0x5b58 <CheckDecrementSwitch+0xce>
-    5b22:	80 91 3f 02 	lds	r24, 0x023F
-    5b26:	81 30       	cpi	r24, 0x01	; 1
-    5b28:	b9 f4       	brne	.+46     	; 0x5b58 <CheckDecrementSwitch+0xce>
+    5bcc:	89 81       	ldd	r24, Y+1	; 0x01
+    5bce:	88 23       	and	r24, r24
+    5bd0:	f9 f4       	brne	.+62     	; 0x5c10 <CheckDecrementSwitch+0xce>
+    5bd2:	80 91 40 02 	lds	r24, 0x0240
+    5bd6:	81 30       	cpi	r24, 0x01	; 1
+    5bd8:	d9 f4       	brne	.+54     	; 0x5c10 <CheckDecrementSwitch+0xce>
+    5bda:	80 91 3f 02 	lds	r24, 0x023F
+    5bde:	81 30       	cpi	r24, 0x01	; 1
+    5be0:	b9 f4       	brne	.+46     	; 0x5c10 <CheckDecrementSwitch+0xce>
 		{
 			BounceDelay--;
-    5b2a:	80 91 cd 01 	lds	r24, 0x01CD
-    5b2e:	81 50       	subi	r24, 0x01	; 1
-    5b30:	80 93 cd 01 	sts	0x01CD, r24
+    5be2:	80 91 cd 01 	lds	r24, 0x01CD
+    5be6:	81 50       	subi	r24, 0x01	; 1
+    5be8:	80 93 cd 01 	sts	0x01CD, r24
 			if( !BounceDelay )
-    5b34:	80 91 cd 01 	lds	r24, 0x01CD
-    5b38:	88 23       	and	r24, r24
-    5b3a:	b1 f5       	brne	.+108    	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5bec:	80 91 cd 01 	lds	r24, 0x01CD
+    5bf0:	88 23       	and	r24, r24
+    5bf2:	b1 f5       	brne	.+108    	; 0x5c60 <CheckDecrementSwitch+0x11e>
 			{
 				press = 0 ;
-    5b3c:	10 92 40 02 	sts	0x0240, r1
+    5bf4:	10 92 40 02 	sts	0x0240, r1
 				hold = 0 ;
-    5b40:	10 92 3f 02 	sts	0x023F, r1
+    5bf8:	10 92 3f 02 	sts	0x023F, r1
 				BounceDelay = BOUNCE_COUNTS ;
-    5b44:	82 e0       	ldi	r24, 0x02	; 2
-    5b46:	80 93 cd 01 	sts	0x01CD, r24
+    5bfc:	82 e0       	ldi	r24, 0x02	; 2
+    5bfe:	80 93 cd 01 	sts	0x01CD, r24
 				SetupDelay = SETUP_COUNTS;
-    5b4a:	82 e3       	ldi	r24, 0x32	; 50
-    5b4c:	90 e0       	ldi	r25, 0x00	; 0
-    5b4e:	90 93 cc 01 	sts	0x01CC, r25
-    5b52:	80 93 cb 01 	sts	0x01CB, r24
-    5b56:	28 c0       	rjmp	.+80     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5c02:	82 e3       	ldi	r24, 0x32	; 50
+    5c04:	90 e0       	ldi	r25, 0x00	; 0
+    5c06:	90 93 cc 01 	sts	0x01CC, r25
+    5c0a:	80 93 cb 01 	sts	0x01CB, r24
+    5c0e:	28 c0       	rjmp	.+80     	; 0x5c60 <CheckDecrementSwitch+0x11e>
 			}
 		}
 		else if (	( Global_u8DisplayMode == SETUP )	&&  ( Global_u8SetupSw == DEC_SW ) &&
-    5b58:	80 91 c1 01 	lds	r24, 0x01C1
-    5b5c:	89 30       	cpi	r24, 0x09	; 9
-    5b5e:	21 f5       	brne	.+72     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
-    5b60:	80 91 47 02 	lds	r24, 0x0247
-    5b64:	8b 3c       	cpi	r24, 0xCB	; 203
-    5b66:	01 f5       	brne	.+64     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
-    5b68:	89 81       	ldd	r24, Y+1	; 0x01
-    5b6a:	88 23       	and	r24, r24
-    5b6c:	e9 f4       	brne	.+58     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
-    5b6e:	80 91 40 02 	lds	r24, 0x0240
-    5b72:	88 23       	and	r24, r24
-    5b74:	c9 f4       	brne	.+50     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
-    5b76:	80 91 3f 02 	lds	r24, 0x023F
-    5b7a:	88 23       	and	r24, r24
-    5b7c:	a9 f4       	brne	.+42     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5c10:	80 91 c1 01 	lds	r24, 0x01C1
+    5c14:	89 30       	cpi	r24, 0x09	; 9
+    5c16:	21 f5       	brne	.+72     	; 0x5c60 <CheckDecrementSwitch+0x11e>
+    5c18:	80 91 47 02 	lds	r24, 0x0247
+    5c1c:	8b 3c       	cpi	r24, 0xCB	; 203
+    5c1e:	01 f5       	brne	.+64     	; 0x5c60 <CheckDecrementSwitch+0x11e>
+    5c20:	89 81       	ldd	r24, Y+1	; 0x01
+    5c22:	88 23       	and	r24, r24
+    5c24:	e9 f4       	brne	.+58     	; 0x5c60 <CheckDecrementSwitch+0x11e>
+    5c26:	80 91 40 02 	lds	r24, 0x0240
+    5c2a:	88 23       	and	r24, r24
+    5c2c:	c9 f4       	brne	.+50     	; 0x5c60 <CheckDecrementSwitch+0x11e>
+    5c2e:	80 91 3f 02 	lds	r24, 0x023F
+    5c32:	88 23       	and	r24, r24
+    5c34:	a9 f4       	brne	.+42     	; 0x5c60 <CheckDecrementSwitch+0x11e>
 					(Local_u8SwitchValue == DIO_u8LOW ) &&	press == 0 		&&		hold == 0 ) // Unpress delay in Setup mode
 		{
 			SetupDelay--;
-    5b7e:	80 91 cb 01 	lds	r24, 0x01CB
-    5b82:	90 91 cc 01 	lds	r25, 0x01CC
-    5b86:	01 97       	sbiw	r24, 0x01	; 1
-    5b88:	90 93 cc 01 	sts	0x01CC, r25
-    5b8c:	80 93 cb 01 	sts	0x01CB, r24
+    5c36:	80 91 cb 01 	lds	r24, 0x01CB
+    5c3a:	90 91 cc 01 	lds	r25, 0x01CC
+    5c3e:	01 97       	sbiw	r24, 0x01	; 1
+    5c40:	90 93 cc 01 	sts	0x01CC, r25
+    5c44:	80 93 cb 01 	sts	0x01CB, r24
 			if( !SetupDelay )
-    5b90:	80 91 cb 01 	lds	r24, 0x01CB
-    5b94:	90 91 cc 01 	lds	r25, 0x01CC
-    5b98:	00 97       	sbiw	r24, 0x00	; 0
-    5b9a:	31 f4       	brne	.+12     	; 0x5ba8 <CheckDecrementSwitch+0x11e>
+    5c48:	80 91 cb 01 	lds	r24, 0x01CB
+    5c4c:	90 91 cc 01 	lds	r25, 0x01CC
+    5c50:	00 97       	sbiw	r24, 0x00	; 0
+    5c52:	31 f4       	brne	.+12     	; 0x5c60 <CheckDecrementSwitch+0x11e>
 			{
 				TMU_vidResumeTask( 8 );
-    5b9c:	88 e0       	ldi	r24, 0x08	; 8
-    5b9e:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5c54:	88 e0       	ldi	r24, 0x08	; 8
+    5c56:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				Global_u8DisplayMode = NORMAL ;
-    5ba2:	85 e0       	ldi	r24, 0x05	; 5
-    5ba4:	80 93 c1 01 	sts	0x01C1, r24
+    5c5a:	85 e0       	ldi	r24, 0x05	; 5
+    5c5c:	80 93 c1 01 	sts	0x01C1, r24
 			}
 		}
 
 	}
 }
-    5ba8:	0f 90       	pop	r0
-    5baa:	0f 90       	pop	r0
-    5bac:	0f 90       	pop	r0
-    5bae:	cf 91       	pop	r28
-    5bb0:	df 91       	pop	r29
-    5bb2:	08 95       	ret
+    5c60:	0f 90       	pop	r0
+    5c62:	0f 90       	pop	r0
+    5c64:	0f 90       	pop	r0
+    5c66:	cf 91       	pop	r28
+    5c68:	df 91       	pop	r29
+    5c6a:	08 95       	ret
 
-00005bb4 <CheckPowerSwitch>:
+00005c6c <CheckPowerSwitch>:
 
 void CheckPowerSwitch(void *pNULL )
 {
-    5bb4:	df 93       	push	r29
-    5bb6:	cf 93       	push	r28
-    5bb8:	00 d0       	rcall	.+0      	; 0x5bba <CheckPowerSwitch+0x6>
-    5bba:	0f 92       	push	r0
-    5bbc:	cd b7       	in	r28, 0x3d	; 61
-    5bbe:	de b7       	in	r29, 0x3e	; 62
-    5bc0:	9b 83       	std	Y+3, r25	; 0x03
-    5bc2:	8a 83       	std	Y+2, r24	; 0x02
+    5c6c:	df 93       	push	r29
+    5c6e:	cf 93       	push	r28
+    5c70:	00 d0       	rcall	.+0      	; 0x5c72 <CheckPowerSwitch+0x6>
+    5c72:	0f 92       	push	r0
+    5c74:	cd b7       	in	r28, 0x3d	; 61
+    5c76:	de b7       	in	r29, 0x3e	; 62
+    5c78:	9b 83       	std	Y+3, r25	; 0x03
+    5c7a:	8a 83       	std	Y+2, r24	; 0x02
 	u8 Local_u8SwitchValue;
 
 	if( ES_OK == Switch_enuGetPressed( PWR_SW , &Local_u8SwitchValue ) )
-    5bc4:	89 ec       	ldi	r24, 0xC9	; 201
-    5bc6:	9e 01       	movw	r18, r28
-    5bc8:	2f 5f       	subi	r18, 0xFF	; 255
-    5bca:	3f 4f       	sbci	r19, 0xFF	; 255
-    5bcc:	b9 01       	movw	r22, r18
-    5bce:	0e 94 11 26 	call	0x4c22	; 0x4c22 <Switch_enuGetPressed>
-    5bd2:	88 23       	and	r24, r24
-    5bd4:	09 f0       	breq	.+2      	; 0x5bd8 <CheckPowerSwitch+0x24>
-    5bd6:	62 c0       	rjmp	.+196    	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5c7c:	89 ec       	ldi	r24, 0xC9	; 201
+    5c7e:	9e 01       	movw	r18, r28
+    5c80:	2f 5f       	subi	r18, 0xFF	; 255
+    5c82:	3f 4f       	sbci	r19, 0xFF	; 255
+    5c84:	b9 01       	movw	r22, r18
+    5c86:	0e 94 11 26 	call	0x4c22	; 0x4c22 <Switch_enuGetPressed>
+    5c8a:	88 23       	and	r24, r24
+    5c8c:	09 f0       	breq	.+2      	; 0x5c90 <CheckPowerSwitch+0x24>
+    5c8e:	62 c0       	rjmp	.+196    	; 0x5d54 <CheckPowerSwitch+0xe8>
 	{
 		static u8 press = 0, hold = 0 , BounceDelay = BOUNCE_COUNTS ;
 
 		if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 && hold == 0 )  //First press
-    5bd8:	89 81       	ldd	r24, Y+1	; 0x01
-    5bda:	81 30       	cpi	r24, 0x01	; 1
-    5bdc:	a9 f5       	brne	.+106    	; 0x5c48 <CheckPowerSwitch+0x94>
-    5bde:	80 91 42 02 	lds	r24, 0x0242
-    5be2:	88 23       	and	r24, r24
-    5be4:	89 f5       	brne	.+98     	; 0x5c48 <CheckPowerSwitch+0x94>
-    5be6:	80 91 41 02 	lds	r24, 0x0241
-    5bea:	88 23       	and	r24, r24
-    5bec:	69 f5       	brne	.+90     	; 0x5c48 <CheckPowerSwitch+0x94>
+    5c90:	89 81       	ldd	r24, Y+1	; 0x01
+    5c92:	81 30       	cpi	r24, 0x01	; 1
+    5c94:	a9 f5       	brne	.+106    	; 0x5d00 <CheckPowerSwitch+0x94>
+    5c96:	80 91 42 02 	lds	r24, 0x0242
+    5c9a:	88 23       	and	r24, r24
+    5c9c:	89 f5       	brne	.+98     	; 0x5d00 <CheckPowerSwitch+0x94>
+    5c9e:	80 91 41 02 	lds	r24, 0x0241
+    5ca2:	88 23       	and	r24, r24
+    5ca4:	69 f5       	brne	.+90     	; 0x5d00 <CheckPowerSwitch+0x94>
 		{
 			press = 1 ;
-    5bee:	81 e0       	ldi	r24, 0x01	; 1
-    5bf0:	80 93 42 02 	sts	0x0242, r24
+    5ca6:	81 e0       	ldi	r24, 0x01	; 1
+    5ca8:	80 93 42 02 	sts	0x0242, r24
 			if( PowerStatus == OFF )
-    5bf4:	80 91 be 01 	lds	r24, 0x01BE
-    5bf8:	81 30       	cpi	r24, 0x01	; 1
-    5bfa:	c1 f4       	brne	.+48     	; 0x5c2c <CheckPowerSwitch+0x78>
+    5cac:	80 91 be 01 	lds	r24, 0x01BE
+    5cb0:	81 30       	cpi	r24, 0x01	; 1
+    5cb2:	c1 f4       	brne	.+48     	; 0x5ce4 <CheckPowerSwitch+0x78>
 			{
 				PowerStatus = ON ;
-    5bfc:	10 92 be 01 	sts	0x01BE, r1
+    5cb4:	10 92 be 01 	sts	0x01BE, r1
 				TMU_vidResumeTask( 7 );
-    5c00:	87 e0       	ldi	r24, 0x07	; 7
-    5c02:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5cb8:	87 e0       	ldi	r24, 0x07	; 7
+    5cba:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				TMU_vidResumeTask( 6 );
-    5c06:	86 e0       	ldi	r24, 0x06	; 6
-    5c08:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5cbe:	86 e0       	ldi	r24, 0x06	; 6
+    5cc0:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				TMU_vidResumeTask( 5 );
-    5c0c:	85 e0       	ldi	r24, 0x05	; 5
-    5c0e:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5cc4:	85 e0       	ldi	r24, 0x05	; 5
+    5cc6:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				TMU_vidResumeTask( 4 );
-    5c12:	84 e0       	ldi	r24, 0x04	; 4
-    5c14:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5cca:	84 e0       	ldi	r24, 0x04	; 4
+    5ccc:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				TMU_vidResumeTask( 3 );
-    5c18:	83 e0       	ldi	r24, 0x03	; 3
-    5c1a:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5cd0:	83 e0       	ldi	r24, 0x03	; 3
+    5cd2:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				TMU_vidResumeTask( 2 );
-    5c1e:	82 e0       	ldi	r24, 0x02	; 2
-    5c20:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5cd6:	82 e0       	ldi	r24, 0x02	; 2
+    5cd8:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
 				TMU_vidResumeTask( 1 );
-    5c24:	81 e0       	ldi	r24, 0x01	; 1
-    5c26:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
-    5c2a:	38 c0       	rjmp	.+112    	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5cdc:	81 e0       	ldi	r24, 0x01	; 1
+    5cde:	0e 94 e2 08 	call	0x11c4	; 0x11c4 <TMU_vidResumeTask>
+    5ce2:	38 c0       	rjmp	.+112    	; 0x5d54 <CheckPowerSwitch+0xe8>
 
 			}
 			else if( PowerStatus == ON )
-    5c2c:	80 91 be 01 	lds	r24, 0x01BE
-    5c30:	88 23       	and	r24, r24
-    5c32:	a1 f5       	brne	.+104    	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5ce4:	80 91 be 01 	lds	r24, 0x01BE
+    5ce8:	88 23       	and	r24, r24
+    5cea:	a1 f5       	brne	.+104    	; 0x5d54 <CheckPowerSwitch+0xe8>
 			{
 				PowerStatus = OFF ;
-    5c34:	81 e0       	ldi	r24, 0x01	; 1
-    5c36:	80 93 be 01 	sts	0x01BE, r24
+    5cec:	81 e0       	ldi	r24, 0x01	; 1
+    5cee:	80 93 be 01 	sts	0x01BE, r24
 				TMU_vidPauseTask( 2 );
-    5c3a:	82 e0       	ldi	r24, 0x02	; 2
-    5c3c:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    5cf2:	82 e0       	ldi	r24, 0x02	; 2
+    5cf4:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
 				TMU_vidPauseTask( 1 );
-    5c40:	81 e0       	ldi	r24, 0x01	; 1
-    5c42:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
-    5c46:	2a c0       	rjmp	.+84     	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5cf8:	81 e0       	ldi	r24, 0x01	; 1
+    5cfa:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    5cfe:	2a c0       	rjmp	.+84     	; 0x5d54 <CheckPowerSwitch+0xe8>
 			}
 		}
 		else if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 1 && hold == 0 ) //continued first press
-    5c48:	89 81       	ldd	r24, Y+1	; 0x01
-    5c4a:	81 30       	cpi	r24, 0x01	; 1
-    5c4c:	61 f4       	brne	.+24     	; 0x5c66 <CheckPowerSwitch+0xb2>
-    5c4e:	80 91 42 02 	lds	r24, 0x0242
-    5c52:	81 30       	cpi	r24, 0x01	; 1
-    5c54:	41 f4       	brne	.+16     	; 0x5c66 <CheckPowerSwitch+0xb2>
-    5c56:	80 91 41 02 	lds	r24, 0x0241
-    5c5a:	88 23       	and	r24, r24
-    5c5c:	21 f4       	brne	.+8      	; 0x5c66 <CheckPowerSwitch+0xb2>
+    5d00:	89 81       	ldd	r24, Y+1	; 0x01
+    5d02:	81 30       	cpi	r24, 0x01	; 1
+    5d04:	61 f4       	brne	.+24     	; 0x5d1e <CheckPowerSwitch+0xb2>
+    5d06:	80 91 42 02 	lds	r24, 0x0242
+    5d0a:	81 30       	cpi	r24, 0x01	; 1
+    5d0c:	41 f4       	brne	.+16     	; 0x5d1e <CheckPowerSwitch+0xb2>
+    5d0e:	80 91 41 02 	lds	r24, 0x0241
+    5d12:	88 23       	and	r24, r24
+    5d14:	21 f4       	brne	.+8      	; 0x5d1e <CheckPowerSwitch+0xb2>
 		{
 			hold = 1;
-    5c5e:	81 e0       	ldi	r24, 0x01	; 1
-    5c60:	80 93 41 02 	sts	0x0241, r24
-    5c64:	1b c0       	rjmp	.+54     	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5d16:	81 e0       	ldi	r24, 0x01	; 1
+    5d18:	80 93 41 02 	sts	0x0241, r24
+    5d1c:	1b c0       	rjmp	.+54     	; 0x5d54 <CheckPowerSwitch+0xe8>
 		}
 		else if ( (Local_u8SwitchValue== DIO_u8LOW ) && press == 1 && hold == 1 ) // removed first press
-    5c66:	89 81       	ldd	r24, Y+1	; 0x01
-    5c68:	88 23       	and	r24, r24
-    5c6a:	c1 f4       	brne	.+48     	; 0x5c9c <CheckPowerSwitch+0xe8>
-    5c6c:	80 91 42 02 	lds	r24, 0x0242
-    5c70:	81 30       	cpi	r24, 0x01	; 1
-    5c72:	a1 f4       	brne	.+40     	; 0x5c9c <CheckPowerSwitch+0xe8>
-    5c74:	80 91 41 02 	lds	r24, 0x0241
-    5c78:	81 30       	cpi	r24, 0x01	; 1
-    5c7a:	81 f4       	brne	.+32     	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5d1e:	89 81       	ldd	r24, Y+1	; 0x01
+    5d20:	88 23       	and	r24, r24
+    5d22:	c1 f4       	brne	.+48     	; 0x5d54 <CheckPowerSwitch+0xe8>
+    5d24:	80 91 42 02 	lds	r24, 0x0242
+    5d28:	81 30       	cpi	r24, 0x01	; 1
+    5d2a:	a1 f4       	brne	.+40     	; 0x5d54 <CheckPowerSwitch+0xe8>
+    5d2c:	80 91 41 02 	lds	r24, 0x0241
+    5d30:	81 30       	cpi	r24, 0x01	; 1
+    5d32:	81 f4       	brne	.+32     	; 0x5d54 <CheckPowerSwitch+0xe8>
 		{
 			BounceDelay--;
-    5c7c:	80 91 ce 01 	lds	r24, 0x01CE
-    5c80:	81 50       	subi	r24, 0x01	; 1
-    5c82:	80 93 ce 01 	sts	0x01CE, r24
+    5d34:	80 91 ce 01 	lds	r24, 0x01CE
+    5d38:	81 50       	subi	r24, 0x01	; 1
+    5d3a:	80 93 ce 01 	sts	0x01CE, r24
 			if( !BounceDelay )
-    5c86:	80 91 ce 01 	lds	r24, 0x01CE
-    5c8a:	88 23       	and	r24, r24
-    5c8c:	39 f4       	brne	.+14     	; 0x5c9c <CheckPowerSwitch+0xe8>
+    5d3e:	80 91 ce 01 	lds	r24, 0x01CE
+    5d42:	88 23       	and	r24, r24
+    5d44:	39 f4       	brne	.+14     	; 0x5d54 <CheckPowerSwitch+0xe8>
 			{
 				press = 0 ;
-    5c8e:	10 92 42 02 	sts	0x0242, r1
+    5d46:	10 92 42 02 	sts	0x0242, r1
 				hold = 0 ;
-    5c92:	10 92 41 02 	sts	0x0241, r1
+    5d4a:	10 92 41 02 	sts	0x0241, r1
 				BounceDelay = BOUNCE_COUNTS ;
-    5c96:	82 e0       	ldi	r24, 0x02	; 2
-    5c98:	80 93 ce 01 	sts	0x01CE, r24
+    5d4e:	82 e0       	ldi	r24, 0x02	; 2
+    5d50:	80 93 ce 01 	sts	0x01CE, r24
 			}
 		}
 	}
 }
-    5c9c:	0f 90       	pop	r0
-    5c9e:	0f 90       	pop	r0
-    5ca0:	0f 90       	pop	r0
-    5ca2:	cf 91       	pop	r28
-    5ca4:	df 91       	pop	r29
-    5ca6:	08 95       	ret
+    5d54:	0f 90       	pop	r0
+    5d56:	0f 90       	pop	r0
+    5d58:	0f 90       	pop	r0
+    5d5a:	cf 91       	pop	r28
+    5d5c:	df 91       	pop	r29
+    5d5e:	08 95       	ret
 
-00005ca8 <AdjustRedLampStatus>:
+00005d60 <AdjustRedLampStatus>:
 
 void AdjustRedLampStatus(void *Copy_pu8RedLampStatus)
 {
-    5ca8:	df 93       	push	r29
-    5caa:	cf 93       	push	r28
-    5cac:	00 d0       	rcall	.+0      	; 0x5cae <AdjustRedLampStatus+0x6>
-    5cae:	00 d0       	rcall	.+0      	; 0x5cb0 <AdjustRedLampStatus+0x8>
-    5cb0:	00 d0       	rcall	.+0      	; 0x5cb2 <AdjustRedLampStatus+0xa>
-    5cb2:	cd b7       	in	r28, 0x3d	; 61
-    5cb4:	de b7       	in	r29, 0x3e	; 62
-    5cb6:	9c 83       	std	Y+4, r25	; 0x04
-    5cb8:	8b 83       	std	Y+3, r24	; 0x03
+    5d60:	df 93       	push	r29
+    5d62:	cf 93       	push	r28
+    5d64:	00 d0       	rcall	.+0      	; 0x5d66 <AdjustRedLampStatus+0x6>
+    5d66:	00 d0       	rcall	.+0      	; 0x5d68 <AdjustRedLampStatus+0x8>
+    5d68:	00 d0       	rcall	.+0      	; 0x5d6a <AdjustRedLampStatus+0xa>
+    5d6a:	cd b7       	in	r28, 0x3d	; 61
+    5d6c:	de b7       	in	r29, 0x3e	; 62
+    5d6e:	9c 83       	std	Y+4, r25	; 0x04
+    5d70:	8b 83       	std	Y+3, r24	; 0x03
 	static u8 Local_u8PrevStatus = LD_OFF ;
 	u8 *Local_u8RedLampStatus = (u8*)Copy_pu8RedLampStatus;
-    5cba:	8b 81       	ldd	r24, Y+3	; 0x03
-    5cbc:	9c 81       	ldd	r25, Y+4	; 0x04
-    5cbe:	9a 83       	std	Y+2, r25	; 0x02
-    5cc0:	89 83       	std	Y+1, r24	; 0x01
+    5d72:	8b 81       	ldd	r24, Y+3	; 0x03
+    5d74:	9c 81       	ldd	r25, Y+4	; 0x04
+    5d76:	9a 83       	std	Y+2, r25	; 0x02
+    5d78:	89 83       	std	Y+1, r24	; 0x01
 
 	if( *Local_u8RedLampStatus == LD_BLINK )
-    5cc2:	e9 81       	ldd	r30, Y+1	; 0x01
-    5cc4:	fa 81       	ldd	r31, Y+2	; 0x02
-    5cc6:	80 81       	ld	r24, Z
-    5cc8:	83 31       	cpi	r24, 0x13	; 19
-    5cca:	e1 f4       	brne	.+56     	; 0x5d04 <AdjustRedLampStatus+0x5c>
+    5d7a:	e9 81       	ldd	r30, Y+1	; 0x01
+    5d7c:	fa 81       	ldd	r31, Y+2	; 0x02
+    5d7e:	80 81       	ld	r24, Z
+    5d80:	83 31       	cpi	r24, 0x13	; 19
+    5d82:	e1 f4       	brne	.+56     	; 0x5dbc <AdjustRedLampStatus+0x5c>
 	{
 		switch( Local_u8PrevStatus )
-    5ccc:	80 91 43 02 	lds	r24, 0x0243
-    5cd0:	28 2f       	mov	r18, r24
-    5cd2:	30 e0       	ldi	r19, 0x00	; 0
-    5cd4:	3e 83       	std	Y+6, r19	; 0x06
-    5cd6:	2d 83       	std	Y+5, r18	; 0x05
-    5cd8:	8d 81       	ldd	r24, Y+5	; 0x05
-    5cda:	9e 81       	ldd	r25, Y+6	; 0x06
-    5cdc:	00 97       	sbiw	r24, 0x00	; 0
-    5cde:	41 f0       	breq	.+16     	; 0x5cf0 <AdjustRedLampStatus+0x48>
-    5ce0:	2d 81       	ldd	r18, Y+5	; 0x05
-    5ce2:	3e 81       	ldd	r19, Y+6	; 0x06
-    5ce4:	21 30       	cpi	r18, 0x01	; 1
-    5ce6:	31 05       	cpc	r19, r1
-    5ce8:	31 f4       	brne	.+12     	; 0x5cf6 <AdjustRedLampStatus+0x4e>
+    5d84:	80 91 43 02 	lds	r24, 0x0243
+    5d88:	28 2f       	mov	r18, r24
+    5d8a:	30 e0       	ldi	r19, 0x00	; 0
+    5d8c:	3e 83       	std	Y+6, r19	; 0x06
+    5d8e:	2d 83       	std	Y+5, r18	; 0x05
+    5d90:	8d 81       	ldd	r24, Y+5	; 0x05
+    5d92:	9e 81       	ldd	r25, Y+6	; 0x06
+    5d94:	00 97       	sbiw	r24, 0x00	; 0
+    5d96:	41 f0       	breq	.+16     	; 0x5da8 <AdjustRedLampStatus+0x48>
+    5d98:	2d 81       	ldd	r18, Y+5	; 0x05
+    5d9a:	3e 81       	ldd	r19, Y+6	; 0x06
+    5d9c:	21 30       	cpi	r18, 0x01	; 1
+    5d9e:	31 05       	cpc	r19, r1
+    5da0:	31 f4       	brne	.+12     	; 0x5dae <AdjustRedLampStatus+0x4e>
 		{
 			case LD_ON	:  Local_u8PrevStatus = LD_OFF ;
-    5cea:	10 92 43 02 	sts	0x0243, r1
-    5cee:	03 c0       	rjmp	.+6      	; 0x5cf6 <AdjustRedLampStatus+0x4e>
+    5da2:	10 92 43 02 	sts	0x0243, r1
+    5da6:	03 c0       	rjmp	.+6      	; 0x5dae <AdjustRedLampStatus+0x4e>
 			break;
 			case LD_OFF	:  Local_u8PrevStatus = LD_ON ;
-    5cf0:	81 e0       	ldi	r24, 0x01	; 1
-    5cf2:	80 93 43 02 	sts	0x0243, r24
+    5da8:	81 e0       	ldi	r24, 0x01	; 1
+    5daa:	80 93 43 02 	sts	0x0243, r24
 			break;
 		}
 		LD_enuSetState( RED_LD , Local_u8PrevStatus );
-    5cf6:	90 91 43 02 	lds	r25, 0x0243
-    5cfa:	8e e1       	ldi	r24, 0x1E	; 30
-    5cfc:	69 2f       	mov	r22, r25
-    5cfe:	0e 94 21 29 	call	0x5242	; 0x5242 <LD_enuSetState>
-    5d02:	19 c0       	rjmp	.+50     	; 0x5d36 <AdjustRedLampStatus+0x8e>
+    5dae:	90 91 43 02 	lds	r25, 0x0243
+    5db2:	8e e1       	ldi	r24, 0x1E	; 30
+    5db4:	69 2f       	mov	r22, r25
+    5db6:	0e 94 21 29 	call	0x5242	; 0x5242 <LD_enuSetState>
+    5dba:	19 c0       	rjmp	.+50     	; 0x5dee <AdjustRedLampStatus+0x8e>
 	}
 	else if( *Local_u8RedLampStatus != Local_u8PrevStatus)
-    5d04:	e9 81       	ldd	r30, Y+1	; 0x01
-    5d06:	fa 81       	ldd	r31, Y+2	; 0x02
-    5d08:	90 81       	ld	r25, Z
-    5d0a:	80 91 43 02 	lds	r24, 0x0243
-    5d0e:	98 17       	cp	r25, r24
-    5d10:	91 f0       	breq	.+36     	; 0x5d36 <AdjustRedLampStatus+0x8e>
+    5dbc:	e9 81       	ldd	r30, Y+1	; 0x01
+    5dbe:	fa 81       	ldd	r31, Y+2	; 0x02
+    5dc0:	90 81       	ld	r25, Z
+    5dc2:	80 91 43 02 	lds	r24, 0x0243
+    5dc6:	98 17       	cp	r25, r24
+    5dc8:	91 f0       	breq	.+36     	; 0x5dee <AdjustRedLampStatus+0x8e>
 	{
 
 		Local_u8PrevStatus = *Local_u8RedLampStatus ;
-    5d12:	e9 81       	ldd	r30, Y+1	; 0x01
-    5d14:	fa 81       	ldd	r31, Y+2	; 0x02
-    5d16:	80 81       	ld	r24, Z
-    5d18:	80 93 43 02 	sts	0x0243, r24
+    5dca:	e9 81       	ldd	r30, Y+1	; 0x01
+    5dcc:	fa 81       	ldd	r31, Y+2	; 0x02
+    5dce:	80 81       	ld	r24, Z
+    5dd0:	80 93 43 02 	sts	0x0243, r24
 		LD_enuSetState( RED_LD , Local_u8PrevStatus );
-    5d1c:	90 91 43 02 	lds	r25, 0x0243
-    5d20:	8e e1       	ldi	r24, 0x1E	; 30
-    5d22:	69 2f       	mov	r22, r25
-    5d24:	0e 94 21 29 	call	0x5242	; 0x5242 <LD_enuSetState>
+    5dd4:	90 91 43 02 	lds	r25, 0x0243
+    5dd8:	8e e1       	ldi	r24, 0x1E	; 30
+    5dda:	69 2f       	mov	r22, r25
+    5ddc:	0e 94 21 29 	call	0x5242	; 0x5242 <LD_enuSetState>
 		if( PowerStatus == OFF )
-    5d28:	80 91 be 01 	lds	r24, 0x01BE
-    5d2c:	81 30       	cpi	r24, 0x01	; 1
-    5d2e:	19 f4       	brne	.+6      	; 0x5d36 <AdjustRedLampStatus+0x8e>
+    5de0:	80 91 be 01 	lds	r24, 0x01BE
+    5de4:	81 30       	cpi	r24, 0x01	; 1
+    5de6:	19 f4       	brne	.+6      	; 0x5dee <AdjustRedLampStatus+0x8e>
 		{
 			TMU_vidPauseTask( 3 );
-    5d30:	83 e0       	ldi	r24, 0x03	; 3
-    5d32:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    5de8:	83 e0       	ldi	r24, 0x03	; 3
+    5dea:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
 		}
 	}
 }
-    5d36:	26 96       	adiw	r28, 0x06	; 6
-    5d38:	0f b6       	in	r0, 0x3f	; 63
-    5d3a:	f8 94       	cli
-    5d3c:	de bf       	out	0x3e, r29	; 62
-    5d3e:	0f be       	out	0x3f, r0	; 63
-    5d40:	cd bf       	out	0x3d, r28	; 61
-    5d42:	cf 91       	pop	r28
-    5d44:	df 91       	pop	r29
-    5d46:	08 95       	ret
+    5dee:	26 96       	adiw	r28, 0x06	; 6
+    5df0:	0f b6       	in	r0, 0x3f	; 63
+    5df2:	f8 94       	cli
+    5df4:	de bf       	out	0x3e, r29	; 62
+    5df6:	0f be       	out	0x3f, r0	; 63
+    5df8:	cd bf       	out	0x3d, r28	; 61
+    5dfa:	cf 91       	pop	r28
+    5dfc:	df 91       	pop	r29
+    5dfe:	08 95       	ret
 
-00005d48 <AdjustHeaterStatus>:
+00005e00 <AdjustHeaterStatus>:
 
 void AdjustHeaterStatus( void *pNULL)
 {
-    5d48:	df 93       	push	r29
-    5d4a:	cf 93       	push	r28
-    5d4c:	00 d0       	rcall	.+0      	; 0x5d4e <AdjustHeaterStatus+0x6>
-    5d4e:	cd b7       	in	r28, 0x3d	; 61
-    5d50:	de b7       	in	r29, 0x3e	; 62
-    5d52:	9a 83       	std	Y+2, r25	; 0x02
-    5d54:	89 83       	std	Y+1, r24	; 0x01
+    5e00:	df 93       	push	r29
+    5e02:	cf 93       	push	r28
+    5e04:	00 d0       	rcall	.+0      	; 0x5e06 <AdjustHeaterStatus+0x6>
+    5e06:	cd b7       	in	r28, 0x3d	; 61
+    5e08:	de b7       	in	r29, 0x3e	; 62
+    5e0a:	9a 83       	std	Y+2, r25	; 0x02
+    5e0c:	89 83       	std	Y+1, r24	; 0x01
 	if( HeaterStatus == OFF )
-    5d56:	80 91 bf 01 	lds	r24, 0x01BF
-    5d5a:	81 30       	cpi	r24, 0x01	; 1
-    5d5c:	39 f4       	brne	.+14     	; 0x5d6c <AdjustHeaterStatus+0x24>
+    5e0e:	80 91 bf 01 	lds	r24, 0x01BF
+    5e12:	81 30       	cpi	r24, 0x01	; 1
+    5e14:	39 f4       	brne	.+14     	; 0x5e24 <AdjustHeaterStatus+0x24>
 	{
 		Heater_enuSetState( HTR_TEMP_TOLERANCE + 1 );
-    5d5e:	86 e0       	ldi	r24, 0x06	; 6
-    5d60:	0e 94 12 2a 	call	0x5424	; 0x5424 <Heater_enuSetState>
+    5e16:	86 e0       	ldi	r24, 0x06	; 6
+    5e18:	0e 94 6e 2a 	call	0x54dc	; 0x54dc <Heater_enuSetState>
 		TMU_vidPauseTask( 5 );
-    5d64:	85 e0       	ldi	r24, 0x05	; 5
-    5d66:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
-    5d6a:	04 c0       	rjmp	.+8      	; 0x5d74 <AdjustHeaterStatus+0x2c>
+    5e1c:	85 e0       	ldi	r24, 0x05	; 5
+    5e1e:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    5e22:	04 c0       	rjmp	.+8      	; 0x5e2c <AdjustHeaterStatus+0x2c>
 	}
 	else
 		Heater_enuSetState( Global_s8TempError );
-    5d6c:	80 91 46 02 	lds	r24, 0x0246
-    5d70:	0e 94 12 2a 	call	0x5424	; 0x5424 <Heater_enuSetState>
+    5e24:	80 91 46 02 	lds	r24, 0x0246
+    5e28:	0e 94 6e 2a 	call	0x54dc	; 0x54dc <Heater_enuSetState>
 }
-    5d74:	0f 90       	pop	r0
-    5d76:	0f 90       	pop	r0
-    5d78:	cf 91       	pop	r28
-    5d7a:	df 91       	pop	r29
-    5d7c:	08 95       	ret
+    5e2c:	0f 90       	pop	r0
+    5e2e:	0f 90       	pop	r0
+    5e30:	cf 91       	pop	r28
+    5e32:	df 91       	pop	r29
+    5e34:	08 95       	ret
 
-00005d7e <AdjustCoolentStatus>:
+00005e36 <AdjustCoolentStatus>:
 
 void AdjustCoolentStatus( void *pNULL)
 {
-    5d7e:	df 93       	push	r29
-    5d80:	cf 93       	push	r28
-    5d82:	00 d0       	rcall	.+0      	; 0x5d84 <AdjustCoolentStatus+0x6>
-    5d84:	cd b7       	in	r28, 0x3d	; 61
-    5d86:	de b7       	in	r29, 0x3e	; 62
-    5d88:	9a 83       	std	Y+2, r25	; 0x02
-    5d8a:	89 83       	std	Y+1, r24	; 0x01
+    5e36:	df 93       	push	r29
+    5e38:	cf 93       	push	r28
+    5e3a:	00 d0       	rcall	.+0      	; 0x5e3c <AdjustCoolentStatus+0x6>
+    5e3c:	cd b7       	in	r28, 0x3d	; 61
+    5e3e:	de b7       	in	r29, 0x3e	; 62
+    5e40:	9a 83       	std	Y+2, r25	; 0x02
+    5e42:	89 83       	std	Y+1, r24	; 0x01
 	if( CoolentStatus == OFF )
-    5d8c:	80 91 c0 01 	lds	r24, 0x01C0
-    5d90:	81 30       	cpi	r24, 0x01	; 1
-    5d92:	39 f4       	brne	.+14     	; 0x5da2 <AdjustCoolentStatus+0x24>
+    5e44:	80 91 c0 01 	lds	r24, 0x01C0
+    5e48:	81 30       	cpi	r24, 0x01	; 1
+    5e4a:	39 f4       	brne	.+14     	; 0x5e5a <AdjustCoolentStatus+0x24>
 	{
 		Coolent_enuSetState( -COOLENT_TEMP_TOLERANCE - 1 );
-    5d94:	8a ef       	ldi	r24, 0xFA	; 250
-    5d96:	0e 94 7f 29 	call	0x52fe	; 0x52fe <Coolent_enuSetState>
+    5e4c:	8a ef       	ldi	r24, 0xFA	; 250
+    5e4e:	0e 94 ad 29 	call	0x535a	; 0x535a <Coolent_enuSetState>
 		TMU_vidPauseTask( 4 );
-    5d9a:	84 e0       	ldi	r24, 0x04	; 4
-    5d9c:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
-    5da0:	04 c0       	rjmp	.+8      	; 0x5daa <AdjustCoolentStatus+0x2c>
+    5e52:	84 e0       	ldi	r24, 0x04	; 4
+    5e54:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    5e58:	04 c0       	rjmp	.+8      	; 0x5e62 <AdjustCoolentStatus+0x2c>
 	}
 	else
 		Coolent_enuSetState( Global_s8TempError );
-    5da2:	80 91 46 02 	lds	r24, 0x0246
-    5da6:	0e 94 7f 29 	call	0x52fe	; 0x52fe <Coolent_enuSetState>
+    5e5a:	80 91 46 02 	lds	r24, 0x0246
+    5e5e:	0e 94 ad 29 	call	0x535a	; 0x535a <Coolent_enuSetState>
 }
-    5daa:	0f 90       	pop	r0
-    5dac:	0f 90       	pop	r0
-    5dae:	cf 91       	pop	r28
-    5db0:	df 91       	pop	r29
-    5db2:	08 95       	ret
+    5e62:	0f 90       	pop	r0
+    5e64:	0f 90       	pop	r0
+    5e66:	cf 91       	pop	r28
+    5e68:	df 91       	pop	r29
+    5e6a:	08 95       	ret
 
-00005db4 <EEPROM_Access>:
+00005e6c <EEPROM_Access>:
 
 void EEPROM_Access( void *Copy_u16SetTempAddress )
 {
-    5db4:	df 93       	push	r29
-    5db6:	cf 93       	push	r28
-    5db8:	00 d0       	rcall	.+0      	; 0x5dba <EEPROM_Access+0x6>
-    5dba:	00 d0       	rcall	.+0      	; 0x5dbc <EEPROM_Access+0x8>
-    5dbc:	0f 92       	push	r0
-    5dbe:	cd b7       	in	r28, 0x3d	; 61
-    5dc0:	de b7       	in	r29, 0x3e	; 62
-    5dc2:	9d 83       	std	Y+5, r25	; 0x05
-    5dc4:	8c 83       	std	Y+4, r24	; 0x04
+    5e6c:	df 93       	push	r29
+    5e6e:	cf 93       	push	r28
+    5e70:	00 d0       	rcall	.+0      	; 0x5e72 <EEPROM_Access+0x6>
+    5e72:	00 d0       	rcall	.+0      	; 0x5e74 <EEPROM_Access+0x8>
+    5e74:	0f 92       	push	r0
+    5e76:	cd b7       	in	r28, 0x3d	; 61
+    5e78:	de b7       	in	r29, 0x3e	; 62
+    5e7a:	9d 83       	std	Y+5, r25	; 0x05
+    5e7c:	8c 83       	std	Y+4, r24	; 0x04
 	u16 *Local_u16TempAddress = (u16*)Copy_u16SetTempAddress ;
-    5dc6:	8c 81       	ldd	r24, Y+4	; 0x04
-    5dc8:	9d 81       	ldd	r25, Y+5	; 0x05
-    5dca:	9a 83       	std	Y+2, r25	; 0x02
-    5dcc:	89 83       	std	Y+1, r24	; 0x01
+    5e7e:	8c 81       	ldd	r24, Y+4	; 0x04
+    5e80:	9d 81       	ldd	r25, Y+5	; 0x05
+    5e82:	9a 83       	std	Y+2, r25	; 0x02
+    5e84:	89 83       	std	Y+1, r24	; 0x01
 	static u8 Local_u8StoredSetTemp = 0 ;
 	u8 Local_u8SetTempSaveID ;
 
 	if( Local_u8StoredSetTemp != Global_u8TempSetValue)
-    5dce:	90 91 44 02 	lds	r25, 0x0244
-    5dd2:	80 91 45 02 	lds	r24, 0x0245
-    5dd6:	98 17       	cp	r25, r24
-    5dd8:	d1 f1       	breq	.+116    	; 0x5e4e <EEPROM_Access+0x9a>
+    5e86:	90 91 44 02 	lds	r25, 0x0244
+    5e8a:	80 91 45 02 	lds	r24, 0x0245
+    5e8e:	98 17       	cp	r25, r24
+    5e90:	d1 f1       	breq	.+116    	; 0x5f06 <EEPROM_Access+0x9a>
 	{
 		if( ES_OK == EEPROM_enuReadByte( *Local_u16TempAddress , &Local_u8SetTempSaveID ) )
-    5dda:	e9 81       	ldd	r30, Y+1	; 0x01
-    5ddc:	fa 81       	ldd	r31, Y+2	; 0x02
-    5dde:	80 81       	ld	r24, Z
-    5de0:	91 81       	ldd	r25, Z+1	; 0x01
-    5de2:	9e 01       	movw	r18, r28
-    5de4:	2d 5f       	subi	r18, 0xFD	; 253
-    5de6:	3f 4f       	sbci	r19, 0xFF	; 255
-    5de8:	b9 01       	movw	r22, r18
-    5dea:	0e 94 bb 1f 	call	0x3f76	; 0x3f76 <EEPROM_enuReadByte>
-    5dee:	88 23       	and	r24, r24
-    5df0:	51 f5       	brne	.+84     	; 0x5e46 <EEPROM_Access+0x92>
+    5e92:	e9 81       	ldd	r30, Y+1	; 0x01
+    5e94:	fa 81       	ldd	r31, Y+2	; 0x02
+    5e96:	80 81       	ld	r24, Z
+    5e98:	91 81       	ldd	r25, Z+1	; 0x01
+    5e9a:	9e 01       	movw	r18, r28
+    5e9c:	2d 5f       	subi	r18, 0xFD	; 253
+    5e9e:	3f 4f       	sbci	r19, 0xFF	; 255
+    5ea0:	b9 01       	movw	r22, r18
+    5ea2:	0e 94 bb 1f 	call	0x3f76	; 0x3f76 <EEPROM_enuReadByte>
+    5ea6:	88 23       	and	r24, r24
+    5ea8:	51 f5       	brne	.+84     	; 0x5efe <EEPROM_Access+0x92>
 		{
 			if( Local_u8SetTempSaveID != SetTempSaveID )
-    5df2:	9b 81       	ldd	r25, Y+3	; 0x03
-    5df4:	80 91 c4 01 	lds	r24, 0x01C4
-    5df8:	98 17       	cp	r25, r24
-    5dfa:	d1 f0       	breq	.+52     	; 0x5e30 <EEPROM_Access+0x7c>
+    5eaa:	9b 81       	ldd	r25, Y+3	; 0x03
+    5eac:	80 91 c4 01 	lds	r24, 0x01C4
+    5eb0:	98 17       	cp	r25, r24
+    5eb2:	d1 f0       	breq	.+52     	; 0x5ee8 <EEPROM_Access+0x7c>
 			{
 				Global_u8TempSetValue = INIT_SET_TEMP ;
-    5dfc:	8c e3       	ldi	r24, 0x3C	; 60
-    5dfe:	80 93 45 02 	sts	0x0245, r24
+    5eb4:	8c e3       	ldi	r24, 0x3C	; 60
+    5eb6:	80 93 45 02 	sts	0x0245, r24
 				if( ES_OK == EEPROM_enuWriteByte( *( Local_u16TempAddress + 1 ) , Global_u8TempSetValue ) )
-    5e02:	89 81       	ldd	r24, Y+1	; 0x01
-    5e04:	9a 81       	ldd	r25, Y+2	; 0x02
-    5e06:	fc 01       	movw	r30, r24
-    5e08:	32 96       	adiw	r30, 0x02	; 2
-    5e0a:	80 81       	ld	r24, Z
-    5e0c:	91 81       	ldd	r25, Z+1	; 0x01
-    5e0e:	20 91 45 02 	lds	r18, 0x0245
-    5e12:	62 2f       	mov	r22, r18
-    5e14:	0e 94 7d 1f 	call	0x3efa	; 0x3efa <EEPROM_enuWriteByte>
-    5e18:	88 23       	and	r24, r24
-    5e1a:	a9 f4       	brne	.+42     	; 0x5e46 <EEPROM_Access+0x92>
+    5eba:	89 81       	ldd	r24, Y+1	; 0x01
+    5ebc:	9a 81       	ldd	r25, Y+2	; 0x02
+    5ebe:	fc 01       	movw	r30, r24
+    5ec0:	32 96       	adiw	r30, 0x02	; 2
+    5ec2:	80 81       	ld	r24, Z
+    5ec4:	91 81       	ldd	r25, Z+1	; 0x01
+    5ec6:	20 91 45 02 	lds	r18, 0x0245
+    5eca:	62 2f       	mov	r22, r18
+    5ecc:	0e 94 7d 1f 	call	0x3efa	; 0x3efa <EEPROM_enuWriteByte>
+    5ed0:	88 23       	and	r24, r24
+    5ed2:	a9 f4       	brne	.+42     	; 0x5efe <EEPROM_Access+0x92>
 				EEPROM_enuWriteByte( *Local_u16TempAddress , SetTempSaveID );
-    5e1c:	e9 81       	ldd	r30, Y+1	; 0x01
-    5e1e:	fa 81       	ldd	r31, Y+2	; 0x02
-    5e20:	80 81       	ld	r24, Z
-    5e22:	91 81       	ldd	r25, Z+1	; 0x01
-    5e24:	20 91 c4 01 	lds	r18, 0x01C4
-    5e28:	62 2f       	mov	r22, r18
-    5e2a:	0e 94 7d 1f 	call	0x3efa	; 0x3efa <EEPROM_enuWriteByte>
-    5e2e:	0b c0       	rjmp	.+22     	; 0x5e46 <EEPROM_Access+0x92>
+    5ed4:	e9 81       	ldd	r30, Y+1	; 0x01
+    5ed6:	fa 81       	ldd	r31, Y+2	; 0x02
+    5ed8:	80 81       	ld	r24, Z
+    5eda:	91 81       	ldd	r25, Z+1	; 0x01
+    5edc:	20 91 c4 01 	lds	r18, 0x01C4
+    5ee0:	62 2f       	mov	r22, r18
+    5ee2:	0e 94 7d 1f 	call	0x3efa	; 0x3efa <EEPROM_enuWriteByte>
+    5ee6:	0b c0       	rjmp	.+22     	; 0x5efe <EEPROM_Access+0x92>
 			}
 			else
 			{
 				EEPROM_enuWriteByte( *( Local_u16TempAddress + 1 ) , Global_u8TempSetValue );
-    5e30:	89 81       	ldd	r24, Y+1	; 0x01
-    5e32:	9a 81       	ldd	r25, Y+2	; 0x02
-    5e34:	fc 01       	movw	r30, r24
-    5e36:	32 96       	adiw	r30, 0x02	; 2
-    5e38:	80 81       	ld	r24, Z
-    5e3a:	91 81       	ldd	r25, Z+1	; 0x01
-    5e3c:	20 91 45 02 	lds	r18, 0x0245
-    5e40:	62 2f       	mov	r22, r18
-    5e42:	0e 94 7d 1f 	call	0x3efa	; 0x3efa <EEPROM_enuWriteByte>
+    5ee8:	89 81       	ldd	r24, Y+1	; 0x01
+    5eea:	9a 81       	ldd	r25, Y+2	; 0x02
+    5eec:	fc 01       	movw	r30, r24
+    5eee:	32 96       	adiw	r30, 0x02	; 2
+    5ef0:	80 81       	ld	r24, Z
+    5ef2:	91 81       	ldd	r25, Z+1	; 0x01
+    5ef4:	20 91 45 02 	lds	r18, 0x0245
+    5ef8:	62 2f       	mov	r22, r18
+    5efa:	0e 94 7d 1f 	call	0x3efa	; 0x3efa <EEPROM_enuWriteByte>
 			}
 		}
 		Local_u8StoredSetTemp = Global_u8TempSetValue ;
-    5e46:	80 91 45 02 	lds	r24, 0x0245
-    5e4a:	80 93 44 02 	sts	0x0244, r24
+    5efe:	80 91 45 02 	lds	r24, 0x0245
+    5f02:	80 93 44 02 	sts	0x0244, r24
 	}
 	TMU_vidPauseTask( 8 );
-    5e4e:	88 e0       	ldi	r24, 0x08	; 8
-    5e50:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
+    5f06:	88 e0       	ldi	r24, 0x08	; 8
+    5f08:	0e 94 c7 08 	call	0x118e	; 0x118e <TMU_vidPauseTask>
 }
-    5e54:	0f 90       	pop	r0
-    5e56:	0f 90       	pop	r0
-    5e58:	0f 90       	pop	r0
-    5e5a:	0f 90       	pop	r0
-    5e5c:	0f 90       	pop	r0
-    5e5e:	cf 91       	pop	r28
-    5e60:	df 91       	pop	r29
-    5e62:	08 95       	ret
+    5f0c:	0f 90       	pop	r0
+    5f0e:	0f 90       	pop	r0
+    5f10:	0f 90       	pop	r0
+    5f12:	0f 90       	pop	r0
+    5f14:	0f 90       	pop	r0
+    5f16:	cf 91       	pop	r28
+    5f18:	df 91       	pop	r29
+    5f1a:	08 95       	ret
 
-00005e64 <__udivmodqi4>:
-    5e64:	99 1b       	sub	r25, r25
-    5e66:	79 e0       	ldi	r23, 0x09	; 9
-    5e68:	04 c0       	rjmp	.+8      	; 0x5e72 <__udivmodqi4_ep>
+00005f1c <__udivmodqi4>:
+    5f1c:	99 1b       	sub	r25, r25
+    5f1e:	79 e0       	ldi	r23, 0x09	; 9
+    5f20:	04 c0       	rjmp	.+8      	; 0x5f2a <__udivmodqi4_ep>
 
-00005e6a <__udivmodqi4_loop>:
-    5e6a:	99 1f       	adc	r25, r25
-    5e6c:	96 17       	cp	r25, r22
-    5e6e:	08 f0       	brcs	.+2      	; 0x5e72 <__udivmodqi4_ep>
-    5e70:	96 1b       	sub	r25, r22
+00005f22 <__udivmodqi4_loop>:
+    5f22:	99 1f       	adc	r25, r25
+    5f24:	96 17       	cp	r25, r22
+    5f26:	08 f0       	brcs	.+2      	; 0x5f2a <__udivmodqi4_ep>
+    5f28:	96 1b       	sub	r25, r22
 
-00005e72 <__udivmodqi4_ep>:
-    5e72:	88 1f       	adc	r24, r24
-    5e74:	7a 95       	dec	r23
-    5e76:	c9 f7       	brne	.-14     	; 0x5e6a <__udivmodqi4_loop>
-    5e78:	80 95       	com	r24
-    5e7a:	08 95       	ret
+00005f2a <__udivmodqi4_ep>:
+    5f2a:	88 1f       	adc	r24, r24
+    5f2c:	7a 95       	dec	r23
+    5f2e:	c9 f7       	brne	.-14     	; 0x5f22 <__udivmodqi4_loop>
+    5f30:	80 95       	com	r24
+    5f32:	08 95       	ret
 
-00005e7c <__udivmodhi4>:
-    5e7c:	aa 1b       	sub	r26, r26
-    5e7e:	bb 1b       	sub	r27, r27
-    5e80:	51 e1       	ldi	r21, 0x11	; 17
-    5e82:	07 c0       	rjmp	.+14     	; 0x5e92 <__udivmodhi4_ep>
+00005f34 <__udivmodhi4>:
+    5f34:	aa 1b       	sub	r26, r26
+    5f36:	bb 1b       	sub	r27, r27
+    5f38:	51 e1       	ldi	r21, 0x11	; 17
+    5f3a:	07 c0       	rjmp	.+14     	; 0x5f4a <__udivmodhi4_ep>
 
-00005e84 <__udivmodhi4_loop>:
-    5e84:	aa 1f       	adc	r26, r26
-    5e86:	bb 1f       	adc	r27, r27
-    5e88:	a6 17       	cp	r26, r22
-    5e8a:	b7 07       	cpc	r27, r23
-    5e8c:	10 f0       	brcs	.+4      	; 0x5e92 <__udivmodhi4_ep>
-    5e8e:	a6 1b       	sub	r26, r22
-    5e90:	b7 0b       	sbc	r27, r23
+00005f3c <__udivmodhi4_loop>:
+    5f3c:	aa 1f       	adc	r26, r26
+    5f3e:	bb 1f       	adc	r27, r27
+    5f40:	a6 17       	cp	r26, r22
+    5f42:	b7 07       	cpc	r27, r23
+    5f44:	10 f0       	brcs	.+4      	; 0x5f4a <__udivmodhi4_ep>
+    5f46:	a6 1b       	sub	r26, r22
+    5f48:	b7 0b       	sbc	r27, r23
 
-00005e92 <__udivmodhi4_ep>:
-    5e92:	88 1f       	adc	r24, r24
-    5e94:	99 1f       	adc	r25, r25
-    5e96:	5a 95       	dec	r21
-    5e98:	a9 f7       	brne	.-22     	; 0x5e84 <__udivmodhi4_loop>
-    5e9a:	80 95       	com	r24
-    5e9c:	90 95       	com	r25
-    5e9e:	bc 01       	movw	r22, r24
-    5ea0:	cd 01       	movw	r24, r26
-    5ea2:	08 95       	ret
+00005f4a <__udivmodhi4_ep>:
+    5f4a:	88 1f       	adc	r24, r24
+    5f4c:	99 1f       	adc	r25, r25
+    5f4e:	5a 95       	dec	r21
+    5f50:	a9 f7       	brne	.-22     	; 0x5f3c <__udivmodhi4_loop>
+    5f52:	80 95       	com	r24
+    5f54:	90 95       	com	r25
+    5f56:	bc 01       	movw	r22, r24
+    5f58:	cd 01       	movw	r24, r26
+    5f5a:	08 95       	ret
 
-00005ea4 <__divmodhi4>:
-    5ea4:	97 fb       	bst	r25, 7
-    5ea6:	09 2e       	mov	r0, r25
-    5ea8:	07 26       	eor	r0, r23
-    5eaa:	0a d0       	rcall	.+20     	; 0x5ec0 <__divmodhi4_neg1>
-    5eac:	77 fd       	sbrc	r23, 7
-    5eae:	04 d0       	rcall	.+8      	; 0x5eb8 <__divmodhi4_neg2>
-    5eb0:	e5 df       	rcall	.-54     	; 0x5e7c <__udivmodhi4>
-    5eb2:	06 d0       	rcall	.+12     	; 0x5ec0 <__divmodhi4_neg1>
-    5eb4:	00 20       	and	r0, r0
-    5eb6:	1a f4       	brpl	.+6      	; 0x5ebe <__divmodhi4_exit>
+00005f5c <__divmodhi4>:
+    5f5c:	97 fb       	bst	r25, 7
+    5f5e:	09 2e       	mov	r0, r25
+    5f60:	07 26       	eor	r0, r23
+    5f62:	0a d0       	rcall	.+20     	; 0x5f78 <__divmodhi4_neg1>
+    5f64:	77 fd       	sbrc	r23, 7
+    5f66:	04 d0       	rcall	.+8      	; 0x5f70 <__divmodhi4_neg2>
+    5f68:	e5 df       	rcall	.-54     	; 0x5f34 <__udivmodhi4>
+    5f6a:	06 d0       	rcall	.+12     	; 0x5f78 <__divmodhi4_neg1>
+    5f6c:	00 20       	and	r0, r0
+    5f6e:	1a f4       	brpl	.+6      	; 0x5f76 <__divmodhi4_exit>
 
-00005eb8 <__divmodhi4_neg2>:
-    5eb8:	70 95       	com	r23
-    5eba:	61 95       	neg	r22
-    5ebc:	7f 4f       	sbci	r23, 0xFF	; 255
+00005f70 <__divmodhi4_neg2>:
+    5f70:	70 95       	com	r23
+    5f72:	61 95       	neg	r22
+    5f74:	7f 4f       	sbci	r23, 0xFF	; 255
 
-00005ebe <__divmodhi4_exit>:
-    5ebe:	08 95       	ret
+00005f76 <__divmodhi4_exit>:
+    5f76:	08 95       	ret
 
-00005ec0 <__divmodhi4_neg1>:
-    5ec0:	f6 f7       	brtc	.-4      	; 0x5ebe <__divmodhi4_exit>
-    5ec2:	90 95       	com	r25
-    5ec4:	81 95       	neg	r24
-    5ec6:	9f 4f       	sbci	r25, 0xFF	; 255
-    5ec8:	08 95       	ret
+00005f78 <__divmodhi4_neg1>:
+    5f78:	f6 f7       	brtc	.-4      	; 0x5f76 <__divmodhi4_exit>
+    5f7a:	90 95       	com	r25
+    5f7c:	81 95       	neg	r24
+    5f7e:	9f 4f       	sbci	r25, 0xFF	; 255
+    5f80:	08 95       	ret
 
-00005eca <__udivmodsi4>:
-    5eca:	a1 e2       	ldi	r26, 0x21	; 33
-    5ecc:	1a 2e       	mov	r1, r26
-    5ece:	aa 1b       	sub	r26, r26
-    5ed0:	bb 1b       	sub	r27, r27
-    5ed2:	fd 01       	movw	r30, r26
-    5ed4:	0d c0       	rjmp	.+26     	; 0x5ef0 <__udivmodsi4_ep>
+00005f82 <__udivmodsi4>:
+    5f82:	a1 e2       	ldi	r26, 0x21	; 33
+    5f84:	1a 2e       	mov	r1, r26
+    5f86:	aa 1b       	sub	r26, r26
+    5f88:	bb 1b       	sub	r27, r27
+    5f8a:	fd 01       	movw	r30, r26
+    5f8c:	0d c0       	rjmp	.+26     	; 0x5fa8 <__udivmodsi4_ep>
 
-00005ed6 <__udivmodsi4_loop>:
-    5ed6:	aa 1f       	adc	r26, r26
-    5ed8:	bb 1f       	adc	r27, r27
-    5eda:	ee 1f       	adc	r30, r30
-    5edc:	ff 1f       	adc	r31, r31
-    5ede:	a2 17       	cp	r26, r18
-    5ee0:	b3 07       	cpc	r27, r19
-    5ee2:	e4 07       	cpc	r30, r20
-    5ee4:	f5 07       	cpc	r31, r21
-    5ee6:	20 f0       	brcs	.+8      	; 0x5ef0 <__udivmodsi4_ep>
-    5ee8:	a2 1b       	sub	r26, r18
-    5eea:	b3 0b       	sbc	r27, r19
-    5eec:	e4 0b       	sbc	r30, r20
-    5eee:	f5 0b       	sbc	r31, r21
+00005f8e <__udivmodsi4_loop>:
+    5f8e:	aa 1f       	adc	r26, r26
+    5f90:	bb 1f       	adc	r27, r27
+    5f92:	ee 1f       	adc	r30, r30
+    5f94:	ff 1f       	adc	r31, r31
+    5f96:	a2 17       	cp	r26, r18
+    5f98:	b3 07       	cpc	r27, r19
+    5f9a:	e4 07       	cpc	r30, r20
+    5f9c:	f5 07       	cpc	r31, r21
+    5f9e:	20 f0       	brcs	.+8      	; 0x5fa8 <__udivmodsi4_ep>
+    5fa0:	a2 1b       	sub	r26, r18
+    5fa2:	b3 0b       	sbc	r27, r19
+    5fa4:	e4 0b       	sbc	r30, r20
+    5fa6:	f5 0b       	sbc	r31, r21
 
-00005ef0 <__udivmodsi4_ep>:
-    5ef0:	66 1f       	adc	r22, r22
-    5ef2:	77 1f       	adc	r23, r23
-    5ef4:	88 1f       	adc	r24, r24
-    5ef6:	99 1f       	adc	r25, r25
-    5ef8:	1a 94       	dec	r1
-    5efa:	69 f7       	brne	.-38     	; 0x5ed6 <__udivmodsi4_loop>
-    5efc:	60 95       	com	r22
-    5efe:	70 95       	com	r23
-    5f00:	80 95       	com	r24
-    5f02:	90 95       	com	r25
-    5f04:	9b 01       	movw	r18, r22
-    5f06:	ac 01       	movw	r20, r24
-    5f08:	bd 01       	movw	r22, r26
-    5f0a:	cf 01       	movw	r24, r30
-    5f0c:	08 95       	ret
+00005fa8 <__udivmodsi4_ep>:
+    5fa8:	66 1f       	adc	r22, r22
+    5faa:	77 1f       	adc	r23, r23
+    5fac:	88 1f       	adc	r24, r24
+    5fae:	99 1f       	adc	r25, r25
+    5fb0:	1a 94       	dec	r1
+    5fb2:	69 f7       	brne	.-38     	; 0x5f8e <__udivmodsi4_loop>
+    5fb4:	60 95       	com	r22
+    5fb6:	70 95       	com	r23
+    5fb8:	80 95       	com	r24
+    5fba:	90 95       	com	r25
+    5fbc:	9b 01       	movw	r18, r22
+    5fbe:	ac 01       	movw	r20, r24
+    5fc0:	bd 01       	movw	r22, r26
+    5fc2:	cf 01       	movw	r24, r30
+    5fc4:	08 95       	ret
 
-00005f0e <__prologue_saves__>:
-    5f0e:	2f 92       	push	r2
-    5f10:	3f 92       	push	r3
-    5f12:	4f 92       	push	r4
-    5f14:	5f 92       	push	r5
-    5f16:	6f 92       	push	r6
-    5f18:	7f 92       	push	r7
-    5f1a:	8f 92       	push	r8
-    5f1c:	9f 92       	push	r9
-    5f1e:	af 92       	push	r10
-    5f20:	bf 92       	push	r11
-    5f22:	cf 92       	push	r12
-    5f24:	df 92       	push	r13
-    5f26:	ef 92       	push	r14
-    5f28:	ff 92       	push	r15
-    5f2a:	0f 93       	push	r16
-    5f2c:	1f 93       	push	r17
-    5f2e:	cf 93       	push	r28
-    5f30:	df 93       	push	r29
-    5f32:	cd b7       	in	r28, 0x3d	; 61
-    5f34:	de b7       	in	r29, 0x3e	; 62
-    5f36:	ca 1b       	sub	r28, r26
-    5f38:	db 0b       	sbc	r29, r27
-    5f3a:	0f b6       	in	r0, 0x3f	; 63
-    5f3c:	f8 94       	cli
-    5f3e:	de bf       	out	0x3e, r29	; 62
-    5f40:	0f be       	out	0x3f, r0	; 63
-    5f42:	cd bf       	out	0x3d, r28	; 61
-    5f44:	09 94       	ijmp
+00005fc6 <__prologue_saves__>:
+    5fc6:	2f 92       	push	r2
+    5fc8:	3f 92       	push	r3
+    5fca:	4f 92       	push	r4
+    5fcc:	5f 92       	push	r5
+    5fce:	6f 92       	push	r6
+    5fd0:	7f 92       	push	r7
+    5fd2:	8f 92       	push	r8
+    5fd4:	9f 92       	push	r9
+    5fd6:	af 92       	push	r10
+    5fd8:	bf 92       	push	r11
+    5fda:	cf 92       	push	r12
+    5fdc:	df 92       	push	r13
+    5fde:	ef 92       	push	r14
+    5fe0:	ff 92       	push	r15
+    5fe2:	0f 93       	push	r16
+    5fe4:	1f 93       	push	r17
+    5fe6:	cf 93       	push	r28
+    5fe8:	df 93       	push	r29
+    5fea:	cd b7       	in	r28, 0x3d	; 61
+    5fec:	de b7       	in	r29, 0x3e	; 62
+    5fee:	ca 1b       	sub	r28, r26
+    5ff0:	db 0b       	sbc	r29, r27
+    5ff2:	0f b6       	in	r0, 0x3f	; 63
+    5ff4:	f8 94       	cli
+    5ff6:	de bf       	out	0x3e, r29	; 62
+    5ff8:	0f be       	out	0x3f, r0	; 63
+    5ffa:	cd bf       	out	0x3d, r28	; 61
+    5ffc:	09 94       	ijmp
 
-00005f46 <__epilogue_restores__>:
-    5f46:	2a 88       	ldd	r2, Y+18	; 0x12
-    5f48:	39 88       	ldd	r3, Y+17	; 0x11
-    5f4a:	48 88       	ldd	r4, Y+16	; 0x10
-    5f4c:	5f 84       	ldd	r5, Y+15	; 0x0f
-    5f4e:	6e 84       	ldd	r6, Y+14	; 0x0e
-    5f50:	7d 84       	ldd	r7, Y+13	; 0x0d
-    5f52:	8c 84       	ldd	r8, Y+12	; 0x0c
-    5f54:	9b 84       	ldd	r9, Y+11	; 0x0b
-    5f56:	aa 84       	ldd	r10, Y+10	; 0x0a
-    5f58:	b9 84       	ldd	r11, Y+9	; 0x09
-    5f5a:	c8 84       	ldd	r12, Y+8	; 0x08
-    5f5c:	df 80       	ldd	r13, Y+7	; 0x07
-    5f5e:	ee 80       	ldd	r14, Y+6	; 0x06
-    5f60:	fd 80       	ldd	r15, Y+5	; 0x05
-    5f62:	0c 81       	ldd	r16, Y+4	; 0x04
-    5f64:	1b 81       	ldd	r17, Y+3	; 0x03
-    5f66:	aa 81       	ldd	r26, Y+2	; 0x02
-    5f68:	b9 81       	ldd	r27, Y+1	; 0x01
-    5f6a:	ce 0f       	add	r28, r30
-    5f6c:	d1 1d       	adc	r29, r1
-    5f6e:	0f b6       	in	r0, 0x3f	; 63
-    5f70:	f8 94       	cli
-    5f72:	de bf       	out	0x3e, r29	; 62
-    5f74:	0f be       	out	0x3f, r0	; 63
-    5f76:	cd bf       	out	0x3d, r28	; 61
-    5f78:	ed 01       	movw	r28, r26
-    5f7a:	08 95       	ret
+00005ffe <__epilogue_restores__>:
+    5ffe:	2a 88       	ldd	r2, Y+18	; 0x12
+    6000:	39 88       	ldd	r3, Y+17	; 0x11
+    6002:	48 88       	ldd	r4, Y+16	; 0x10
+    6004:	5f 84       	ldd	r5, Y+15	; 0x0f
+    6006:	6e 84       	ldd	r6, Y+14	; 0x0e
+    6008:	7d 84       	ldd	r7, Y+13	; 0x0d
+    600a:	8c 84       	ldd	r8, Y+12	; 0x0c
+    600c:	9b 84       	ldd	r9, Y+11	; 0x0b
+    600e:	aa 84       	ldd	r10, Y+10	; 0x0a
+    6010:	b9 84       	ldd	r11, Y+9	; 0x09
+    6012:	c8 84       	ldd	r12, Y+8	; 0x08
+    6014:	df 80       	ldd	r13, Y+7	; 0x07
+    6016:	ee 80       	ldd	r14, Y+6	; 0x06
+    6018:	fd 80       	ldd	r15, Y+5	; 0x05
+    601a:	0c 81       	ldd	r16, Y+4	; 0x04
+    601c:	1b 81       	ldd	r17, Y+3	; 0x03
+    601e:	aa 81       	ldd	r26, Y+2	; 0x02
+    6020:	b9 81       	ldd	r27, Y+1	; 0x01
+    6022:	ce 0f       	add	r28, r30
+    6024:	d1 1d       	adc	r29, r1
+    6026:	0f b6       	in	r0, 0x3f	; 63
+    6028:	f8 94       	cli
+    602a:	de bf       	out	0x3e, r29	; 62
+    602c:	0f be       	out	0x3f, r0	; 63
+    602e:	cd bf       	out	0x3d, r28	; 61
+    6030:	ed 01       	movw	r28, r26
+    6032:	08 95       	ret
 
-00005f7c <_exit>:
-    5f7c:	f8 94       	cli
+00006034 <_exit>:
+    6034:	f8 94       	cli
 
-00005f7e <__stop_program>:
-    5f7e:	ff cf       	rjmp	.-2      	; 0x5f7e <__stop_program>
+00006036 <__stop_program>:
+    6036:	ff cf       	rjmp	.-2      	; 0x6036 <__stop_program>

@@ -24,21 +24,28 @@
 #define COOL_KI					4
 #define COOL_KD					2
 
+#ifndef ICR1_VALUE
+#define ICR1_VALUE				0x00FF
+#endif
+
 #define COOL_INIT_DUTY_CYCLE	50
 #define COOL_MAX_DUTY_CYCLE		80
 
 
 ES_t Coolent_enuInit(void)
 {
-	ES_t Local_enuErrorState = ES_NOK ;
+	ES_t Local_AenuErrorState[5];
 
-	if( ES_OK == PWM_enuInit())
-	{
-		PWM_enuSetDutyCycle( COOLENT_PWM , COOL_INIT_DUTY_CYCLE );
-		if( ES_OK == DIO_enuSetPinDirection( COOLENT_GRP , COOLENT_PIN , DIO_u8OUTPUT ) )
-			Local_enuErrorState = DIO_enuSetPinValue( COOLENT_GRP , COOLENT_PIN , DIO_u8LOW );
-	}
-	return Local_enuErrorState ;
+	Local_AenuErrorState[0] = PWM_enuInit();
+	Local_AenuErrorState[1] = PWM_enuSetICR1Value( (u16)ICR1_VALUE );
+	Local_AenuErrorState[2] = PWM_enuSetDutyCycle( COOLENT_PWM , COOL_INIT_DUTY_CYCLE );
+	Local_AenuErrorState[3] = DIO_enuSetPinDirection( COOLENT_GRP , COOLENT_PIN , DIO_u8OUTPUT );
+	Local_AenuErrorState[4] = DIO_enuSetPinValue( COOLENT_GRP , COOLENT_PIN , DIO_u8LOW );
+
+	u8 Local_u8Iter = 0 ;
+	for( ; (Local_u8Iter < 5) && ( Local_AenuErrorState[Local_u8Iter] == ES_OK ) ; Local_u8Iter++ );
+
+	return ( ( Local_u8Iter == 5 )? ES_OK : Local_AenuErrorState[Local_u8Iter] );
 }
 
 ES_t Coolent_enuSetState( s8 Copy_u8TempError )
