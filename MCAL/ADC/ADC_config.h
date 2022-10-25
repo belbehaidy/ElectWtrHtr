@@ -12,7 +12,7 @@
 
 #define ADC_VREF				INTERNAL_REF
 
-#define ADC_ADJUST				RIGHT_ADJUST
+#define ADC_ADJUST				LEFT_ADJUST
 
 #define ADC_INIT_CHANNEL		CH_00
 

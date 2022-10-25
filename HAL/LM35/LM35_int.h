@@ -8,6 +8,8 @@
 #ifndef HAL_LM35_LM35_INT_H_
 #define HAL_LM35_LM35_INT_H_
 
+#include "..\..\SHARED\ATMEGA32_Registers.h"
+#include "..\..\SHARED\BIT_MATH.h"
 #include "..\..\SHARED\stdTypes.h"
 #include "..\..\SHARED\errorState.h"
 
@@ -24,8 +26,14 @@ bool Global_blConverted = FALSE ;
 #define TEMP_VALUE_STATE		DIO_u8FLOAT
 
 #define TEMP_ADC_CH				CH_00
-#define TEMP_CONVERSION_FACTOR	0.25		 		//	Degree/step
-//#define TEMP_OFFSET				0.0000				//	Correction factor at mid range
+
+/********************************************************************************************/
+#define TEMP_CONVERSION_FACTOR	1.941216926					/*	Average Conversion Factor	*/
+#define TEMP_OFFSET				(1.040630271)				/*	Average Correction Factor	*/
+/*	Above Values for Both Conversion Factor & Correction Factor result in 					*/
+/*	Temperature accuracy of (+/- 1 Degree Celsius ) along the range from 20 - 100 Degrees	*/
+/********************************************************************************************/
+
 
 ES_t LM35_enuInit(void)
 {
@@ -51,17 +59,14 @@ ES_t LM35_enuInit(void)
 	return Local_enuErrorState ;
 }
 
-ES_t LM35_enuReadTemp( u16 *Copy_u16TempValue )
+ES_t LM35_enuReadTemp( u8 *Copy_u8TempValue )
 {
 	ES_t Local_enuErrorState = ES_NOK ;
-	u16 Local_u16TempValue;
+	u8 Local_u8TempValue;
 
-	if( Global_blConverted == TRUE )
-	{
-		Global_blConverted = FALSE ;
-		Local_enuErrorState = ADC_enuRead( &Local_u16TempValue );
-		*Copy_u16TempValue = (u16)( ( Local_u16TempValue * TEMP_CONVERSION_FACTOR )/* + TEMP_OFFSET */);
-	}
+	Global_blConverted = FALSE ;
+	Local_enuErrorState = ADC_enuReadHigh( &Local_u8TempValue );
+	*Copy_u8TempValue = (u8)( ( (f32)Local_u8TempValue * TEMP_CONVERSION_FACTOR ) + TEMP_OFFSET );
 
 	return Local_enuErrorState ;
 }

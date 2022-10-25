@@ -9,6 +9,7 @@
 #define WTR_HTR_CONFIG_H_
 
 #define INIT_SET_TEMP	60
+#define SETUP_STEP		5
 #define TEMP_MAX_LIMIT	75
 #define TEMP_MIN_LIMIT	35
 

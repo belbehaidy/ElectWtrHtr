@@ -26,6 +26,7 @@
 #include "WtrHtr_priv.h"
 
 OnOff_t PowerStatus = OFF;
+Process_t ProcessStatus = HEATING ;
 OnOff_t HeaterStatus = OFF;
 OnOff_t CoolentStatus = OFF;
 u8 LedStatus = LD_OFF ;
@@ -34,6 +35,7 @@ u8 Global_u8DisplayMode = NORMAL ;
 u8 Global_u8SetupSw;
 u16 EEPROM_SetTempAddress = (u16)SET_ADDRESS ;
 u8 SetTempSaveID = 0x55 ;
+bool SetTempUpdate = TRUE ;
 
 u8 Global_u8TempSetValue ;					// Set Temperature
 u8 Global_u8TempValue = 30;					// Actual Temperature
@@ -53,15 +55,17 @@ main(void)
 	Coolent_enuInit();
 	TMU_vidInit();
 
-	TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , READY  , 1  , 0 );
-	TMU_vidCreateTask(DisplayTemperature	, &SSeg_u8ActiveModule	, 7 , PAUSED , 4  , 0 );
-	TMU_vidCreateTask(CheckTemperatureStatus, NULL					, 6 , PAUSED , 10 , 0 );
-	TMU_vidCreateTask(AdjustHeaterStatus	, NULL					, 5 , PAUSED , 100, 3 );
-	TMU_vidCreateTask(AdjustCoolentStatus	, NULL					, 4 , PAUSED , 100, 3 );
-	TMU_vidCreateTask(AdjustRedLampStatus	, NULL					, 3 , PAUSED , 50 , 1 );
-	TMU_vidCreateTask(CheckIncrementSwitch	, NULL					, 2 , PAUSED , 2  , 0 );
-	TMU_vidCreateTask(CheckDecrementSwitch	, NULL					, 1 , PAUSED , 2  , 1 );
-	TMU_vidCreateTask(CheckPowerSwitch		, NULL					, 0 , READY  , 2  , 0 );
+	EEPROM_Access( &EEPROM_SetTempAddress );
+
+	TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , READY  , 3  , 0  );
+	TMU_vidCreateTask(DisplayTemperature	, &SSeg_u8ActiveModule	, 7 , PAUSED , 1  , 0  );
+	TMU_vidCreateTask(CheckTemperatureStatus, NULL					, 6 , PAUSED , 10 , 0  );
+	TMU_vidCreateTask(AdjustHeaterStatus	, NULL					, 5 , PAUSED , 100, 11 );
+	TMU_vidCreateTask(AdjustCoolentStatus	, NULL					, 4 , PAUSED , 100, 13 );
+	TMU_vidCreateTask(AdjustRedLampStatus	, NULL					, 3 , PAUSED , 50 , 17 );
+	TMU_vidCreateTask(CheckIncrementSwitch	, NULL					, 2 , PAUSED , 2  , 0  );
+	TMU_vidCreateTask(CheckDecrementSwitch	, NULL					, 1 , PAUSED , 2  , 1  );
+	TMU_vidCreateTask(CheckPowerSwitch		, NULL					, 0 , READY  , 2  , 0  );
 
 	TMU_vidStartScheduler();
 }
@@ -93,23 +97,23 @@ void DisplayTemperature(void *Copy_pu8ActiveModule)
 
 		if( *Local_u8ActiveModule == TEMP_UNITS )
 		{
-			SevSeg_enuModuleControl( TEMP_TENS , MODULE_DISABLE);
-			SevSeg_enuSetDigitValue( TEMP_UNITS , ( Local_u8DisplayValue % 10 ) );
-			if( BlinkStatus == FALSE )	SevSeg_enuModuleControl( TEMP_UNITS , MODULE_ENABLE);
+			SevSeg_enuModuleDisable( TEMP_TENS );
+			SevSeg_enuSetDigitValue( Local_u8DisplayValue % 10 );
+			if( BlinkStatus == FALSE )	SevSeg_enuModuleEnable( TEMP_UNITS );
 			*Local_u8ActiveModule = TEMP_TENS ;
 		}
 		else
 		{
-			SevSeg_enuModuleControl( TEMP_UNITS , MODULE_DISABLE);
-			SevSeg_enuSetDigitValue( TEMP_TENS , ( Local_u8DisplayValue / 10 ) );
-			if( BlinkStatus == FALSE )SevSeg_enuModuleControl( TEMP_TENS , MODULE_ENABLE);
+			SevSeg_enuModuleDisable( TEMP_UNITS );
+			SevSeg_enuSetDigitValue( Local_u8DisplayValue / 10 );
+			if( BlinkStatus == FALSE )SevSeg_enuModuleEnable( TEMP_TENS );
 			*Local_u8ActiveModule = TEMP_UNITS ;
 		}
 	}
 	else
 	{
-		SevSeg_enuModuleControl( TEMP_UNITS , MODULE_DISABLE);
-		SevSeg_enuModuleControl( TEMP_TENS , MODULE_DISABLE);
+		SevSeg_enuModuleDisable( TEMP_UNITS );
+		SevSeg_enuModuleDisable( TEMP_TENS );
 		*Local_u8ActiveModule = TEMP_UNITS;
 		TMU_vidPauseTask( 7 );
 	}
@@ -117,48 +121,48 @@ void DisplayTemperature(void *Copy_pu8ActiveModule)
 
 void CheckTemperatureStatus(void *pNULL)
 {
-	u16 Local_u16TempValue ;
+	u8 Local_u8TempValue ;
 	static u16 Local_u16TempAccValue = 0 ;
 	static u8 Local_u8PrevTempValue = 0 ;
 	static u8 Local_u8TempReadCounter = TEMP_AVG_READINGS ;
 
 	if( Global_u8DisplayMode == NORMAL && PowerStatus == ON )
 	{
-		LM35_enuReadTemp( &Local_u16TempValue );
-		Local_u16TempAccValue += Local_u16TempValue ;
+		LM35_enuReadTemp( &Local_u8TempValue );
+		Local_u16TempAccValue += Local_u8TempValue ;
 		ADC_enuStartConversion();
 		Local_u8TempReadCounter--;
 		if( !Local_u8TempReadCounter )
 		{
-			Local_u8TempReadCounter = TEMP_AVG_READINGS;
 			Global_u8TempValue = Local_u16TempAccValue / TEMP_AVG_READINGS ;
-			Global_s8TempError = Global_u8TempValue - Local_u8PrevTempValue ;
+			Global_s8TempError = Global_u8TempValue - Global_u8TempSetValue ;
 			Local_u8PrevTempValue = Global_u8TempValue ;
-			if( Global_s8TempError >= HTR_TEMP_TOLERANCE )
+			Local_u16TempAccValue = 0 ;
+			Local_u8TempReadCounter = TEMP_AVG_READINGS;
+
+			if( Global_s8TempError < HTR_TEMP_TOLERANCE && HeaterStatus == OFF && CoolentStatus == OFF )
 			{
-				if( HeaterStatus == OFF )
-				{
-					CoolentStatus = ON ;
-					LedStatus = LD_ON ;
-					TMU_vidResumeTask( 4 );
-				}
-				else
-				{
-					HeaterStatus = OFF ;
-				}
+				ProcessStatus = HEATING ;
+				HeaterStatus = ON ;
+				CoolentStatus = OFF ;
+				LedStatus = LD_BLINK ;
+				TMU_vidResumeTask( 5 );
 			}
-			else if( Global_s8TempError <= -COOLENT_TEMP_TOLERANCE )
+			else if( Global_s8TempError >= HTR_TEMP_TOLERANCE && ProcessStatus == HEATING )
 			{
-				if( CoolentStatus == OFF )
-				{
-					HeaterStatus = ON ;
-					TMU_vidResumeTask( 5 );
-					LedStatus = LD_BLINK ;
-				}
-				else
-				{
-					CoolentStatus = OFF ;
-				}
+				ProcessStatus = COOLING ;
+				HeaterStatus = OFF ;
+				CoolentStatus = ON ;
+				LedStatus = LD_ON ;
+				TMU_vidResumeTask( 4 );
+			}
+			else if( Global_s8TempError <= -COOLENT_TEMP_TOLERANCE && ProcessStatus == COOLING )
+			{
+				ProcessStatus = HEATING ;
+				HeaterStatus = ON ;
+				CoolentStatus = OFF ;
+				LedStatus = LD_BLINK ;
+				TMU_vidResumeTask( 5 );
 			}
 		}
 	}
@@ -178,9 +182,9 @@ void CheckIncrementSwitch(void *pNULL)
 
 		if( ES_OK == Switch_enuGetPressed( INC_SW , &Local_u8SwitchValue ) )
 		{
-			static u8 press = 0, hold = 0 , BounceDelay = BOUNCE_COUNTS ;
+			static u8 press = 0 , BounceDelay = BOUNCE_COUNTS ;
 			static u16 SetupDelay = SETUP_COUNTS ;
-			if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 && hold == 0 )  // First press
+			if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 )  // First press
 			{
 				if( Global_u8DisplayMode == NORMAL )
 				{
@@ -190,34 +194,33 @@ void CheckIncrementSwitch(void *pNULL)
 				}
 				else
 				{
+					if( Global_u8SetupSw != INC_SW )
+						Global_u8SetupSw = INC_SW ;
 					if( Global_u8TempSetValue < TEMP_MAX_LIMIT )
 					{
-						Global_u8TempSetValue++;
+						Global_u8TempSetValue += SETUP_STEP;
 						press = 1 ;
 					}
 				}
 			}
-			else if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 1 && hold == 0 ) // Continued first press
-			{
-				hold = 1;
-			}
-			else if ( (Local_u8SwitchValue == DIO_u8LOW ) && press == 1 && hold == 1 ) // Removed first press
+			else if ( (Local_u8SwitchValue == DIO_u8LOW ) && press == 1 ) // Removed first press
 			{
 				BounceDelay--;
 				if( !BounceDelay )
 				{
 					press = 0 ;
-					hold = 0 ;
 					BounceDelay = BOUNCE_COUNTS ;
 					SetupDelay = SETUP_COUNTS ;
 				}
 			}
 			else if (	( Global_u8DisplayMode == SETUP )	&&  ( Global_u8SetupSw == INC_SW ) &&
-						(Local_u8SwitchValue == DIO_u8LOW ) &&	press == 0 		&&		hold == 0 ) // Unpress delay in Setup mode
+						(Local_u8SwitchValue == DIO_u8LOW ) &&	press == 0 ) // Unpress delay in Setup mode
 			{
 				SetupDelay--;
 				if( !SetupDelay )
 				{
+					SetTempUpdate = TRUE ;
+					TMU_vidResumeTask( 6 );
 					TMU_vidResumeTask( 8 );
 					Global_u8DisplayMode = NORMAL ;
 				}
@@ -231,9 +234,9 @@ void CheckDecrementSwitch(void *pNULL )
 
 	if( ES_OK == Switch_enuGetPressed( DEC_SW , &Local_u8SwitchValue ) )
 	{
-		static u8 press = 0, hold = 0 , BounceDelay = BOUNCE_COUNTS ;
+		static u8 press = 0 , BounceDelay = BOUNCE_COUNTS ;
 		static u16 SetupDelay = SETUP_COUNTS ;
-		if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 && hold == 0 )  //First press
+		if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 0 )  //First press
 		{
 			if( Global_u8DisplayMode == NORMAL )
 			{
@@ -242,34 +245,33 @@ void CheckDecrementSwitch(void *pNULL )
 			}
 			else
 			{
+				if( Global_u8SetupSw != DEC_SW )
+					Global_u8SetupSw = DEC_SW ;
 				if( Global_u8TempSetValue > TEMP_MIN_LIMIT )
 				{
-					Global_u8TempSetValue--;
+					Global_u8TempSetValue -= SETUP_STEP;
 					press = 1 ;
 				}
 			}
 		}
-		else if ( (Local_u8SwitchValue == DIO_u8HIGH ) && press == 1 && hold == 0 ) //continued first press
-		{
-			hold = 1;
-		}
-		else if ( (Local_u8SwitchValue== DIO_u8LOW ) && press == 1 && hold == 1 ) // removed first press
+		else if ( (Local_u8SwitchValue== DIO_u8LOW ) && press == 1 ) // removed first press
 		{
 			BounceDelay--;
 			if( !BounceDelay )
 			{
 				press = 0 ;
-				hold = 0 ;
 				BounceDelay = BOUNCE_COUNTS ;
 				SetupDelay = SETUP_COUNTS;
 			}
 		}
 		else if (	( Global_u8DisplayMode == SETUP )	&&  ( Global_u8SetupSw == DEC_SW ) &&
-					(Local_u8SwitchValue == DIO_u8LOW ) &&	press == 0 		&&		hold == 0 ) // Unpress delay in Setup mode
+					(Local_u8SwitchValue == DIO_u8LOW ) &&	press == 0 	 ) // Unpress delay in Setup mode
 		{
 			SetupDelay--;
 			if( !SetupDelay )
 			{
+				SetTempUpdate = TRUE ;
+				TMU_vidResumeTask( 6 );
 				TMU_vidResumeTask( 8 );
 				Global_u8DisplayMode = NORMAL ;
 			}
@@ -292,6 +294,7 @@ void CheckPowerSwitch(void *pNULL )
 			if( PowerStatus == OFF )
 			{
 				PowerStatus = ON ;
+				Global_u8DisplayMode = NORMAL ;
 				TMU_vidResumeTask( 7 );
 				TMU_vidResumeTask( 6 );
 				TMU_vidResumeTask( 5 );
@@ -355,29 +358,84 @@ void AdjustRedLampStatus(void *Copy_pu8RedLampStatus)
 
 void AdjustHeaterStatus( void *pNULL)
 {
-	if( HeaterStatus == OFF )
+	static OnOff_t PrevStatus = OFF ;
+
+	Heater_enuSetState( Global_s8TempError );
+
+	if( HeaterStatus != PrevStatus)
 	{
-		Heater_enuSetState( HTR_TEMP_TOLERANCE + 1 );
-		TMU_vidPauseTask( 5 );
+		if( HeaterStatus == OFF )
+		{
+			Heater_enuDisable();
+			TMU_vidPauseTask( 5 );
+		}
+		else
+		{
+			Heater_enuEnable();
+		}
+		PrevStatus = HeaterStatus ;
 	}
-	else
-		Heater_enuSetState( Global_s8TempError );
 }
 
 void AdjustCoolentStatus( void *pNULL)
 {
-	if( CoolentStatus == OFF )
+	static OnOff_t PrevStatus = OFF ;
+
+	Coolent_enuSetState( Global_s8TempError );
+
+	if( CoolentStatus != PrevStatus)
 	{
-		Coolent_enuSetState( -COOLENT_TEMP_TOLERANCE - 1 );
-		TMU_vidPauseTask( 4 );
+		if( CoolentStatus == OFF )
+		{
+			Coolent_enuDisable();
+			TMU_vidPauseTask( 4 );
+		}
+		else
+		{
+			Coolent_enuEnable();
+		}
+		PrevStatus = CoolentStatus ;
 	}
-	else
-		Coolent_enuSetState( Global_s8TempError );
+
 }
 
 void EEPROM_Access( void *Copy_u16SetTempAddress )
 {
 	u16 *Local_u16TempAddress = (u16*)Copy_u16SetTempAddress ;
+	static u8 Local_u8StoredSetTemp = INIT_SET_TEMP , Local_u8Stage = 0 , Local_u8SetTempSaveID;
+	static ES_t Local_enuErrorState = ES_NOK ;
+
+	if( SetTempUpdate == TRUE )
+	{
+		if( ( Local_u8StoredSetTemp != Global_u8TempSetValue) && ( Local_u8Stage == 0 ) )
+		{
+			Local_enuErrorState = EEPROM_enuReadByte( *Local_u16TempAddress , &Local_u8SetTempSaveID ) ;
+			Local_u8Stage++ ;
+		}
+		else if( Local_enuErrorState == ES_OK && Local_u8Stage == 1)
+		{
+			if( Local_u8SetTempSaveID != SetTempSaveID )
+			{
+				Local_enuErrorState = EEPROM_enuWriteByte( *Local_u16TempAddress , SetTempSaveID ) ;
+				Global_u8TempSetValue = INIT_SET_TEMP ;
+			}
+			Local_u8Stage++ ;
+		}
+		else if( Local_enuErrorState == ES_OK && Local_u8Stage == 2)
+		{
+			Local_enuErrorState = EEPROM_enuWriteByte( *( Local_u16TempAddress + 1 ) , Global_u8TempSetValue ) ;
+			Local_u8Stage++ ;
+		}
+		else if( Local_enuErrorState == ES_OK && Local_u8Stage == 3)
+		{
+			Local_u8StoredSetTemp = Global_u8TempSetValue ;
+			SetTempUpdate = FALSE ;
+			Local_u8Stage = 0 ;
+			TMU_vidPauseTask( 8 );
+		}
+	}
+
+/*	u16 *Local_u16TempAddress = (u16*)Copy_u16SetTempAddress ;
 	static u8 Local_u8StoredSetTemp = 0 ;
 	u8 Local_u8SetTempSaveID ;
 
@@ -399,4 +457,5 @@ void EEPROM_Access( void *Copy_u16SetTempAddress )
 		Local_u8StoredSetTemp = Global_u8TempSetValue ;
 	}
 	TMU_vidPauseTask( 8 );
+*/
 }

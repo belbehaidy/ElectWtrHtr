@@ -53,7 +53,7 @@
 #define OC2_PIN				7							/*	OC2 bit number on DDR Register	*/
 
 /****************************************/
-/*	 Waveform Generation Mode Options	*/
+/*	 		Timer Mode Options			*/
 /****************************************/
 #define WGM_NORMAL_MODE		30
 #define WGM_CTC_MODE		32

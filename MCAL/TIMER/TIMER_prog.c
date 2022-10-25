@@ -39,21 +39,25 @@ ES_t Timer_enuInit( void )
 
 	for(u8 Local_u8Iter = 0 ; Local_u8Iter < Timers_u8MaxNum ; Local_u8Iter++ )
 	{
+		Global_u32Timer0_Clk = Timer_u32TimerClock( Timers[Local_u8Iter].TimerNum , Timers[Local_u8Iter].ClkSelect ,&Local_u8ClkSelect);
 		if( Timers[Local_u8Iter].TimerNum == TIMER0)
 		{
 			TIMSK &= ~( TC0_INT_EN_MASK ) ;			// Disable All Interrupts before setting all conditions
 			TCCR0 = 0x00 ;							// Masks all bits in TCCR0
 			OCR0  = 0x00 ;							// Clears Output Compare Register
 			/*	Set Clock Selection	*/
-			Global_u32Timer0_Clk = Timer_u32TimerClock( TIMER0 , Timers[Local_u8Iter].ClkSelect ,&Local_u8ClkSelect);
+//			Global_u32Timer0_Clk = Timer_u32TimerClock( TIMER0 , Timers[Local_u8Iter].ClkSelect ,&Local_u8ClkSelect);
 			TCCR0 |= ( Local_u8ClkSelect  << CLK0_SEL_BITS );
 			/*	Set Compare Output Mode	*/
 			TCCR0 |= ( ( Timers[Local_u8Iter].CompOutMode - COMP_NORMAL ) << COMP0_MAT_OUT_MODE_BITS );
 			/*	Set Waveform Generation Mode	*/
-			if( Timers[Local_u8Iter].WaveGenMode == WGM_NORMAL_MODE	||
-				Timers[Local_u8Iter].WaveGenMode == WGM_CTC_MODE	)
+			if( Timers[Local_u8Iter].WaveGenMode == WGM_NORMAL_MODE	)
 			{
-				TCCR0 |= ( ( ( Timers[Local_u8Iter].WaveGenMode - WGM_NORMAL_MODE ) >> BIT0_MASK ) << WGM01_BIT );
+				//NO ACTION NEEDED
+			}
+			else if( Timers[Local_u8Iter].WaveGenMode == WGM_CTC_MODE )
+			{
+				SET_BIT( TCCR0 , WGM01_BIT ) ;
 			}
 			else
 			{
@@ -80,15 +84,18 @@ ES_t Timer_enuInit( void )
 			OCR2  = 0x00 ;							// Clears Output Compare Register
 
 			/*	Set Clock Selection	*/
-			Global_u32Timer2_Clk = Timer_u32TimerClock( TIMER2 , Timers[Local_u8Iter].ClkSelect ,&Local_u8ClkSelect);
+//			Global_u32Timer2_Clk = Timer_u32TimerClock( TIMER2 , Timers[Local_u8Iter].ClkSelect ,&Local_u8ClkSelect);
 			TCCR2 |= ( Local_u8ClkSelect << CLK2_SEL_BITS );
 			/*	Set Compare Output Mode	*/
 			TCCR2 |= ( ( Timers[Local_u8Iter].CompOutMode - COMP_NORMAL ) << COMP2_MAT_OUT_MODE_BITS );
 			/*	Set Waveform Generation Mode	*/
-			if( Timers[Local_u8Iter].WaveGenMode == WGM_NORMAL_MODE ||
-				Timers[Local_u8Iter].WaveGenMode == WGM_CTC_MODE	 )
+			if( Timers[Local_u8Iter].WaveGenMode == WGM_NORMAL_MODE )
 			{
-				TCCR2 |= ( ( ( Timers[Local_u8Iter].WaveGenMode - WGM_NORMAL_MODE ) >> BIT0_MASK ) << WGM21_BIT );
+				// NO ACTION NEEDED
+			}
+			else if(Timers[Local_u8Iter].WaveGenMode == WGM_CTC_MODE )
+			{
+				SET_BIT( TCCR2 , WGM21_BIT ) ;
 			}
 			else
 			{
@@ -302,33 +309,40 @@ ES_t Timer_enuGetOCn_Mode( u8 Copy_u8TimerNum , u8 *Copy_pu8TimerCOM_Mode)
 ES_t Timer_enuSetTimer_Mode( u8 Copy_u8TimerNum , u8 Copy_u8WGM_Mode )
 {
 	ES_t Local_enuErrorState = ES_NOK;
+	u8 Local_u8IntMask , Local_u8TCCR , Local_u8WGM_CTC_Bit ;
+	bool ErrorFlag = FALSE ;
 
 
 	if( Copy_u8WGM_Mode == WGM_NORMAL_MODE || Copy_u8WGM_Mode == WGM_CTC_MODE )
 	{
 		u8 Local_u8CopyTIMSK = TIMSK ;														// Saving a Copy of Timer Interrupt Mask Register
 
-		if( Copy_u8TimerNum == TIMER0 )
+		switch( Copy_u8TimerNum )
 		{
-			TIMSK &= ~( TC0_INT_EN_MASK ) ;													// Disable Timer0 Interrupts
-			CLR_BIT( TCCR0 , WGM01_BIT ) ;													// Masking WGM01 Select bit
-			TCCR0 |= ((( Copy_u8WGM_Mode - WGM_NORMAL_MODE ) >> _BIT_MASK_ ) << WGM01_BIT );	// Setting New Waveform Generation Mode
-#if Mask
-			Timers[ TIMER0 - TIMER0 ].WaveGenMode = Copy_u8WGM_Mode ;
-#endif
+			case TIMER0 : 	Local_u8IntMask = TC0_INT_EN_MASK ;
+							Local_u8TCCR = TCCR0 ;
+							Local_u8WGM_CTC_Bit = WGM01_BIT;
+							break;
+			case TIMER2 : 	Local_u8IntMask = TC2_INT_EN_MASK ;
+							Local_u8TCCR = TCCR2 ;
+							Local_u8WGM_CTC_Bit = WGM21_BIT ;
+							break;
+			default 	: 	Local_enuErrorState = ES_OUT_RANGE ;
+							ErrorFlag = TRUE;
 		}
-		else if( Copy_u8TimerNum == TIMER2 )
+		if( ErrorFlag == FALSE )
 		{
-			TIMSK &= ~( TC2_INT_EN_MASK ) ;													// Disable Timer2 Interrupts
-			CLR_BIT( TCCR2 , WGM21_BIT );													// Masking WGM21 Select bit
-			TCCR2 |= ((( Copy_u8WGM_Mode - WGM_NORMAL_MODE ) >> _BIT_MASK_ ) << WGM21_BIT  );// Setting New Waveform Generation Mode
-#if Mask
-			Timers[ TIMER2 - TIMER0 ].WaveGenMode = Copy_u8WGM_Mode ;
-#endif
+			TIMSK &= ~( Local_u8IntMask );													// Clearing Timer Interrupts while changing Timer mode
+			switch ( Copy_u8WGM_Mode )
+			{
+				case WGM_NORMAL_MODE 	: 	CLR_BIT( Local_u8TCCR , Local_u8WGM_CTC_Bit ) ;
+											break;
+				case WGM_CTC_MODE 		: 	SET_BIT( Local_u8TCCR , Local_u8WGM_CTC_Bit ) ;
+											break;
+			}
 		}
-		else Local_enuErrorState = ES_OUT_RANGE ;
-
-		TIMSK = Local_u8CopyTIMSK ;															// Re-setting Timer Interrupt Mask Register to its Status
+		TIMSK = Local_u8CopyTIMSK ;															// Re-setting Timer Interrupt Mask Register to its Original Status
+		Timers[ Copy_u8TimerNum - TIMER0 ].WaveGenMode = Copy_u8WGM_Mode ;
 	}
 	else Local_enuErrorState = ES_OUT_RANGE ;
 
@@ -376,9 +390,6 @@ ES_t Timer_enuPreLoad( u8 Copy_u8TimerNum , u8 Copy_u8PreLoad)
 {
 	ES_t Local_enuErrorState = ES_NOK;
 
-	u8 Local_u8Temp = SREG ;									// Saving a Copy of AVR Status Register
-	_CLI_;														// Disable All Interrupts while writing to Counter Register
-
 	if( Copy_u8TimerNum == TIMER0 )
 	{
 		TCNT0 = (u8)Copy_u8PreLoad ;
@@ -388,8 +399,6 @@ ES_t Timer_enuPreLoad( u8 Copy_u8TimerNum , u8 Copy_u8PreLoad)
 		TCNT2 = (u8)Copy_u8PreLoad ;
 	}
 	else Local_enuErrorState = ES_OUT_RANGE;
-
-	SREG = Local_u8Temp;										// Re-setting AVR Status Register to its Status
 
 	return ( (Local_enuErrorState == ES_NOK)? ES_OK : Local_enuErrorState ) ;
 }
@@ -605,6 +614,7 @@ ES_t Timer_enuInterruptDisable( u8 Copy_u8TimerIntName)
 {
 	ES_t Local_enuErrorState = ES_NOK;
 
+	u8 Local_u8SREG = SREG ;
 	_CLI_ ;																// Disable ALL Interrupts
 
 	switch ( Copy_u8TimerIntName )
@@ -621,7 +631,7 @@ ES_t Timer_enuInterruptDisable( u8 Copy_u8TimerIntName)
 						#warning " Timer_enuInterruptEnable() : Unidentified Interrupt Name, No Action Taken."
 	}
 
-	_SEI_ ;																// Re-Enable Global Interrupts
+	SREG = Local_u8SREG ;												// Re-Setting Global Interrupts
 
 	return ( (Local_enuErrorState == ES_NOK)? ES_OK : Local_enuErrorState ) ;
 }
@@ -647,9 +657,7 @@ bool Timer_IsInterruptEnabled( u8 Copy_u8TimerIntName )
 
 ES_t Timer_enuCallBack( u8 Copy_u8TimerIntName , void (*Copy_pAppFun)(void) )
 {
-	ES_t Local_enuErrorState = ES_NOK;
-
-	u8 found = 0 ;
+	ES_t Local_enuErrorState = ES_OUT_RANGE;
 
 	if( Copy_pAppFun != NULL )
 	{
@@ -659,11 +667,9 @@ ES_t Timer_enuCallBack( u8 Copy_u8TimerIntName , void (*Copy_pAppFun)(void) )
 			{
 				Global_AstrTimerPointers[Local_u8Iter].ptrFun = Copy_pAppFun;
 				Local_enuErrorState = ES_OK ;
-				found = 1;
 				break;
 			}
 		}
-		if(!found) Local_enuErrorState = ES_OUT_RANGE ;
 	}
 	else Local_enuErrorState = ES_NULL_POINTER;
 

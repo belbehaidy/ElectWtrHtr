@@ -356,6 +356,7 @@ ES_t PWM_enuGetWGM_Mode( u8 Copy_u8TimerNum , u8 *Copy_pu8TimerWGM_Mode)
 	return Local_enuErrorState ;
 }
 #endif
+
 ES_t PWM_enuSetOCRnValue( u8 Copy_u8TimerNum , u16 Copy_u16OCRnValue )
 {
 	ES_t Local_enuErrorState = ES_NOK ;

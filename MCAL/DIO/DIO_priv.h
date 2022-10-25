@@ -13,7 +13,6 @@
 #define DIO_u8GROUP_C			14
 #define DIO_u8GROUP_D			15
 
-
 #define DIO_u8PIN0				PIN0
 #define DIO_u8PIN1				PIN1
 #define DIO_u8PIN2				PIN2

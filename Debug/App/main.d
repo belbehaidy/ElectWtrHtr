@@ -2,19 +2,24 @@ App/main.o App/main.o: ../App/main.c \
   ../App/../SHARED/ATMEGA32_Registers.h ../App/../SHARED/stdTypes.h \
   ../App/../SHARED/errorState.h ../App/../SHARED/BIT_MATH.h \
   ../App/../TMU/TMU_int.h ../App/../MCAL/DIO/DIO_int.h \
-  ../App/../MCAL/DIO/..\..\SHARED\stdTypes.h \
-  ../App/../MCAL/DIO/..\..\SHARED\errorState.h \
   ../App/../MCAL/EEPROM/EEPROM_int.h ../App/../HAL/COOLENT/COOLENT_int.h \
+  ../App/../HAL/COOLENT/..\..\SHARED\ATMEGA32_Registers.h \
+  ../App/../HAL/COOLENT/..\..\SHARED\BIT_MATH.h \
   ../App/../HAL/COOLENT/..\..\SHARED\stdTypes.h \
   ../App/../HAL/COOLENT/..\..\SHARED\errorState.h \
   ../App/../HAL/COOLENT/..\..\MCAL\DIO\DIO_int.h \
   ../App/../HAL/COOLENT/..\..\MCAL\PWM\PWM_int.h \
   ../App/../HAL/HEATER/HEATER_int.h \
+  ../App/../HAL/HEATER/..\..\SHARED\ATMEGA32_Registers.h \
+  ../App/../HAL/HEATER/..\..\SHARED\BIT_MATH.h \
   ../App/../HAL/HEATER/..\..\SHARED\stdTypes.h \
   ../App/../HAL/HEATER/..\..\SHARED\errorState.h \
   ../App/../HAL/HEATER/..\..\MCAL\DIO\DIO_int.h \
+  ../App/../HAL/HEATER/..\..\MCAL\EXTI\EXTI_int.h \
   ../App/../HAL/HEATER/..\..\MCAL\PWM\PWM_int.h \
   ../App/../HAL/LM35/LM35_int.h \
+  ../App/../HAL/LM35/..\..\SHARED\ATMEGA32_Registers.h \
+  ../App/../HAL/LM35/..\..\SHARED\BIT_MATH.h \
   ../App/../HAL/LM35/..\..\SHARED\stdTypes.h \
   ../App/../HAL/LM35/..\..\SHARED\errorState.h \
   ../App/../HAL/LM35/..\..\MCAL\DIO\DIO_int.h \
@@ -34,13 +39,13 @@ App/main.o App/main.o: ../App/main.c \
 
 ../App/../MCAL/DIO/DIO_int.h:
 
-../App/../MCAL/DIO/..\..\SHARED\stdTypes.h:
-
-../App/../MCAL/DIO/..\..\SHARED\errorState.h:
-
 ../App/../MCAL/EEPROM/EEPROM_int.h:
 
 ../App/../HAL/COOLENT/COOLENT_int.h:
+
+../App/../HAL/COOLENT/..\..\SHARED\ATMEGA32_Registers.h:
+
+../App/../HAL/COOLENT/..\..\SHARED\BIT_MATH.h:
 
 ../App/../HAL/COOLENT/..\..\SHARED\stdTypes.h:
 
@@ -52,15 +57,25 @@ App/main.o App/main.o: ../App/main.c \
 
 ../App/../HAL/HEATER/HEATER_int.h:
 
+../App/../HAL/HEATER/..\..\SHARED\ATMEGA32_Registers.h:
+
+../App/../HAL/HEATER/..\..\SHARED\BIT_MATH.h:
+
 ../App/../HAL/HEATER/..\..\SHARED\stdTypes.h:
 
 ../App/../HAL/HEATER/..\..\SHARED\errorState.h:
 
 ../App/../HAL/HEATER/..\..\MCAL\DIO\DIO_int.h:
 
+../App/../HAL/HEATER/..\..\MCAL\EXTI\EXTI_int.h:
+
 ../App/../HAL/HEATER/..\..\MCAL\PWM\PWM_int.h:
 
 ../App/../HAL/LM35/LM35_int.h:
+
+../App/../HAL/LM35/..\..\SHARED\ATMEGA32_Registers.h:
+
+../App/../HAL/LM35/..\..\SHARED\BIT_MATH.h:
 
 ../App/../HAL/LM35/..\..\SHARED\stdTypes.h:
 

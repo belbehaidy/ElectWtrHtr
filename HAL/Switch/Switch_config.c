@@ -6,7 +6,12 @@
  *      Author: Bassem El-Behaidy
  */
 
+#include "..\..\SHARED\ATMEGA32_Registers.h"
+#include "..\..\SHARED\BIT_MATH.h"
 #include "..\..\SHARED\stdTypes.h"
+#include "..\..\SHARED\errorState.h"
+
+
 #include "..\..\MCAL\DIO\DIO_int.h"
 
 #include "Switch_config.h"

@@ -14,8 +14,8 @@
 
 ES_t EEPROM_enuWriteByte( u16 Copy_u16Address , u8 Copy_u8Data )
 {
-	while( ( ( EECR >> EEWE ) & _BIT_MASK_ ) );
-	while( ( ( SPMCR >> SPMEN ) & _BIT_MASK_ ) );
+	WAIT_TILL_BIT_IS_CLR( EECR , EEWE ) ;
+	WAIT_TILL_BIT_IS_CLR( SPMCR , SPMEN ) ;
 
 	u8 Local_u8CopySREG = SREG ;						// Keeping a copy of Status register SREG
 	_CLI_;												// Disable Interrupts
@@ -23,10 +23,8 @@ ES_t EEPROM_enuWriteByte( u16 Copy_u16Address , u8 Copy_u8Data )
 	EEARH = ( Copy_u16Address >> _BYTE_SHIFT_ );		// Writing the higher byte of address in EEARH
 	EEARL = (u8)Copy_u16Address;						// Writing the Lower byte of address in EEARL
 	EEDR = Copy_u8Data ;								// Writing the data byte in EEDR register
-//	ASM_SET_BIT( _SFR_EECR_ , EEMWE );
-//	ASM_SET_BIT( _SFR_EECR_ , EEWE  );
-	asm( " SBI 0x1C,2 " );								// Setting EEMWE bit in EECR register
-	asm( " SBI 0x1C,1 " );								// Setting EEWE bit in EECR register
+	ASM_SET_BIT( _SFR_EECR_ , EEMWE );					// Setting EEMWE bit in EECR register
+	ASM_SET_BIT( _SFR_EECR_ , EEWE  );					// Setting EEWE bit in EECR register
 
 	SREG = Local_u8CopySREG ;
 	return ES_OK;
@@ -38,11 +36,10 @@ ES_t EEPROM_enuReadByte( u16 Copy_u16Address , u8 *Copy_pu8Data )
 
 	if( Copy_pu8Data != NULL )
 	{
-		while( ( ( EECR >> EEWE ) & 1 ) );
+		WAIT_TILL_BIT_IS_CLR( EECR , EEWE ) ;
 		EEARH = ( Copy_u16Address >> _BYTE_SHIFT_ );	// Writing the Higher byte of address in EEARH
 		EEARL = (u8)Copy_u16Address;					// Writing the Lower byte of address in EEARL
-//		ASM_SET_BIT( _SFR_EECR_ , EERE );
-		asm( " SBI 0x1C,0 " );							// Setting EERE bit in EECR register
+		ASM_SET_BIT( _SFR_EECR_ , EERE );				// Setting EERE bit in EECR register
 		* Copy_pu8Data = EEDR ;							// Reading the data byte from EEDR register
 		Local_enuErrorState = ES_OK ;
 	}

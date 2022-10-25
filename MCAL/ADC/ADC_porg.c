@@ -163,7 +163,8 @@ ES_t ADC_enuSelectChannel(u8 Copy_u8ChannelID)
 	if( Copy_u8ChannelID >= CH_00 && Copy_u8ChannelID <= CH_31 )
 	{
 		ADMUX &= ~( ADC_CH_SEL_BITS_MASK);
-		ADMUX |= (Copy_u8ChannelID << ADC_CH_SEL_BITS);
+		ADMUX |= ( ( Copy_u8ChannelID - CH_00 ) << ADC_CH_SEL_BITS );
+//		ADMUX |= (Copy_u8ChannelID << ADC_CH_SEL_BITS);
 		Local_enuErrorState = ES_OK ;
 	}
 	else Local_enuErrorState = ES_OUT_RANGE;
@@ -173,7 +174,7 @@ ES_t ADC_enuSelectChannel(u8 Copy_u8ChannelID)
 
 ES_t ADC_enuStartConversion(void)
 {
-	SET_BIT( ADCSRA , ADC_START_CONVERSION_BIT );
+	ASM_SET_BIT( _SFR_ADCSRA_ , ADC_START_CONVERSION_BIT );
 
 	return ES_OK;
 }
@@ -184,12 +185,12 @@ ES_t ADC_enuEnableAutoTrigger(u8 Copy_u8TriggerSource)
 
 	if(Copy_u8TriggerSource >= FREE_RUNNING && Copy_u8TriggerSource <= TIMER1_CAPT_EVENT )
 	{
-		CLR_BIT( ADCSRA , ADC_AUTO_TRIGGER_EN_BIT );
+		ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_AUTO_TRIGGER_EN_BIT );
 
 		SFIOR &= ~( ADC_TRIGGER_SEL_BITS_MASK );
-		SFIOR |= ( (ADC_INIT_CHANNEL - FREE_RUNNING ) << ADC_TRIGGER_SEL_BITS );
+		SFIOR |= ( ( Copy_u8TriggerSource - FREE_RUNNING ) << ADC_TRIGGER_SEL_BITS );
 
-		SET_BIT( ADCSRA , ADC_AUTO_TRIGGER_EN_BIT );
+		ASM_SET_BIT( _SFR_ADCSRA_ , ADC_AUTO_TRIGGER_EN_BIT );
 
 		Local_enuErrorState = ES_OK;
 	}
@@ -200,7 +201,7 @@ ES_t ADC_enuEnableAutoTrigger(u8 Copy_u8TriggerSource)
 
 ES_t ADC_enuDisableAutoTrigger(void)
 {
-	CLR_BIT( ADCSRA , ADC_AUTO_TRIGGER_EN_BIT );
+	ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_AUTO_TRIGGER_EN_BIT );
 //	ADCSRA &= ~(BIT_MASK << ADC_AUTO_TRIGGER_EN_BIT );
 
 	return ES_OK;

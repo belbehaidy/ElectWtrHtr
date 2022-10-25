@@ -9,6 +9,7 @@
 #define WTR_HTR_PRIV_H_
 
 typedef enum { ON , OFF } OnOff_t;
+typedef enum { HEATING , COOLING } Process_t ;
 
 #define NORMAL				5
 #define SETUP				9
@@ -22,8 +23,8 @@ typedef enum { ON , OFF } OnOff_t;
 #define TEMP_AVG_READINGS	10
 
 #define BOUNCE_COUNTS		2
-#define SETUP_COUNTS		50
-#define BLINK_COUNTS		10
+#define SETUP_COUNTS		20
+#define BLINK_COUNTS		2
 
 
 void DisplayTemperature(void*p);

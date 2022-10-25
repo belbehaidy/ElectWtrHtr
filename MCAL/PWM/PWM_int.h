@@ -111,7 +111,7 @@ ES_t PWM_enuGetInterruptMode( u8 Copy_u8TimerNum , u8 *Copy_pu8TimerInterruptMod
 
 ES_t PWM_enuSetDutyCycle( u8 Copy_u8TimerNum , f32 Copy_f32DutyCycle );////////////////////////////////////////////////////////
 
-//ES_t Timer_enuReset( u8 Copy_u8TimerNum );
+//ES_t PWM_enuReset( u8 Copy_u8TimerNum );
 
 //ES_t Timer_enuReadCounterValue( u8 Copy_u8TimerNum , void *Copy_pCounterValue );
 

@@ -11,6 +11,7 @@ RM := rm -rf
 -include TMU/subdir.mk
 -include MCAL/TIMER/subdir.mk
 -include MCAL/PWM/subdir.mk
+-include MCAL/EXTI/subdir.mk
 -include MCAL/EEPROM/subdir.mk
 -include MCAL/DIO/subdir.mk
 -include MCAL/ADC/subdir.mk
