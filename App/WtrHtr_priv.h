@@ -23,8 +23,8 @@ typedef enum { HEATING , COOLING } Process_t ;
 #define TEMP_AVG_READINGS	10
 
 #define BOUNCE_COUNTS		2
-#define SETUP_COUNTS		20
-#define BLINK_COUNTS		2
+#define SETUP_COUNTS		50
+#define BLINK_COUNTS		5
 
 
 void DisplayTemperature(void*p);

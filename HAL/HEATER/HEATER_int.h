@@ -40,7 +40,7 @@
 #define HTR_INIT_DUTY_CYCLE		0.0F
 #define HTR_MAX_DUTY_CYCLE		80.0F
 
-bool CounterReset = FALSE;
+//bool CounterReset = FALSE;
 void INT0_ISR( void);
 void Heater_vidZCrossSync( void );
 
@@ -50,8 +50,8 @@ ES_t Heater_enuInit(void)
 	u8 Local_u8Iter = 0 ;
 
 #ifdef HEATER_PWM_SETUP
-//	Local_AenuErrorState[0] = PWM_enuInit();
-//	Local_AenuErrorState[1] = PWM_enuSetICR1Value( (u16)ICR1_VALUE );
+	Local_AenuErrorState[0] = PWM_enuInit();
+	Local_AenuErrorState[1] = PWM_enuSetICR1Value( (u16)ICR1_VALUE );
 	for( Local_u8Iter = 0 ; (Local_u8Iter < 2) && ( Local_AenuErrorState[Local_u8Iter] == ES_OK ) ; Local_u8Iter++ );
 	if( Local_u8Iter == 2 )
 	{
@@ -62,7 +62,6 @@ ES_t Heater_enuInit(void)
 	}
 #endif
 
-//	Heater_vidZCrossSync();
 
 	for( Local_u8Iter = 0 ; (Local_u8Iter < 2) && ( Local_AenuErrorState[Local_u8Iter] == ES_OK ) ; Local_u8Iter++ );
 	if( Local_u8Iter == 2 )
@@ -80,6 +79,8 @@ ES_t Heater_enuInit(void)
 	if( Local_u8Iter == 2 )
 		Local_enuErrorState = ES_OK ;
 
+//	Heater_vidZCrossSync();
+
 	return Local_enuErrorState ;
 }
 /*
@@ -89,7 +90,7 @@ void Heater_vidZCrossSync( void )
 	_SEI_;
 	while( 	CounterReset != TRUE);
 	_CLI_;
-	EXTI_enuCallBack( INT0 , NULL );
+//	EXTI_enuCallBack( INT0 , NULL );
 	EXTI_enuDisableInterrupt( INT0 );
 	CounterReset = FALSE ;
 	SREG = Local_u8SREG ;
@@ -149,7 +150,7 @@ ES_t Heater_enuSetState( s8 Copy_s8TempError )
 void INT0_ISR( void)
 {
 	TCNT1 = 0x0000 ;
-//	CounterReset = TRUE;
+//	CounterReset = TRUE ;
 }
 
 #endif /* HAL_HEATER_HEATER_INT_H_ */

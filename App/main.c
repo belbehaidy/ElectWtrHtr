@@ -25,21 +25,21 @@
 #include "WtrHtr_config.h"
 #include "WtrHtr_priv.h"
 
-OnOff_t PowerStatus = OFF;
-Process_t ProcessStatus = HEATING ;
-OnOff_t HeaterStatus = OFF;
-OnOff_t CoolentStatus = OFF;
-u8 LedStatus = LD_OFF ;
+OnOff_t PowerStatus = OFF;						//	is a Flag indicating if POWER is ON or OFF
+Process_t ProcessStatus = HEATING ;				//	is a Flag indicating either system in either HEATING or COOLING cycle
+OnOff_t HeaterStatus = OFF;						//	is a Flag indicating either Heater is ON or OFF
+OnOff_t CoolentStatus = OFF;					//	is a Flag indicating either Coolent is ON or OFF
+u8 LedStatus = LD_OFF ;							//	is a Flag indicating LED is ON / OFF / BLINK
 
-u8 Global_u8DisplayMode = NORMAL ;
-u8 Global_u8SetupSw;
-u16 EEPROM_SetTempAddress = (u16)SET_ADDRESS ;
-u8 SetTempSaveID = 0x55 ;
-bool SetTempUpdate = TRUE ;
+u8 Global_u8DisplayMode = NORMAL ;				//	is a Flag indicating either Seven Segment is displaying Actual (NORMAL) or Set (SETUP) temperature
+u8 Global_u8SetupSw;							//	is a Flag indicating which switch is active during Setup mode INC_SW /DEC_SW
+u16 EEPROM_SetTempAddress = (u16)SET_ADDRESS ;	//	A variable saving SET Temperature address in EEPROM
+u8 SetTempSaveID = 0x55 ;						//	A variable saving SET TEMP ID which indicates that EEPROM have a set Temperature saved or Not
+bool SetTempUpdate = FALSE ;					//	is a Flag indicating either Set Temperature is updated or not
 
-u8 Global_u8TempSetValue ;					// Set Temperature
-u8 Global_u8TempValue = 30;					// Actual Temperature
-s8 Global_s8TempError ;						// Difference between Set point and Actual Temp
+u8 Global_u8TempSetValue ;						//	is a variable saving Set Temperature Value
+u8 Global_u8TempValue = 30;						//	is a variable saving Actual Temperature Value
+s8 Global_s8TempError ;							//	is a variable saving Difference between Set Temperature and Actual Temperature
 
 int
 main(void)
@@ -47,17 +47,19 @@ main(void)
 
 	u8 SSeg_u8ActiveModule = TEMP_UNITS ;
 
+	Heater_enuInit();
+	Coolent_enuInit();
 	LD_enuInit();
 	Switch_enuInit();
 	SevSeg_enuInit();
 	LM35_enuInit();
-	Heater_enuInit();
-	Coolent_enuInit();
 	TMU_vidInit();
 
+	//	Checking the Set Temperature saved in EEPROM and assigning it to Global_u8TempSetValue var
 	EEPROM_Access( &EEPROM_SetTempAddress );
 
-	TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , READY  , 3  , 0  );
+	//	Creating Tasks to start Time Management Unit Operation
+	TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , PAUSED , 3  , 0  );
 	TMU_vidCreateTask(DisplayTemperature	, &SSeg_u8ActiveModule	, 7 , PAUSED , 1  , 0  );
 	TMU_vidCreateTask(CheckTemperatureStatus, NULL					, 6 , PAUSED , 10 , 0  );
 	TMU_vidCreateTask(AdjustHeaterStatus	, NULL					, 5 , PAUSED , 100, 11 );
@@ -67,10 +69,11 @@ main(void)
 	TMU_vidCreateTask(CheckDecrementSwitch	, NULL					, 1 , PAUSED , 2  , 1  );
 	TMU_vidCreateTask(CheckPowerSwitch		, NULL					, 0 , READY  , 2  , 0  );
 
+	// Starting Scheduler for Time Management Unit
 	TMU_vidStartScheduler();
 }
 
-void DisplayTemperature(void *Copy_pu8ActiveModule)
+void DisplayTemperature(void *Copy_pu8ActiveModule)		//	TASK( 7 )
 {
 	u8 *Local_u8ActiveModule = (u8*)Copy_pu8ActiveModule ;
 	u8 Local_u8DisplayValue;
@@ -119,7 +122,7 @@ void DisplayTemperature(void *Copy_pu8ActiveModule)
 	}
 }
 
-void CheckTemperatureStatus(void *pNULL)
+void CheckTemperatureStatus(void *pNULL)		//	TASK( 6 )
 {
 	u8 Local_u8TempValue ;
 	static u16 Local_u16TempAccValue = 0 ;
@@ -175,7 +178,7 @@ void CheckTemperatureStatus(void *pNULL)
 	}
 }
 
-void CheckIncrementSwitch(void *pNULL)
+void CheckIncrementSwitch(void *pNULL)		//	TASK( 2 )
 {
 	u8 Local_u8SwitchValue;
 
@@ -191,6 +194,7 @@ void CheckIncrementSwitch(void *pNULL)
 					Global_u8DisplayMode = SETUP ;
 					Global_u8SetupSw = INC_SW ;
 					SetupDelay = SETUP_COUNTS;
+					press = 1 ;
 				}
 				else
 				{
@@ -228,7 +232,7 @@ void CheckIncrementSwitch(void *pNULL)
 
 		}
 }
-void CheckDecrementSwitch(void *pNULL )
+void CheckDecrementSwitch(void *pNULL )		//	TASK( 1 )
 {
 	u8 Local_u8SwitchValue;
 
@@ -242,6 +246,7 @@ void CheckDecrementSwitch(void *pNULL )
 			{
 				Global_u8DisplayMode = SETUP ;
 				Global_u8SetupSw = DEC_SW ;
+				press = 1 ;
 			}
 			else
 			{
@@ -280,7 +285,7 @@ void CheckDecrementSwitch(void *pNULL )
 	}
 }
 
-void CheckPowerSwitch(void *pNULL )
+void CheckPowerSwitch(void *pNULL )		//	TASK( 0 )
 {
 	u8 Local_u8SwitchValue;
 
@@ -328,12 +333,11 @@ void CheckPowerSwitch(void *pNULL )
 	}
 }
 
-void AdjustRedLampStatus(void *Copy_pu8RedLampStatus)
+void AdjustRedLampStatus(void *pNULL )		//	TASK( 3 )
 {
 	static u8 Local_u8PrevStatus = LD_OFF ;
-	u8 *Local_u8RedLampStatus = (u8*)Copy_pu8RedLampStatus;
 
-	if( *Local_u8RedLampStatus == LD_BLINK )
+	if( LedStatus == LD_BLINK )
 	{
 		switch( Local_u8PrevStatus )
 		{
@@ -344,10 +348,10 @@ void AdjustRedLampStatus(void *Copy_pu8RedLampStatus)
 		}
 		LD_enuSetState( RED_LD , Local_u8PrevStatus );
 	}
-	else if( *Local_u8RedLampStatus != Local_u8PrevStatus)
+	else if( LedStatus != Local_u8PrevStatus)
 	{
 
-		Local_u8PrevStatus = *Local_u8RedLampStatus ;
+		Local_u8PrevStatus = LedStatus ;
 		LD_enuSetState( RED_LD , Local_u8PrevStatus );
 		if( PowerStatus == OFF )
 		{
@@ -356,7 +360,7 @@ void AdjustRedLampStatus(void *Copy_pu8RedLampStatus)
 	}
 }
 
-void AdjustHeaterStatus( void *pNULL)
+void AdjustHeaterStatus( void *pNULL)		//	TASK( 5 )
 {
 	static OnOff_t PrevStatus = OFF ;
 
@@ -377,7 +381,7 @@ void AdjustHeaterStatus( void *pNULL)
 	}
 }
 
-void AdjustCoolentStatus( void *pNULL)
+void AdjustCoolentStatus( void *pNULL)		//	TASK( 4 )
 {
 	static OnOff_t PrevStatus = OFF ;
 
@@ -399,45 +403,11 @@ void AdjustCoolentStatus( void *pNULL)
 
 }
 
-void EEPROM_Access( void *Copy_u16SetTempAddress )
+void EEPROM_Access( void *Copy_u16SetTempAddress )		//	TASK( 8 )
 {
 	u16 *Local_u16TempAddress = (u16*)Copy_u16SetTempAddress ;
-	static u8 Local_u8StoredSetTemp = INIT_SET_TEMP , Local_u8Stage = 0 , Local_u8SetTempSaveID;
-	static ES_t Local_enuErrorState = ES_NOK ;
-
-	if( SetTempUpdate == TRUE )
-	{
-		if( ( Local_u8StoredSetTemp != Global_u8TempSetValue) && ( Local_u8Stage == 0 ) )
-		{
-			Local_enuErrorState = EEPROM_enuReadByte( *Local_u16TempAddress , &Local_u8SetTempSaveID ) ;
-			Local_u8Stage++ ;
-		}
-		else if( Local_enuErrorState == ES_OK && Local_u8Stage == 1)
-		{
-			if( Local_u8SetTempSaveID != SetTempSaveID )
-			{
-				Local_enuErrorState = EEPROM_enuWriteByte( *Local_u16TempAddress , SetTempSaveID ) ;
-				Global_u8TempSetValue = INIT_SET_TEMP ;
-			}
-			Local_u8Stage++ ;
-		}
-		else if( Local_enuErrorState == ES_OK && Local_u8Stage == 2)
-		{
-			Local_enuErrorState = EEPROM_enuWriteByte( *( Local_u16TempAddress + 1 ) , Global_u8TempSetValue ) ;
-			Local_u8Stage++ ;
-		}
-		else if( Local_enuErrorState == ES_OK && Local_u8Stage == 3)
-		{
-			Local_u8StoredSetTemp = Global_u8TempSetValue ;
-			SetTempUpdate = FALSE ;
-			Local_u8Stage = 0 ;
-			TMU_vidPauseTask( 8 );
-		}
-	}
-
-/*	u16 *Local_u16TempAddress = (u16*)Copy_u16SetTempAddress ;
-	static u8 Local_u8StoredSetTemp = 0 ;
-	u8 Local_u8SetTempSaveID ;
+	static u8 Local_u8StoredSetTemp = INIT_SET_TEMP ;
+	static u8 Local_u8SetTempSaveID;
 
 	if( Local_u8StoredSetTemp != Global_u8TempSetValue)
 	{
@@ -446,16 +416,23 @@ void EEPROM_Access( void *Copy_u16SetTempAddress )
 			if( Local_u8SetTempSaveID != SetTempSaveID )
 			{
 				Global_u8TempSetValue = INIT_SET_TEMP ;
-				if( ES_OK == EEPROM_enuWriteByte( *( Local_u16TempAddress + 1 ) , Global_u8TempSetValue ) )
+				if( ES_OK == EEPROM_enuWriteByte( (*( Local_u16TempAddress ) + 1 ) , Global_u8TempSetValue ) )
 				EEPROM_enuWriteByte( *Local_u16TempAddress , SetTempSaveID );
 			}
 			else
 			{
-				EEPROM_enuWriteByte( *( Local_u16TempAddress + 1 ) , Global_u8TempSetValue );
+				if( SetTempUpdate == TRUE )
+				{
+					if( ES_OK == EEPROM_enuWriteByte( (*( Local_u16TempAddress ) + 1 ) , Global_u8TempSetValue ) )
+						SetTempUpdate = FALSE ;
+				}
+				else
+				{
+					EEPROM_enuReadByte( (*( Local_u16TempAddress ) + 1 ) , &Global_u8TempSetValue );
+				}
 			}
 		}
 		Local_u8StoredSetTemp = Global_u8TempSetValue ;
 	}
 	TMU_vidPauseTask( 8 );
-*/
 }
