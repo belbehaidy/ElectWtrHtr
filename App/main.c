@@ -34,7 +34,7 @@ u8 LedStatus = LD_OFF ;							//	is a Flag indicating LED is ON / OFF / BLINK
 u8 Global_u8DisplayMode = NORMAL ;				//	is a Flag indicating either Seven Segment is displaying Actual (NORMAL) or Set (SETUP) temperature
 u8 Global_u8SetupSw;							//	is a Flag indicating which switch is active during Setup mode INC_SW /DEC_SW
 u16 EEPROM_SetTempAddress = (u16)SET_ADDRESS ;	//	A variable saving SET Temperature address in EEPROM
-u8 SetTempSaveID = 0x55 ;						//	A variable saving SET TEMP ID which indicates that EEPROM have a set Temperature saved or Not
+u8 SetTempSaveID = SAVED_ID ;					//	A variable saving SET TEMP SAVED ID which indicates that EEPROM have a set Temperature saved or Not
 bool SetTempUpdate = FALSE ;					//	is a Flag indicating either Set Temperature is updated or not
 
 u8 Global_u8TempSetValue ;						//	is a variable saving Set Temperature Value
@@ -55,22 +55,32 @@ main(void)
 	LM35_enuInit();
 	TMU_vidInit();
 
-	//	Checking the Set Temperature saved in EEPROM and assigning it to Global_u8TempSetValue var
-	EEPROM_Access( &EEPROM_SetTempAddress );
-
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//	Creating Tasks to start Time Management Unit Operation
-	TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , PAUSED , 3  , 0  );
-	TMU_vidCreateTask(DisplayTemperature	, &SSeg_u8ActiveModule	, 7 , PAUSED , 1  , 0  );
-	TMU_vidCreateTask(CheckTemperatureStatus, NULL					, 6 , PAUSED , 10 , 0  );
-	TMU_vidCreateTask(AdjustHeaterStatus	, NULL					, 5 , PAUSED , 100, 11 );
-	TMU_vidCreateTask(AdjustCoolentStatus	, NULL					, 4 , PAUSED , 100, 13 );
-	TMU_vidCreateTask(AdjustRedLampStatus	, NULL					, 3 , PAUSED , 50 , 17 );
-	TMU_vidCreateTask(CheckIncrementSwitch	, NULL					, 2 , PAUSED , 2  , 0  );
-	TMU_vidCreateTask(CheckDecrementSwitch	, NULL					, 1 , PAUSED , 2  , 1  );
-	TMU_vidCreateTask(CheckPowerSwitch		, NULL					, 0 , READY  , 2  , 0  );
+	//	Tasks are created by calling TMU_vidCreateTask() API which has the following declaration
+	//	void TMU_vidCreateTask(
+	//		void( *Copy_pFunAppFun )( void* ) ,	->	Pointer to function has a pointer to void argument and returns void
+	//		void *Copy_pvidParameter,			->	Pointer to function argument passed as pointer to void
+	//		u8 Copy_u8Priority,					->	Value indicating priority of the task, Tasks can not have the same priority,
+	//												the higher the number , the higher the priority.
+	//												Priority number is the index of the task in the Tasks array
+	//		u8 Copy_u8State ,					->	Initial State of the task ( READY / PAUSED ), we have a third state KILLED
+	//		u16 Copy_u16Periodicity,			->	The number of Tick counts after which the task executes again.
+	//		u8 Copy_u8Offset					->	The number of Tick counts task is delayed after reaching its Periodic Tick before executing.
+	//							);
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				TMU_vidCreateTask(EEPROM_Access			, &EEPROM_SetTempAddress, 8 , READY	 , 3  , 0  );
+				TMU_vidCreateTask(DisplayTemperature	, &SSeg_u8ActiveModule	, 7 , PAUSED , 1  , 0  );
+				TMU_vidCreateTask(CheckTemperatureStatus, NULL					, 6 , PAUSED , 10 , 0  );
+				TMU_vidCreateTask(AdjustHeaterStatus	, NULL					, 5 , PAUSED , 100, 11 );
+				TMU_vidCreateTask(AdjustCoolentStatus	, NULL					, 4 , PAUSED , 100, 13 );
+				TMU_vidCreateTask(AdjustRedLampStatus	, NULL					, 3 , PAUSED , 50 , 17 );
+				TMU_vidCreateTask(CheckIncrementSwitch	, NULL					, 2 , PAUSED , 2  , 0  );
+				TMU_vidCreateTask(CheckDecrementSwitch	, NULL					, 1 , PAUSED , 2  , 1  );
+				TMU_vidCreateTask(CheckPowerSwitch		, NULL					, 0 , READY  , 2  , 0  );
 
 	// Starting Scheduler for Time Management Unit
-	TMU_vidStartScheduler();
+				TMU_vidStartScheduler();
 }
 
 void DisplayTemperature(void *Copy_pu8ActiveModule)		//	TASK( 7 )
@@ -127,21 +137,23 @@ void CheckTemperatureStatus(void *pNULL)		//	TASK( 6 )
 	u8 Local_u8TempValue ;
 	static u16 Local_u16TempAccValue = 0 ;
 	static u8 Local_u8PrevTempValue = 0 ;
-	static u8 Local_u8TempReadCounter = TEMP_AVG_READINGS ;
+	static u8 Local_u8TempReadCounter = (u8)TEMP_AVG_READINGS ;
 
 	if( Global_u8DisplayMode == NORMAL && PowerStatus == ON )
 	{
-		LM35_enuReadTemp( &Local_u8TempValue );
-		Local_u16TempAccValue += Local_u8TempValue ;
-		ADC_enuStartConversion();
-		Local_u8TempReadCounter--;
+		if( ES_OK == LM35_enuReadTemp( &Local_u8TempValue ) )
+		{
+			Local_u16TempAccValue += Local_u8TempValue ;
+			if( ES_OK == ADC_enuStartConversion() )
+				Local_u8TempReadCounter--;
+		}
 		if( !Local_u8TempReadCounter )
 		{
-			Global_u8TempValue = Local_u16TempAccValue / TEMP_AVG_READINGS ;
+			Global_u8TempValue = ( Local_u16TempAccValue / TEMP_AVG_READINGS );
 			Global_s8TempError = Global_u8TempValue - Global_u8TempSetValue ;
 			Local_u8PrevTempValue = Global_u8TempValue ;
 			Local_u16TempAccValue = 0 ;
-			Local_u8TempReadCounter = TEMP_AVG_READINGS;
+			Local_u8TempReadCounter = (u8)TEMP_AVG_READINGS;
 
 			if( Global_s8TempError < HTR_TEMP_TOLERANCE && HeaterStatus == OFF && CoolentStatus == OFF )
 			{
@@ -339,18 +351,10 @@ void AdjustRedLampStatus(void *pNULL )		//	TASK( 3 )
 
 	if( LedStatus == LD_BLINK )
 	{
-		switch( Local_u8PrevStatus )
-		{
-			case LD_ON	:  Local_u8PrevStatus = LD_OFF ;
-			break;
-			case LD_OFF	:  Local_u8PrevStatus = LD_ON ;
-			break;
-		}
-		LD_enuSetState( RED_LD , Local_u8PrevStatus );
+		LD_enuBlink( RED_LD );
 	}
 	else if( LedStatus != Local_u8PrevStatus)
 	{
-
 		Local_u8PrevStatus = LedStatus ;
 		LD_enuSetState( RED_LD , Local_u8PrevStatus );
 		if( PowerStatus == OFF )

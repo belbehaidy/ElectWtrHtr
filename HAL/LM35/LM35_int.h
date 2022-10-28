@@ -28,8 +28,8 @@ bool Global_blConverted = FALSE ;
 #define TEMP_ADC_CH				CH_00
 
 /********************************************************************************************/
-#define TEMP_CONVERSION_FACTOR	1.941216926					/*	Average Conversion Factor	*/
-#define TEMP_OFFSET				(1.040630271)				/*	Average Correction Factor	*/
+#define TEMP_CONVERSION_FACTOR	0.25						/*	Average Conversion Factor	*/
+#define TEMP_OFFSET				0.0 						/*	Average Correction Factor	*/
 /*	Above Values for Both Conversion Factor & Correction Factor result in 					*/
 /*	Temperature accuracy of (+/- 1 Degree Celsius ) along the range from 20 - 100 Degrees	*/
 /********************************************************************************************/
@@ -62,11 +62,15 @@ ES_t LM35_enuInit(void)
 ES_t LM35_enuReadTemp( u8 *Copy_u8TempValue )
 {
 	ES_t Local_enuErrorState = ES_NOK ;
-	u8 Local_u8TempValue;
+	u16 Local_u16TempValue;
 
-	Global_blConverted = FALSE ;
-	Local_enuErrorState = ADC_enuReadHigh( &Local_u8TempValue );
-	*Copy_u8TempValue = (u8)( ( (f32)Local_u8TempValue * TEMP_CONVERSION_FACTOR ) + TEMP_OFFSET );
+	if( Global_blConverted == TRUE )
+	{
+		Global_blConverted = FALSE ;
+		Local_enuErrorState = ADC_enuRead( &Local_u16TempValue );
+		*Copy_u8TempValue = (u8)( ( (f64)Local_u16TempValue * TEMP_CONVERSION_FACTOR ) + TEMP_OFFSET );
+		Local_enuErrorState = ES_OK ;
+	}
 
 	return Local_enuErrorState ;
 }

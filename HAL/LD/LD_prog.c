@@ -49,3 +49,17 @@ ES_t LD_enuSetState(u8 Copy_u8LD_Num ,u8 Copy_u8LDSetValue)
 
 	return Local_enuErrorStatus;
 }
+
+ES_t LD_enuBlink( u8 Copy_u8LD_Num )
+{
+	ES_t Local_enuErrorStatus = ES_NOK ;
+
+	if( ( ( Copy_u8LD_Num -= LD_ZERO ) < LD_u8LD_MaxNum ) )
+	{
+		Local_enuErrorStatus = DIO_enuTogglePinValue(LD[Copy_u8LD_Num].LD_Grp , LD[Copy_u8LD_Num].LD_Pin );
+	}
+	else Local_enuErrorStatus = ES_OUT_RANGE;
+
+
+	return Local_enuErrorStatus;
+}

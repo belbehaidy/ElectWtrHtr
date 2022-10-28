@@ -190,7 +190,7 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x6a22
+.text           0x00000000     0x6a32
  *(.vectors)
  .vectors       0x00000000       0x54 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -488,172 +488,172 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
                 0x00004cf4      0x13c ./MCAL/DIO/DIO_prog.o
                 0x00004cf4                DIO_enuGetPinValue
  .text.ADC_enuInit
-                0x00004e30       0xc6 ./MCAL/ADC/ADC_porg.o
+                0x00004e30       0x94 ./MCAL/ADC/ADC_porg.o
                 0x00004e30                ADC_enuInit
  .text.ADC_enuSetPreScalar
-                0x00004ef6       0x52 ./MCAL/ADC/ADC_porg.o
-                0x00004ef6                ADC_enuSetPreScalar
+                0x00004ec4       0x52 ./MCAL/ADC/ADC_porg.o
+                0x00004ec4                ADC_enuSetPreScalar
  .text.ADC_enuSetRefVolt
-                0x00004f48       0x6a ./MCAL/ADC/ADC_porg.o
-                0x00004f48                ADC_enuSetRefVolt
+                0x00004f16       0x6a ./MCAL/ADC/ADC_porg.o
+                0x00004f16                ADC_enuSetRefVolt
  .text.ADC_enuSelectChannel
-                0x00004fb2       0x52 ./MCAL/ADC/ADC_porg.o
-                0x00004fb2                ADC_enuSelectChannel
+                0x00004f80       0x52 ./MCAL/ADC/ADC_porg.o
+                0x00004f80                ADC_enuSelectChannel
  .text.ADC_enuStartConversion
-                0x00005004       0x12 ./MCAL/ADC/ADC_porg.o
-                0x00005004                ADC_enuStartConversion
+                0x00004fd2       0x12 ./MCAL/ADC/ADC_porg.o
+                0x00004fd2                ADC_enuStartConversion
  .text.ADC_enuEnableAutoTrigger
-                0x00005016       0x56 ./MCAL/ADC/ADC_porg.o
-                0x00005016                ADC_enuEnableAutoTrigger
+                0x00004fe4       0x56 ./MCAL/ADC/ADC_porg.o
+                0x00004fe4                ADC_enuEnableAutoTrigger
  .text.ADC_enuDisableAutoTrigger
-                0x0000506c       0x12 ./MCAL/ADC/ADC_porg.o
-                0x0000506c                ADC_enuDisableAutoTrigger
+                0x0000503a       0x12 ./MCAL/ADC/ADC_porg.o
+                0x0000503a                ADC_enuDisableAutoTrigger
  .text.ADC_enuRead
-                0x0000507e       0x72 ./MCAL/ADC/ADC_porg.o
-                0x0000507e                ADC_enuRead
+                0x0000504c       0x66 ./MCAL/ADC/ADC_porg.o
+                0x0000504c                ADC_enuRead
  .text.ADC_enuReadHigh
-                0x000050f0       0x3e ./MCAL/ADC/ADC_porg.o
-                0x000050f0                ADC_enuReadHigh
+                0x000050b2       0x6e ./MCAL/ADC/ADC_porg.o
+                0x000050b2                ADC_enuReadHigh
  .text.ADC_enuPollingRead
-                0x0000512e       0x96 ./MCAL/ADC/ADC_porg.o
-                0x0000512e                ADC_enuPollingRead
+                0x00005120       0x7e ./MCAL/ADC/ADC_porg.o
+                0x00005120                ADC_enuPollingRead
  .text.ADC_enuPollingReadHigh
-                0x000051c4       0x6a ./MCAL/ADC/ADC_porg.o
-                0x000051c4                ADC_enuPollingReadHigh
+                0x0000519e       0x9a ./MCAL/ADC/ADC_porg.o
+                0x0000519e                ADC_enuPollingReadHigh
  .text.ADC_enuCallBack
-                0x0000522e       0x3e ./MCAL/ADC/ADC_porg.o
-                0x0000522e                ADC_enuCallBack
+                0x00005238       0x3e ./MCAL/ADC/ADC_porg.o
+                0x00005238                ADC_enuCallBack
  .text.ADC_enuEnable
-                0x0000526c       0x1e ./MCAL/ADC/ADC_porg.o
-                0x0000526c                ADC_enuEnable
+                0x00005276       0x12 ./MCAL/ADC/ADC_porg.o
+                0x00005276                ADC_enuEnable
  .text.ADC_enuDisable
-                0x0000528a       0x1e ./MCAL/ADC/ADC_porg.o
-                0x0000528a                ADC_enuDisable
+                0x00005288       0x12 ./MCAL/ADC/ADC_porg.o
+                0x00005288                ADC_enuDisable
  .text.ADC_enuEnableInterrupt
-                0x000052a8       0x1e ./MCAL/ADC/ADC_porg.o
-                0x000052a8                ADC_enuEnableInterrupt
+                0x0000529a       0x12 ./MCAL/ADC/ADC_porg.o
+                0x0000529a                ADC_enuEnableInterrupt
  .text.ADC_enuDisableInterrupt
-                0x000052c6       0x1e ./MCAL/ADC/ADC_porg.o
-                0x000052c6                ADC_enuDisableInterrupt
+                0x000052ac       0x12 ./MCAL/ADC/ADC_porg.o
+                0x000052ac                ADC_enuDisableInterrupt
  .text.__vector_16
-                0x000052e4       0x66 ./MCAL/ADC/ADC_porg.o
-                0x000052e4                __vector_16
+                0x000052be       0x66 ./MCAL/ADC/ADC_porg.o
+                0x000052be                __vector_16
  .text.Switch_enuInit
-                0x0000534a       0xde ./HAL/Switch/Switch_prog.o
-                0x0000534a                Switch_enuInit
+                0x00005324       0xde ./HAL/Switch/Switch_prog.o
+                0x00005324                Switch_enuInit
  .text.Switch_enuGetPressed
-                0x00005428       0x7c ./HAL/Switch/Switch_prog.o
-                0x00005428                Switch_enuGetPressed
+                0x00005402       0x7c ./HAL/Switch/Switch_prog.o
+                0x00005402                Switch_enuGetPressed
  .text.SevSeg_enuInit
-                0x000054a4      0x11a ./HAL/SevSeg/SevSeg_prog.o
-                0x000054a4                SevSeg_enuInit
+                0x0000547e      0x11a ./HAL/SevSeg/SevSeg_prog.o
+                0x0000547e                SevSeg_enuInit
  .text.SevSeg_enuSetDigitValue
-                0x000055be       0x44 ./HAL/SevSeg/SevSeg_prog.o
-                0x000055be                SevSeg_enuSetDigitValue
+                0x00005598       0x44 ./HAL/SevSeg/SevSeg_prog.o
+                0x00005598                SevSeg_enuSetDigitValue
  .text.SevSeg_enuSetDIPValue
-                0x00005602       0x40 ./HAL/SevSeg/SevSeg_prog.o
-                0x00005602                SevSeg_enuSetDIPValue
+                0x000055dc       0x40 ./HAL/SevSeg/SevSeg_prog.o
+                0x000055dc                SevSeg_enuSetDIPValue
  .text.SevSeg_enuFrameDelay
-                0x00005642       0x4a ./HAL/SevSeg/SevSeg_prog.o
-                0x00005642                SevSeg_enuFrameDelay
+                0x0000561c       0x4a ./HAL/SevSeg/SevSeg_prog.o
+                0x0000561c                SevSeg_enuFrameDelay
  .text.SevSeg_enuModuleEnable
-                0x0000568c       0x54 ./HAL/SevSeg/SevSeg_prog.o
-                0x0000568c                SevSeg_enuModuleEnable
+                0x00005666       0x54 ./HAL/SevSeg/SevSeg_prog.o
+                0x00005666                SevSeg_enuModuleEnable
  .text.SevSeg_enuModuleDisable
-                0x000056e0       0x54 ./HAL/SevSeg/SevSeg_prog.o
-                0x000056e0                SevSeg_enuModuleDisable
+                0x000056ba       0x54 ./HAL/SevSeg/SevSeg_prog.o
+                0x000056ba                SevSeg_enuModuleDisable
  .text.LD_enuInit
-                0x00005734       0xae ./HAL/LD/LD_prog.o
-                0x00005734                LD_enuInit
+                0x0000570e       0xae ./HAL/LD/LD_prog.o
+                0x0000570e                LD_enuInit
  .text.LD_enuSetState
-                0x000057e2       0x74 ./HAL/LD/LD_prog.o
-                0x000057e2                LD_enuSetState
+                0x000057bc       0x74 ./HAL/LD/LD_prog.o
+                0x000057bc                LD_enuSetState
  .text.Coolent_enuInit
-                0x00005856       0xf6 ./App/main.o
-                0x00005856                Coolent_enuInit
+                0x00005830       0xf6 ./App/main.o
+                0x00005830                Coolent_enuInit
  .text.Coolent_enuEnable
-                0x0000594c       0x12 ./App/main.o
-                0x0000594c                Coolent_enuEnable
+                0x00005926       0x12 ./App/main.o
+                0x00005926                Coolent_enuEnable
  .text.Coolent_enuDisable
-                0x0000595e       0x12 ./App/main.o
-                0x0000595e                Coolent_enuDisable
+                0x00005938       0x12 ./App/main.o
+                0x00005938                Coolent_enuDisable
  .text.Coolent_enuSetState
-                0x00005970      0x26a ./App/main.o
-                0x00005970                Coolent_enuSetState
+                0x0000594a      0x27e ./App/main.o
+                0x0000594a                Coolent_enuSetState
  .text.Heater_enuInit
-                0x00005bda       0xf6 ./App/main.o
-                0x00005bda                Heater_enuInit
+                0x00005bc8       0xf6 ./App/main.o
+                0x00005bc8                Heater_enuInit
  .text.Heater_enuEnable
-                0x00005cd0       0x12 ./App/main.o
-                0x00005cd0                Heater_enuEnable
+                0x00005cbe       0x12 ./App/main.o
+                0x00005cbe                Heater_enuEnable
  .text.Heater_enuDisable
-                0x00005ce2       0x12 ./App/main.o
-                0x00005ce2                Heater_enuDisable
+                0x00005cd0       0x12 ./App/main.o
+                0x00005cd0                Heater_enuDisable
  .text.Heater_enuSetState
-                0x00005cf4      0x254 ./App/main.o
-                0x00005cf4                Heater_enuSetState
+                0x00005ce2      0x268 ./App/main.o
+                0x00005ce2                Heater_enuSetState
  .text.INT0_ISR
-                0x00005f48       0x16 ./App/main.o
-                0x00005f48                INT0_ISR
+                0x00005f4a       0x16 ./App/main.o
+                0x00005f4a                INT0_ISR
  .text.LM35_enuInit
-                0x00005f5e       0x7a ./App/main.o
-                0x00005f5e                LM35_enuInit
+                0x00005f60       0x7a ./App/main.o
+                0x00005f60                LM35_enuInit
  .text.LM35_enuReadTemp
-                0x00005fd8       0x82 ./App/main.o
-                0x00005fd8                LM35_enuReadTemp
+                0x00005fda       0x90 ./App/main.o
+                0x00005fda                LM35_enuReadTemp
  .text.ADC_vidISR
-                0x0000605a       0x14 ./App/main.o
-                0x0000605a                ADC_vidISR
- .text.main     0x0000606e      0x12e ./App/main.o
-                0x0000606e                main
+                0x0000606a       0x14 ./App/main.o
+                0x0000606a                ADC_vidISR
+ .text.main     0x0000607e      0x126 ./App/main.o
+                0x0000607e                main
  .text.DisplayTemperature
-                0x0000619c      0x102 ./App/main.o
-                0x0000619c                DisplayTemperature
+                0x000061a4      0x102 ./App/main.o
+                0x000061a4                DisplayTemperature
  .text.CheckTemperatureStatus
-                0x0000629e      0x14e ./App/main.o
-                0x0000629e                CheckTemperatureStatus
+                0x000062a6      0x156 ./App/main.o
+                0x000062a6                CheckTemperatureStatus
  .text.CheckIncrementSwitch
-                0x000063ec      0x11c ./App/main.o
-                0x000063ec                CheckIncrementSwitch
+                0x000063fc      0x11c ./App/main.o
+                0x000063fc                CheckIncrementSwitch
  .text.CheckDecrementSwitch
-                0x00006508      0x110 ./App/main.o
-                0x00006508                CheckDecrementSwitch
+                0x00006518      0x110 ./App/main.o
+                0x00006518                CheckDecrementSwitch
  .text.CheckPowerSwitch
-                0x00006618       0xfa ./App/main.o
-                0x00006618                CheckPowerSwitch
+                0x00006628       0xfa ./App/main.o
+                0x00006628                CheckPowerSwitch
  .text.AdjustRedLampStatus
-                0x00006712       0x8c ./App/main.o
-                0x00006712                AdjustRedLampStatus
+                0x00006722       0x8c ./App/main.o
+                0x00006722                AdjustRedLampStatus
  .text.AdjustHeaterStatus
-                0x0000679e       0x4c ./App/main.o
-                0x0000679e                AdjustHeaterStatus
+                0x000067ae       0x4c ./App/main.o
+                0x000067ae                AdjustHeaterStatus
  .text.AdjustCoolentStatus
-                0x000067ea       0x4c ./App/main.o
-                0x000067ea                AdjustCoolentStatus
+                0x000067fa       0x4c ./App/main.o
+                0x000067fa                AdjustCoolentStatus
  .text.EEPROM_Access
-                0x00006836       0xd0 ./App/main.o
-                0x00006836                EEPROM_Access
- .text.libgcc   0x00006906       0x18 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
-                0x00006906                __udivmodqi4
- .text.libgcc   0x0000691e       0x28 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
-                0x0000691e                __udivmodhi4
- .text.libgcc   0x00006946       0x26 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
-                0x00006946                __divmodhi4
-                0x00006946                _div
- .text.libgcc   0x0000696c       0x44 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x0000696c                __udivmodsi4
- .text.libgcc   0x000069b0        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000069b0        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x000069b0        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x000069b0       0x38 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x000069b0                __prologue_saves__
- .text.libgcc   0x000069e8       0x36 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x000069e8                __epilogue_restores__
-                0x00006a1e                . = ALIGN (0x2)
+                0x00006846       0xd0 ./App/main.o
+                0x00006846                EEPROM_Access
+ .text.libgcc   0x00006916       0x18 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+                0x00006916                __udivmodqi4
+ .text.libgcc   0x0000692e       0x28 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000692e                __udivmodhi4
+ .text.libgcc   0x00006956       0x26 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+                0x00006956                __divmodhi4
+                0x00006956                _div
+ .text.libgcc   0x0000697c       0x44 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000697c                __udivmodsi4
+ .text.libgcc   0x000069c0        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000069c0        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000069c0        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000069c0       0x38 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x000069c0                __prologue_saves__
+ .text.libgcc   0x000069f8       0x36 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x000069f8                __epilogue_restores__
+                0x00006a2e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00006a1e        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00006a1e                exit
-                0x00006a1e                _exit
+ .fini9         0x00006a2e        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00006a2e                exit
+                0x00006a2e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -672,11 +672,11 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00006a1e        0x4 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00006a2e        0x4 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00006a22                _etext = .
+                0x00006a32                _etext = .
 
-.data           0x00800060      0x172 load address 0x00006a22
+.data           0x00800060      0x172 load address 0x00006a32
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -796,25 +796,25 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
  .data.Global_u8TempValue
                 0x008001c4        0x1 ./App/main.o
                 0x008001c4                Global_u8TempValue
- .data.BlinkDelay.1667
+ .data.BlinkDelay.1664
                 0x008001c5        0x1 ./App/main.o
- .data.Local_u8TempReadCounter.1707
+ .data.Local_u8TempReadCounter.1704
                 0x008001c6        0x1 ./App/main.o
- .data.SetupDelay.1758
+ .data.SetupDelay.1761
                 0x008001c7        0x2 ./App/main.o
- .data.BounceDelay.1757
+ .data.BounceDelay.1760
                 0x008001c9        0x1 ./App/main.o
- .data.SetupDelay.1814
+ .data.SetupDelay.1817
                 0x008001ca        0x2 ./App/main.o
- .data.BounceDelay.1813
+ .data.BounceDelay.1816
                 0x008001cc        0x1 ./App/main.o
- .data.BounceDelay.1870
+ .data.BounceDelay.1873
                 0x008001cd        0x1 ./App/main.o
- .data.PrevStatus.1938
+ .data.PrevStatus.1941
                 0x008001ce        0x1 ./App/main.o
- .data.PrevStatus.1952
+ .data.PrevStatus.1955
                 0x008001cf        0x1 ./App/main.o
- .data.Local_u8StoredSetTemp.1967
+ .data.Local_u8StoredSetTemp.1970
                 0x008001d0        0x1 ./App/main.o
  *(.rodata)
  *(.rodata*)
@@ -824,7 +824,7 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
                 0x008001d2                _edata = .
                 0x008001d2                PROVIDE (__data_end, .)
 
-.bss            0x008001d2       0x88
+.bss            0x008001d2       0x86
                 0x008001d2                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x008001d2        0x0 d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -905,63 +905,59 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
                 0x00800235                EXTI_ApFunction_AppFun
  .bss.ADC_pFunISRFun
                 0x0080023b        0x2 ./MCAL/ADC/ADC_porg.o
- .bss.PrevDutyCycle.1340
+ .bss.PrevDutyCycle.1339
                 0x0080023d        0x4 ./App/main.o
- .bss.AccTempError.1338
-                0x00800241        0x1 ./App/main.o
  .bss.PrevTempError.1337
-                0x00800242        0x1 ./App/main.o
- .bss.PrevDutyCycle.1462
-                0x00800243        0x4 ./App/main.o
- .bss.AccTempError.1461
-                0x00800247        0x1 ./App/main.o
- .bss.PrevTempError.1460
-                0x00800248        0x1 ./App/main.o
+                0x00800241        0x1 ./App/main.o
+ .bss.PrevDutyCycle.1458
+                0x00800242        0x4 ./App/main.o
+ .bss.PrevTempError.1457
+                0x00800246        0x1 ./App/main.o
  .bss.Global_blConverted
-                0x00800249        0x1 ./App/main.o
-                0x00800249                Global_blConverted
+                0x00800247        0x1 ./App/main.o
+                0x00800247                Global_blConverted
  .bss.ProcessStatus
-                0x0080024a        0x1 ./App/main.o
-                0x0080024a                ProcessStatus
+                0x00800248        0x1 ./App/main.o
+                0x00800248                ProcessStatus
  .bss.LedStatus
-                0x0080024b        0x1 ./App/main.o
-                0x0080024b                LedStatus
+                0x00800249        0x1 ./App/main.o
+                0x00800249                LedStatus
  .bss.SetTempUpdate
+                0x0080024a        0x1 ./App/main.o
+                0x0080024a                SetTempUpdate
+ .bss.BlinkStatus.1665
+                0x0080024b        0x1 ./App/main.o
+ .bss.Local_u8PrevTempValue.1703
                 0x0080024c        0x1 ./App/main.o
-                0x0080024c                SetTempUpdate
- .bss.BlinkStatus.1668
-                0x0080024d        0x1 ./App/main.o
- .bss.Local_u8PrevTempValue.1706
-                0x0080024e        0x1 ./App/main.o
- .bss.Local_u16TempAccValue.1705
-                0x0080024f        0x2 ./App/main.o
- .bss.press.1756
+ .bss.Local_u16TempAccValue.1702
+                0x0080024d        0x2 ./App/main.o
+ .bss.press.1759
+                0x0080024f        0x1 ./App/main.o
+ .bss.press.1815
+                0x00800250        0x1 ./App/main.o
+ .bss.hold.1872
                 0x00800251        0x1 ./App/main.o
- .bss.press.1812
+ .bss.press.1871
                 0x00800252        0x1 ./App/main.o
- .bss.hold.1869
+ .bss.Local_u8PrevStatus.1917
                 0x00800253        0x1 ./App/main.o
- .bss.press.1868
+ .bss.Local_u8SetTempSaveID.1971
                 0x00800254        0x1 ./App/main.o
- .bss.Local_u8PrevStatus.1914
-                0x00800255        0x1 ./App/main.o
- .bss.Local_u8SetTempSaveID.1968
-                0x00800256        0x1 ./App/main.o
  *(COMMON)
- COMMON         0x00800257        0x3 ./App/main.o
-                0x00800257                Global_u8TempSetValue
-                0x00800258                Global_s8TempError
-                0x00800259                Global_u8SetupSw
-                0x0080025a                PROVIDE (__bss_end, .)
-                0x00006a22                __data_load_start = LOADADDR (.data)
-                0x00006b94                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800255        0x3 ./App/main.o
+                0x00800255                Global_u8TempSetValue
+                0x00800256                Global_s8TempError
+                0x00800257                Global_u8SetupSw
+                0x00800258                PROVIDE (__bss_end, .)
+                0x00006a32                __data_load_start = LOADADDR (.data)
+                0x00006ba4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080025a        0x0
-                0x0080025a                PROVIDE (__noinit_start, .)
+.noinit         0x00800258        0x0
+                0x00800258                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0080025a                PROVIDE (__noinit_end, .)
-                0x0080025a                _end = .
-                0x0080025a                PROVIDE (__heap_start, .)
+                0x00800258                PROVIDE (__noinit_end, .)
+                0x00800258                _end = .
+                0x00800258                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -979,7 +975,7 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
 .signature
  *(.signature*)
 
-.stab           0x00000000     0x74ac
+.stab           0x00000000     0x7488
  *(.stab)
  .stab          0x00000000      0x5c4 ./TMU/TMU_prog.o
  .stab          0x000005c4      0x234 ./MCAL/TIMER/TIMER_config.o
@@ -998,26 +994,26 @@ LOAD d:/amit_course/masters/drive/sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr
                                 0x384 (size before relaxing)
  .stab          0x00003bf4      0x588 ./MCAL/DIO/DIO_prog.o
                                 0x594 (size before relaxing)
- .stab          0x0000417c      0xa80 ./MCAL/ADC/ADC_porg.o
-                                0xa8c (size before relaxing)
- .stab          0x00004bfc      0x1f8 ./HAL/Switch/Switch_config.o
+ .stab          0x0000417c      0xa98 ./MCAL/ADC/ADC_porg.o
+                                0xaa4 (size before relaxing)
+ .stab          0x00004c14      0x1f8 ./HAL/Switch/Switch_config.o
                                 0x204 (size before relaxing)
- .stab          0x00004df4      0x270 ./HAL/Switch/Switch_prog.o
+ .stab          0x00004e0c      0x270 ./HAL/Switch/Switch_prog.o
                                 0x360 (size before relaxing)
- .stab          0x00005064      0x204 ./HAL/SevSeg/SevSeg_config.o
+ .stab          0x0000507c      0x204 ./HAL/SevSeg/SevSeg_config.o
                                 0x210 (size before relaxing)
- .stab          0x00005268      0x4e0 ./HAL/SevSeg/SevSeg_prog.o
+ .stab          0x00005280      0x4e0 ./HAL/SevSeg/SevSeg_prog.o
                                 0x5dc (size before relaxing)
- .stab          0x00005748      0x1f8 ./HAL/LD/LD_config.o
+ .stab          0x00005760      0x1f8 ./HAL/LD/LD_config.o
                                 0x204 (size before relaxing)
- .stab          0x00005940      0x27c ./HAL/LD/LD_prog.o
+ .stab          0x00005958      0x27c ./HAL/LD/LD_prog.o
                                 0x36c (size before relaxing)
- .stab          0x00005bbc     0x18f0 ./App/main.o
-                               0x18fc (size before relaxing)
+ .stab          0x00005bd4     0x18b4 ./App/main.o
+                               0x18c0 (size before relaxing)
 
-.stabstr        0x00000000     0x2a1a
+.stabstr        0x00000000     0x2a1f
  *(.stabstr)
- .stabstr       0x00000000     0x2a1a ./TMU/TMU_prog.o
+ .stabstr       0x00000000     0x2a1f ./TMU/TMU_prog.o
 
 .stab.excl
  *(.stab.excl)

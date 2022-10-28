@@ -37,7 +37,7 @@ ES_t ADC_enuInit(void)
 	//////////////////////////////////
 	ADMUX &= ~(ADC_REF_SEL_BITS_MASK);
 #if ( ADC_VREF >= AREF_REF && ADC_VREF <= INTERNAL_REF )
-	ADMUX |= ( (ADC_VREF - AREF_REF) << ADC_REF_SEL_BITS);
+	ADMUX |= ( (ADC_VREF - AREF_REF) << ADC_REF_SEL_BITS );
 #else
 	Local_enuErrorState = ES_OUT_RANGE;
 	#error 	"ADC_enuInit() : ADC Reference Voltage Set Value is Out of Range"
@@ -47,9 +47,9 @@ ES_t ADC_enuInit(void)
 	// Setting Output Adjust Direction	//
 	//////////////////////////////////////
 #if ( ADC_ADJUST == RIGHT_ADJUST )
-	CLR_BIT( ADMUX , ADLAR_BIT );
+	ASM_CLR_BIT( _SFR_ADMUX_ , ADLAR_BIT );
 #elif ( ADC_ADJUST == LEFT_ADJUST )
-	SET_BIT( ADMUX , ADLAR_BIT );
+	ASM_SET_BIT( _SFR_ADMUX_ , ADLAR_BIT );
 #else
 	Local_enuErrorState = ES_OUT_RANGE;
 	#error "ADC_enuInit() : ADC Output Adjust Direction Set Value is Out of Range"
@@ -70,9 +70,9 @@ ES_t ADC_enuInit(void)
 	//	 Setting ADC Interrupt Mode		//
 	//////////////////////////////////////
 #if ( ADC_INTERRUPT_MODE == ADC_POLLING )
-	CLR_BIT( ADCSRA , ADC_INT_ENABLE_BIT );
+	ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_INT_ENABLE_BIT );
 #elif ( ADC_INTERRUPT_MODE == ADC_INTERRUPT )
-	SET_BIT( ADCSRA , ADC_INT_ENABLE_BIT );
+	ASM_SET_BIT( _SFR_ADCSRA_ , ADC_INT_ENABLE_BIT );
 #else
 	Local_enuErrorState = ES_OUT_RANGE;
 	#error "ADC_enuInit() : ADC Interrupt Mode Set Value is Out of Range"
@@ -97,10 +97,10 @@ ES_t ADC_enuInit(void)
 	//////////////////////////////////
 #if ( ADC_TRIGGER_MODE == AUTO_TRIGGER || ADC_TRIGGER_MODE == SINGLE_TRIGGER )
 
-	CLR_BIT( ADCSRA , ADC_AUTO_TRIGGER_EN_BIT );
+	ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_AUTO_TRIGGER_EN_BIT );
 
 	#if( ADC_TRIGGER_MODE == AUTO_TRIGGER )
-		SET_BIT( ADCSRA , ADC_AUTO_TRIGGER_EN_BIT );
+		ASM_SET_BIT( _SFR_ADCSRA_ , ADC_AUTO_TRIGGER_EN_BIT );
 	#endif
 
 #else
@@ -111,7 +111,7 @@ ES_t ADC_enuInit(void)
 	//////////////////////////////////
 	//	 ENABLE ADC Peripheral		//
 	//////////////////////////////////
-	SET_BIT( ADCSRA , ADC_ENABLE_BIT );
+	ASM_SET_BIT( _SFR_ADCSRA_ , ADC_ENABLE_BIT );
 
 	if( Local_enuErrorState != ES_OUT_RANGE)
 		Local_enuErrorState = ES_OK ;
@@ -164,7 +164,6 @@ ES_t ADC_enuSelectChannel(u8 Copy_u8ChannelID)
 	{
 		ADMUX &= ~( ADC_CH_SEL_BITS_MASK);
 		ADMUX |= ( ( Copy_u8ChannelID - CH_00 ) << ADC_CH_SEL_BITS );
-//		ADMUX |= (Copy_u8ChannelID << ADC_CH_SEL_BITS);
 		Local_enuErrorState = ES_OK ;
 	}
 	else Local_enuErrorState = ES_OUT_RANGE;
@@ -202,7 +201,6 @@ ES_t ADC_enuEnableAutoTrigger(u8 Copy_u8TriggerSource)
 ES_t ADC_enuDisableAutoTrigger(void)
 {
 	ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_AUTO_TRIGGER_EN_BIT );
-//	ADCSRA &= ~(BIT_MASK << ADC_AUTO_TRIGGER_EN_BIT );
 
 	return ES_OK;
 }
@@ -287,7 +285,7 @@ ES_t ADC_enuPollingRead(u16 *Copy_u16ADC_Value)
 	}
 	else Local_enuErrorState = ES_NULL_POINTER ;
 
-	SET_BIT( ADCSRA , ADC_INT_FLAG_BIT );
+	ASM_SET_BIT( _SFR_ADCSRA_ , ADC_INT_FLAG_BIT );
 
 	return Local_enuErrorState;
 }
@@ -340,31 +338,30 @@ ES_t ADC_enuCallBack(void ( *Copy_pFunAppFun )(void))
 
 ES_t ADC_enuEnable(void)
 {
+	ASM_SET_BIT( _SFR_ADCSRA_ , ADC_ENABLE_BIT );
 
-	SET_BIT( ADCSRA , ADC_ENABLE_BIT );
-//	ADCSRA |= ( BIT_MASK << ADC_ENABLE_BIT );
 	return ES_OK;
 }
 
 ES_t ADC_enuDisable(void)
 
 {
-	CLR_BIT( ADCSRA , ADC_ENABLE_BIT );
-//	ADCSRA &= ~( BIT_MASK << ADC_ENABLE_BIT );
+	ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_ENABLE_BIT );
+
 	return ES_OK;
 }
 
 ES_t ADC_enuEnableInterrupt(void)
 {
-	SET_BIT( ADCSRA , ADC_ENABLE_BIT );
-//	ADCSRA |= ( BIT_MASK << ADC_ENABLE_BIT );
+	ASM_SET_BIT( _SFR_ADCSRA_ , ADC_ENABLE_BIT );
+
 	return ES_OK;
 }
 
 ES_t ADC_enuDisableInterrupt(void)
 {
-	CLR_BIT( ADCSRA , ADC_ENABLE_BIT );
-//	ADCSRA &= ~( BIT_MASK << ADC_ENABLE_BIT );
+	ASM_CLR_BIT( _SFR_ADCSRA_ , ADC_ENABLE_BIT );
+
 	return ES_OK;
 }
 

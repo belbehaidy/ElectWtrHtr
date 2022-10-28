@@ -26,9 +26,9 @@
 
 #define COOLENT_DUTY_CYC_TOL		0.0F
 
-#define COOL_KP					5.0F
-#define COOL_KI					2.0F
-#define COOL_KD					2.0F
+#define COOL_KP					8.0F
+#define COOL_KI					4.0F
+#define COOL_KD					4.0F
 
 #ifndef ICR1_VALUE
 #define COOLENT_PWM_SETUP
@@ -90,7 +90,7 @@ ES_t Coolent_enuDisable( void )
 ES_t Coolent_enuSetState( s8 Copy_s8TempError )
 {
 	ES_t Local_enuErrorState = ES_NOK ;
-	static s8 PrevTempError = 0 , AccTempError = 0;
+	static s8 PrevTempError = 0 ;// AccTempError = 0;
 	f32 DutyCycle;
 	static f32 PrevDutyCycle = 0.0F ;
 
@@ -102,9 +102,9 @@ ES_t Coolent_enuSetState( s8 Copy_s8TempError )
 		DutyCycle = COOL_MAX_DUTY_CYCLE ;
 	else
 	{
-		AccTempError += Copy_s8TempError ;
+//		AccTempError += Copy_s8TempError ;
 		DutyCycle = COOL_MAX_DUTY_CYCLE - (	( COOL_KP * Copy_s8TempError 	) +
-											( COOL_KI * AccTempError 		) +
+											( COOL_KI * ( Copy_s8TempError + PrevTempError ) ) +
 											( COOL_KD * ( Copy_s8TempError - PrevTempError ) ) ) ;
 		if( DutyCycle < 0.0 ) DutyCycle = 0.0 ;
 		else if( DutyCycle > COOL_MAX_DUTY_CYCLE ) DutyCycle = COOL_MAX_DUTY_CYCLE ;

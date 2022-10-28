@@ -28,9 +28,9 @@
 
 #define HTR_DUTY_CYC_TOL		0.0F
 
-#define HTR_KP					5.0F
-#define HTR_KI					2.0F
-#define HTR_KD					2.0F
+#define HTR_KP					8.0F
+#define HTR_KI					4.0F
+#define HTR_KD					4.0F
 
 #ifndef ICR1_VALUE
 #define HEATER_PWM_SETUP
@@ -115,7 +115,7 @@ ES_t Heater_enuDisable( void )
 ES_t Heater_enuSetState( s8 Copy_s8TempError )
 {
 	ES_t Local_enuErrorState = ES_NOK ;
-	static s8 PrevTempError = 0 , AccTempError = 0 ;
+	static s8 PrevTempError = 0 ; // AccTempError = 0 ;
 	static f32 PrevDutyCycle = 0.0F ;
 
 	f32 DutyCycle;
@@ -126,9 +126,9 @@ ES_t Heater_enuSetState( s8 Copy_s8TempError )
 		DutyCycle = HTR_MAX_DUTY_CYCLE ;
 	else
 	{
-		AccTempError += Copy_s8TempError ;
+//		AccTempError += Copy_s8TempError ;
 		DutyCycle =	HTR_MAX_DUTY_CYCLE - (	( HTR_KP * Copy_s8TempError	) +
-											( HTR_KI * AccTempError		) +
+											( HTR_KI * ( Copy_s8TempError + PrevTempError ) ) +
 											( HTR_KD * ( Copy_s8TempError - PrevTempError ) ) ) ;
 		if( DutyCycle < 0.0 ) DutyCycle = 0.0 ;
 		else if( DutyCycle > HTR_MAX_DUTY_CYCLE ) DutyCycle = HTR_MAX_DUTY_CYCLE ;

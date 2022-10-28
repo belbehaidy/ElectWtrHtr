@@ -15,12 +15,13 @@ typedef enum { HEATING , COOLING } Process_t ;
 #define SETUP				9
 
 #define SET_ADDRESS			0x0010
+#define SAVED_ID			0x55
 
 #define LD_OFF				LD_u8OFF
 #define LD_ON				LD_u8ON
 #define LD_BLINK			19
 
-#define TEMP_AVG_READINGS	10
+#define TEMP_AVG_READINGS	10UL
 
 #define BOUNCE_COUNTS		2
 #define SETUP_COUNTS		50
