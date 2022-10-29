@@ -212,7 +212,7 @@ void CheckIncrementSwitch(void *pNULL)		//	TASK( 2 )
 				{
 					if( Global_u8SetupSw != INC_SW )
 						Global_u8SetupSw = INC_SW ;
-					if( Global_u8TempSetValue < TEMP_MAX_LIMIT )
+					if( Global_u8TempSetValue <= ( TEMP_MAX_LIMIT - SETUP_STEP ) )
 					{
 						Global_u8TempSetValue += SETUP_STEP;
 						press = 1 ;
@@ -264,7 +264,7 @@ void CheckDecrementSwitch(void *pNULL )		//	TASK( 1 )
 			{
 				if( Global_u8SetupSw != DEC_SW )
 					Global_u8SetupSw = DEC_SW ;
-				if( Global_u8TempSetValue > TEMP_MIN_LIMIT )
+				if( Global_u8TempSetValue >= ( TEMP_MIN_LIMIT+SETUP_STEP ) )
 				{
 					Global_u8TempSetValue -= SETUP_STEP;
 					press = 1 ;
